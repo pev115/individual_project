@@ -4,6 +4,7 @@ Things to do to setup project:
 * Launch cloudstack instance
 * Get sudo permissions
 * install ethereum
+* Install Solidity compiler
 * download the testrpc
 * install node js (npm)
 * install mongo db
