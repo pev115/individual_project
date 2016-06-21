@@ -7,7 +7,7 @@ Things to do to setup project:
 * download the testrpc : run geth --testrpc
 * install node js (npm) :follow  https://nodejs.org/en/download/package-manager/
 * insall meteor: ``` curl https://install.meteor.com/ | sh ```
-* Install Solidity compiler: ``` npm install solc ```
+* Install Solidity compiler: ``` npm install solc ```  or from https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial
 * install git : ``` sudo apt-get install git ```
 * download the git repository:
 * mount the vm to local servers
