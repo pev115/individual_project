@@ -20,3 +20,22 @@ Things to do to setup project:
 * go to connect to server
 * enter smb://icnas2.cc.ic.ac.uk/pev115
 * to find this can log in to the virtual machine and type ``` fd -h ```
+
+
+
+ #Other things installed:
+##Geneal packages
+* truffle : ```npm install -g truffle``` -> probably will need to reinstall whenm used although -g indicates global install
+* testrpc: ```nmp intsall -g  ethereumjs-testrpc``` -> probably will need to reistall when used. although -g indicates global install
+* run ```npm install``` in  order to get the node_modules folder in project
+* solc : ```meteor nmp install --save  solc``` : installed vertion 0.3.5 
+
+##Meteor packages
+* ++iron: router: ```meteor add iron:router ```  
+* ++ session : ``` meteor add session```
+* ++bootstrap : ```meteor add twbs: bootstrap```
+
+##Atom packages
+* meteor helper
+* meteor-api
+* meteor-snippets
