@@ -39,3 +39,5 @@ Things to do to setup project:
 * meteor helper
 * meteor-api
 * meteor-snippets
+* language-babel
+* lint
