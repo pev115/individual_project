@@ -45,6 +45,10 @@ Things to do to setup project:
 ##Webstorm packages:
 I haven't added but might be useful ; packages that support.md files : markdown support and markdown smth else
 
+
+#Methodologies and other:
+* Command to connect the node : ```geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```
+
 ##TODO :
 
     * Check why allowing for the personal api is not secure
@@ -66,3 +70,13 @@ I haven't added but might be useful ; packages that support.md files : markdown 
     * make a design plan
     * refind how I ignored node modules and place it here.
     * Donwload the new version of the ethereum wallet.
+    * Get the geth command for running the noede down
+    * import the packages in version file as libraries
+
+##Questions:
+
+* How to connect to node other than typing ``` geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```  ?
+* Can I connect to node just via having the wallet up?
+* Is the above command ok? is it secure?
+
+
