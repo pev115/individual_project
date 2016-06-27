@@ -42,9 +42,11 @@ Template.createDAO.events({
         /* Asking for password
          * TODO: make a password prompt where not everyone can see what is happening
          */
-        var password = prompt("please input your password","password");
-        web3.personal.unlockAccount(web3.eth.coinbase, password);
 
+        var password = prompt("please input your password","password");
+        if(!TEST_RPC) {
+            web3.personal.unlockAccount(web3.eth.coinbase, password);
+        }
         /* Deploy the contract */
         var saidamount = 15 ;
         var DAO_contract = web3.eth.contract([{"constant":false,"inputs":[],"name":"kill","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":true,"inputs":[],"name":"amount","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"constant":true,"inputs":[],"name":"balance","outputs":[{"name":"","type":"uint256"}],"type":"function"},{"inputs":[{"name":"saidamount","type":"uint256"}],"type":"constructor"}]);
