@@ -3,4 +3,5 @@ Router.configure({
 });
 
 
-Router.route('/',{name:'createDAO'});
+Router.route('/',{name:'home'});
+Router.route('/DAOMonitor',{name:'DAOMonitor'});

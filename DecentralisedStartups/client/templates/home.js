@@ -33,7 +33,7 @@
 /*Set the session with the data held before constructing the contract */
 Session.set('con_address',"Not Available - Please Create the contract");
 
-Template.createDAO.events({
+Template.home.events({
     /* on click, create and deploy the contract */
     'click #create_DAO_btn': function(){
         /*Set the session to indicate that the contract is being mined */
@@ -70,7 +70,7 @@ Template.createDAO.events({
 
 
 
-Template.createDAO.helpers({
+Template.home.helpers({
     DAO_address: function(){
         var created_DAO = Session.get('con_address');
 

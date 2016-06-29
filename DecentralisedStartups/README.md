@@ -64,19 +64,18 @@ I haven't added but might be useful ; packages that support.md files : markdown 
       - The web3 through meteor
       - solidity and npm
 
-    * In my testcontract the constructor does not have the same name as the contract
     * revisit the READM file : get the info necessary from group project as well.
-    * Get initialted with truffle and testrpc
+    * Get initiated with truffle and testrpc
     * make a design plan
     * refind how I ignored node modules and place it here.
     * Donwload the new version of the ethereum wallet.
-    * Get the geth command for running the noede down
+    * Get the geth command for running the node down
     * import the packages in version file as libraries
 
 ##Questions:
 
 * How to connect to node other than typing ``` geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```  ?
 * Can I connect to node just via having the wallet up?
-* Is the above command ok? is it secure?
+* Is the above command ok? is it secure? Can I find a way to securely submit the password and have it unlock the account via RPC on the server side?
 
 
