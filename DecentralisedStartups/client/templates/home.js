@@ -4,33 +4,29 @@
  Required: run the command :
  geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console
  before connecting to the website.
+*/
 
-
-/* TODO:
- * rethink the personal api allowance and how could I structure it
- * make it so I can see the contract parameters on the screen*/
+/* TODO: rethink the personal api allowance and how could I structure it*/
 
 /*Set the session with the data held before constructing the contract */
-Session.set('con_address',"Not Available - Please Create the contract");
 
 Template.home.events({
     /* on click, create and deploy the contract */
     'click #create_DAO_btn': function(){
-        /*Set the session to indicate that the contract is being mined */
-        Session.set('con_address',"Not Available - Waiting for miners");
 
         /* Asking for password
          * TODO: make a password prompt where not everyone can see what is happening
+         *  
          */
 
         var password = prompt("please input your password","password");
         if(!TEST_RPC) {
             web3.personal.unlockAccount(web3.eth.coinbase, password);
         }
+        
+        
+        /*TODO: adapt the code to many different possible contracts- make it scalable*/
         /* Deploy the contract */
-
-
-
         var minimumQuorumForProposals = 2 ;
         var minutesForDebate = 3 ;
         var marginOfVotesForMajority = 1 ;
@@ -78,7 +74,9 @@ Template.home.events({
                 {"indexed":false,"name":"isMember","type":"bool"}],"name":"MembershipChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"minimumQuorum",
                 "type":"uint256"},{"indexed":false,"name":"debatingPeriodInMinutes","type":"uint256"},{"indexed":false,"name":"majorityMargin","type":"int256"}],"name":"ChangeOfRules",
                 "type":"event"}]);
-        congressContract.new(
+        
+        
+        var deployed_contract = congressContract.new(
             minimumQuorumForProposals,
             minutesForDebate,
             marginOfVotesForMajority,
@@ -91,14 +89,16 @@ Template.home.events({
                 console.log(e, contract);
                 if (typeof contract.address !== 'undefined') {
                     console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
-                    Session.set('con_address',contract);
+                    console.log("setting the session");
+                    Session.set('contract',contract);
                 }
-            })
+            });
 
 
-
-
-
+        /*
+        console.log("This is the deployed contract");
+        console.log(deployed_contract);
+    */
 
 
 
@@ -136,14 +136,3 @@ Template.home.events({
 
 
 
-Template.home.helpers({
-    DAO_address: function(){
-        var created_DAO = Session.get('con_address');
-
-        if(typeof created_DAO.address !== 'undefined'){
-            return created_DAO.address;
-        }else{
-            return created_DAO;
-        }
-    }
-});
