@@ -52,6 +52,7 @@ I haven't added but might be useful ; packages that support.md files : markdown 
 ##TODO :
 
     * Check why allowing for the personal api is not secure
+    * Define the DAO framework to work with-> an interface common to all the DAOs that will allow interraction.
     * Find out if there is another way of doing this that does not require to have the personal api on and check if there is a way that it would work just by having the ethereum wallet on.
     * Find out if having two web3 apis one server side to open accounts and one client side is secure.
     * Find a good wesite and source for the following:
