@@ -8,7 +8,7 @@
 
 /*TODO: Think about how to handle contract mining*/
 
-Template.DAOMonitor.helpers({
+Template.Monitor.helpers({
     DAO_not_exists: function(){
        return !contractObjectExists();
     }

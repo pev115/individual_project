@@ -8,7 +8,7 @@
 
 /*TODO: Think about how to handle different types of DAOs*/
 
-Template.DAOInterract.helpers({
+Template.Interact.helpers({
     DAO_address: function(){
         var created_DAO = Session.get('contract');
         if(typeof created_DAO !== 'undefined'){

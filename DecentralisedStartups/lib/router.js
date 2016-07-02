@@ -4,4 +4,5 @@ Router.configure({
 
 
 Router.route('/',{name:'home'});
-Router.route('/DAOMonitor',{name:'DAOMonitor'});
+Router.route('/Monitor',{name:'Monitor'});
+Router.route('/Create',{name:'Create'});

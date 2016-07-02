@@ -1,0 +1,8 @@
+<template name="Monitor">
+    {{#if DAO_not_exists}}
+        {{> Connect}}
+    {{else}}
+        {{> Interact}}
+    {{/if}}
+
+</template>

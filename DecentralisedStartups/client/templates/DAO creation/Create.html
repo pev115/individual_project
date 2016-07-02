@@ -1,0 +1,15 @@
+<template name="Create">
+     <from>
+         <select name ="DAO Type" id = "DAO_type_choice">
+             <option selected disabled>Choose a DAO type</option>
+             <option value = "Congress">Congress</option>
+             <option value = "Ltd">Limited Company, Unimplemented </option>
+             <option value = "Inc">Public Company, Unimplemented </option>
+             <option value = "NGO">NGO, Unimplemented </option>
+         </select>
+         {{#if type }}
+             {{> Template.dynamic template =type}}
+         {{/if}}
+     </from>
+
+</template>
