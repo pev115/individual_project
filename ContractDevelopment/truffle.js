@@ -11,7 +11,9 @@ module.exports = {
   },
   deploy: [
     "owned",
-    "Congress"
+    "SharesManager",
+    "TestingSol",
+    "Private"
   ],
   rpc: {
     host: "localhost",

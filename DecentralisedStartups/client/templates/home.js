@@ -20,16 +20,16 @@ Template.home.events({
          * TODO: make a password prompt where not everyone can see what is happening
          *  
          */
-/*
+
         var password = prompt("please input your password","password");
         if(!TEST_RPC) {
             web3.personal.unlockAccount(web3.eth.coinbase, password);
         }
         
-*/
+
         /*TODO: adapt the code to many different possible contracts- make it scalable*/
         /* Deploy the contract */
-/*
+
         var minimumQuorumForProposals = 2 ;
         var minutesForDebate = 3 ;
         var marginOfVotesForMajority = 1 ;
@@ -97,7 +97,7 @@ Template.home.events({
                 }
             });
 
-*/
+
     }
 
 });
