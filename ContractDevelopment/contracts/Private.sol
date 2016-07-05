@@ -8,12 +8,11 @@ ask:is it bad to import all SharesManager even if not using all of it?#
 What happens with dividion of integers?*/
 
 
-contract Private is owned {
+contract Private is owned, SharesManager {
 
     /* Contract Variables and events */
     Proposal[] public proposals;
     uint public numProposals;
-    SharesManager public sharesTokenAddress;
     bool public allowShareCreation;
     Dividend[] public dividends;
 
@@ -48,7 +47,7 @@ contract Private is owned {
     }
 
     modifier onlyShareholders {
-          if (sharesTokenAddress.balances(msg.sender) == 0) throw;
+          if (balances[msg.sender] == 0) throw;
           _
       }
 
@@ -58,7 +57,6 @@ contract Private is owned {
         owner = _owner;
       }
       allowShareCreation =false;
-      sharesTokenAddress = SharesManager(sharesAddress);
     }
 
     function switchSharesIssue() onlyOwner returns(bool allowSharesIssue) {
@@ -71,11 +69,11 @@ contract Private is owned {
       }
     }
 
-    function createShares() returns (bool success){
+    function issueShares() returns (bool success){
       if(!allowShareCreation){
         throw;
       }
-      bool created = sharesTokenAddress.createShares(msg.sender).value(msg.value);
+      bool created = createShares(msg.sender).value(msg.value);
       return created;
     }
 
@@ -83,11 +81,11 @@ contract Private is owned {
       if(totalDividend > this.balance){
         throw;
       }
-      uint distributedUnit = totalDividend/sharesTokenAddress.totalSupply();
-      uint nbShareholders = sharesTokenAddress.shareholders.length;
+      uint distributedUnit = totalDividend/totalSupply();
+      uint nbShareholders = shareholders.length;
 
       for (uint i=0; i<nbShareholders; ++i){
-        address holder = sharesTokenAddress.shareholders[i];
+        address holder = shareholders[i];
         holder.send(distributedUnit);
 
       }

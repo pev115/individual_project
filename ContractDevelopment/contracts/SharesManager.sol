@@ -5,7 +5,6 @@ contract SharesManager {
         check if I want to delete shareholders if they get to 0 funds.
         Think of how shareholders can see their funds*/
 
-  address public DAO;
   uint256 public totalSupply;
   address[] public shareholders;
   mapping (address => uint256) balances;
@@ -14,31 +13,16 @@ contract SharesManager {
   /* This generates a public event on the blockchain that will notify clients */
   event Transfer(address indexed from, address indexed to, uint256 value);
 
-  modifier onlyDao{
-    if(msg.sender != DAO){
-      throw;
-    }
-    _
-  }
 
   /* Initializes contract with initial supply tokens to the creator of the contract */
   function SharesManager() {
-  DAO = 0;
   totalSupply = 0;
   msg.sender.send(msg.value);                        /* Send back any ether sent accidentally*/
   }
 
-  function setDAO(address _DAO){
-    if (DAO != 0){
-      throw;
-    }
-    DAO = _DAO;
-  }
 
-  function createShares(address beneficiary) returns (bool success){
-    if(msg.sender != DAO){
-      throw;
-    }
+  function createShares(address beneficiary) internal returns (bool success){
+
     uint shareholderID = shareholders.length++;
     shareholders[shareholderID]=beneficiary;
     balances[beneficiary]=msg.value;
@@ -47,8 +31,6 @@ contract SharesManager {
     return true;
 
   }
-
-function balances()
 
 /* Send coins */
 function transfer(address _to, uint256 _value) {
