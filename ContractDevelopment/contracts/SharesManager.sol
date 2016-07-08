@@ -8,7 +8,7 @@ contract SharesManager {
   uint256 public totalSupply;
   address[] public shareholders;
   mapping (address => uint256) balances;
-
+  bool public allowShareCreation;
 
   /* This generates a public event on the blockchain that will notify clients */
   event Transfer(address indexed from, address indexed to, uint256 value);
@@ -21,19 +21,32 @@ contract SharesManager {
   }
 
 
-  function createShares(address beneficiary) internal returns (bool success){
+  function createShares() returns (bool success){
+    if(!allowShareCreation){
+      throw;
+    }
 
-    uint shareholderID = shareholders.length++;
-    shareholders[shareholderID]=beneficiary;
-    balances[beneficiary]=msg.value;
+    if(balances[msg.sender]==0){  /*TODO: Verify that this is a possible way*/
+      uint shareholderID = shareholders.length++;
+      shareholders[shareholderID]=msg.sender;
+    }
+
+    balances[msg.sender]+=msg.value;
     totalSupply += msg.value;
-
     return true;
+  }
+
+  function getShares() returns (uint shares){
+    return balances[msg.sender];
 
   }
 
 /* Send coins */
 function transfer(address _to, uint256 _value) {
+if(balances[_to]==0){
+  uint shareholderID = shareholders.length++;
+  shareholders[shareholderID]= _to;
+}
 if (balances[msg.sender] < _value) throw;           /* Check if the sender has enough*/
 if (balances[_to] + _value < balances[_to]) throw; /* Check for overflows */
 balances[msg.sender] -= _value;                     /* Subtract from the sender */

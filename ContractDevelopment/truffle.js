@@ -12,9 +12,13 @@ module.exports = {
   deploy: [
     "owned",
     "SharesManager",
-    "TestingSol",
+    "testingSol",
     "Private"
   ],
+/*  after_deploy: [
+    "./environments/development/afterDeploy.js"
+  ],
+  */
   rpc: {
     host: "localhost",
     port: 8545

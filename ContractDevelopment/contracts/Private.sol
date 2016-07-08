@@ -13,13 +13,23 @@ contract Private is owned, SharesManager {
     /* Contract Variables and events */
     Proposal[] public proposals;
     uint public numProposals;
-    bool public allowShareCreation;
     Dividend[] public dividends;
 
     event ProposalAdded(uint proposalID, address recipient, uint amount, string description);
     event ProposalExecuted(uint proposalNumber);
     event Voted(uint proposalID, bool position, address voter);
     event DividendPayout(uint time, uint amount, uint unit, uint ID);
+    event fueled(uint amount);
+
+/*Debugging events*/
+    event totDiv(uint totDiv);
+    event balance(uint balance);
+    event sholder(address holder);
+    event unit (uint unit);
+    event divID( uint dicID);
+    event totalSup(uint totalSupply);
+
+
 
     struct Proposal {
         address recipient;
@@ -52,9 +62,11 @@ contract Private is owned, SharesManager {
       }
 
     /* First time setup */
-    function Private(address _owner, SharesManager sharesAddress) {
+    function Private(address _owner) {
       if(_owner != 0){
         owner = _owner;
+      }else{
+        owner = msg.sender;
       }
       allowShareCreation =false;
     }
@@ -69,34 +81,42 @@ contract Private is owned, SharesManager {
       }
     }
 
-    function issueShares() returns (bool success){
-      if(!allowShareCreation){
-        throw;
-      }
-      bool created = createShares(msg.sender).value(msg.value);
-      return created;
-    }
 
-    function distributeDividents(uint totalDividend) onlyOwner returns (bool success){
+
+
+    function distributeDividends(uint totalDividend) onlyOwner {
+     totDiv(totalDividend);
+     balance(this.balance);
       if(totalDividend > this.balance){
         throw;
       }
-      uint distributedUnit = totalDividend/totalSupply();
+
+
+
+
+
       uint nbShareholders = shareholders.length;
+
+     unit(totalDividend/totalSupply);
+     totalSup(totalSupply);
 
       for (uint i=0; i<nbShareholders; ++i){
         address holder = shareholders[i];
-        holder.send(distributedUnit);
-
+        sholder(holder);
+        holder.send(totalDividend/totalSupply);
       }
 
-
-      uint dividendID = dividends.length; /*TODO: Check if i need to put ++: how does lenght work*/
-      dividends[dividendID]=Dividend({time:now,amount:totalDividend,unit:distributedUnit,ID:dividendID});
-      DividendPayout(now,totalDividend,distributedUnit,dividendID);
-      return true;
+      uint dividendID = dividends.length++; /*TODO: Check if i need to put ++: how does lenght work*/
+      divID(dividendID);
+      dividends[dividendID]=Dividend({time:now,amount:totalDividend,unit:totalDividend/totalSupply,ID:dividendID});
+      DividendPayout(now,totalDividend,totalDividend/totalSupply,dividendID);
 
     }
+
+    function fuel() onlyOwner{
+        fueled(msg.value);
+    }
+
 
     /* Function to create a new proposal */
     function newProposal( address beneficiary, uint etherAmount,
@@ -150,7 +170,7 @@ contract Private is owned, SharesManager {
 
     for (uint i = 0; i <  p.votes.length; ++i) {
         Vote v = p.votes[i];
-        uint voteWeight = sharesTokenAddress.balances(v.voter);
+        uint voteWeight = balances[v.voter];
         if (v.inSupport) {
             p.yes += voteWeight;
         } else {
