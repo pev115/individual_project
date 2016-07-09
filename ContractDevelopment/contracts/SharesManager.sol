@@ -8,7 +8,7 @@ contract SharesManager {
   uint256 public totalSupply;
   address[] public shareholders;
   mapping (address => uint256) balances;
-  bool public allowShareCreation;
+  bool public investment;
 
   /* This generates a public event on the blockchain that will notify clients */
   event Transfer(address indexed from, address indexed to, uint256 value);
@@ -22,7 +22,7 @@ contract SharesManager {
 
 
   function createShares() returns (bool success){
-    if(!allowShareCreation){
+    if(!investment){
       throw;
     }
 
