@@ -1,4 +1,6 @@
 contract('Private', function(accounts){
+
+
   it("Checks the owner is set correctly",function(done){
     var priv = Private.deployed();
     priv.owner.call().then(function(owner){
@@ -12,193 +14,139 @@ contract('Private', function(accounts){
     }).catch(done);
   });
 
-  it("Checks: normal shares creation workflow and dividend distribution",function(done){
-    var TestRPC = require("ethereumjs-testrpc");
 
-    var accountConfig=[{balance:100},{balance:100}];
 
-    web3.setProvider(TestRPC.provider({accounts:accountConfig}));
-
+  it("checks Flags toggle correctly",function(done){
     var priv = Private.deployed();
+    priv.building.call().then(function(flag){
+      assert.equal(flag,false, "building not initialised false");
+      return  priv.toggleBuilding.sendTransaction({from:accounts[0]}).then(function(){
+                return priv.building.call();
+              });
+    }).then(function(changed){
+        assert.equal(changed, true, "building did not toggle");
+        return priv.recruiting.call();
+    }).then(function(flag){
+      assert.equal(flag,false, "recruiting not initalised to false");
+      return priv.toggleRecruiting.sendTransaction({from:accounts[0]}).then(function(){
+              return priv.recruiting.call();
+            });
+    }).then(function(changed){
+      assert.equal(changed, true, " recruiting did not toggle");
+      return priv.production.call();
+    }).then(function(flag){
+      assert.equal(flag,false, "production not initalised to false");
+      return priv.toggleProduction.sendTransaction({from:accounts[0]}).then(function(){
+            return priv.production.call();
+          });
+    }).then(function(changed){
+      assert.equal(changed, true, " production did not toggle");
+      return priv.investment.call();
+    }).then(function(flag){
+      assert.equal(flag,false, "investment not initalised to false");
+      return priv.toggleSharesIssue.sendTransaction({from:accounts[0]}).then(function(){
+          return priv.investment.call();
+        });
+    }).then(function(changed){
+        assert.equal(changed, true, "investment did not toggle");
+    }).then(done).catch(done);
+  });
 
 
+
+
+
+  it("Checks shares allocation is correct",function(done){
+    Private.new({from:accounts[0]}).then(function(priv){
+      var account_zero = accounts[0];
+      var account_one = accounts[1];
+      var account_two = accounts[2];
+
+      var total= 0;
+
+      priv.toggleSharesIssue.sendTransaction({from:account_zero})
+      .then(function(tx){
+        return priv.investment.call();
+      }).then(function(result){
+        assert.equal(result,true,"Cannot create shares");
+      }).then(function(){
+        var amount = parseInt(web3.toWei(10, 'Ether'));
+        for(var i =1 ; i<3; i++){
+          priv.createShares.sendTransaction({from:accounts[i],value:amount}).catch(function(e){
+            console.log("Error in creating shares");
+            console.log(e);
+        });
+          total += amount;
+          amount+= parseInt(web3.toWei(10, 'Ether'));
+        }
+        return priv.totalSupply.call() ;
+      }).then(function(supply){
+        assert.equal(supply.toNumber(), total, "total does not match")
+      }).then(function(){
+        return priv.transfer.sendTransaction(accounts[0], parseInt(web3.toWei(5,'Ether')),{from:accounts[2]}).then(function(){
+            return priv.getShares.call();
+        });
+      }).then(function(sh){
+        var expected = parseInt(web3.toWei(5,'Ether'));
+        assert.equal(sh.toNumber(),expected, "Did not transfer correctly");
+      }).then(done).catch(done);
+    }).catch(done);
+  });
+
+
+
+
+
+it("Checks payment is distributed correctly", function(done){
+  Private.new({from:accounts[0]}).then(function(priv){
     var account_zero = accounts[0];
     var account_one = accounts[1];
     var account_two = accounts[2];
-    var account_three = accounts[3];
-
-      console.log('Testing Balances');
-      console.log(web3.eth.getBalance(account_one).toNumber());
-
-
-
-
-
 
     var account_one_starting_balance;
-    var account_two_starting_balance;
-    var account_three_starting_balance;
     var account_one_ending_balance;
-    var account_two_ending_balance;
-    var account_three_ending_balance;
-
-    var total_dividend = 12;
-
-    priv.switchSharesIssue({from:account_zero}).catch(function(e){
-      console.log("Error in switching the SharesIssue");
-      console.log(e);
-    });
-
-    priv.allowShareCreation.call().then(function(result){
-      console.log("Can I issue shares?");
-      console.log(result);
-    });
-
-    var amount = 5;
-    for(var i =1 ; i<4; i++){
-      priv.createShares({from:accounts[i],value:amount}).catch(function(e){
-        console.log("Error in creating shares");
-        console.log(e);
-      })
-      amount+=10;
-    }
-    console.log("TEST1")
-    priv.totalSupply.call().then(function(total){
-      console.log("This is the total:");
-      console.log(total);
-    });
-
-    account_one_starting_balance = web3.eth.getBalance(account_one).toNumber();
-    account_two_starting_balance = web3.eth.getBalance(account_two).toNumber();
-    account_three_starting_balance = web3.eth.getBalance(account_three).toNumber();
 
 
+    priv.toggleSharesIssue.sendTransaction({from:account_zero}).then(function(tx){
+      var amount = parseInt(web3.toWei(10, 'Ether'));
+      for(var i =1 ; i<3; i++){
+        priv.createShares.sendTransaction({from:accounts[i],value:amount}).catch(function(e){
+          console.log("Error in creating shares");
+          console.log(e);
+      });
 
-    var watcher = priv.allEvents();
-
-/*
-    var con = web3.eth.contract(Private.abi).at(Private.deployed_address);
-    console.log("This is con: ");
-    console.log(con);
-    var totDivEvent = con.totDiv();
-    console.log("Getting to the event variable");
-    totDivEvent.watch(function(error,result){
-      if(!error){
-        console.log("this is the event");
-        console.log(result);
-      }else{
-        console.log("We have an error");
-        console.log(error);
+        amount+= parseInt(web3.toWei(10, 'Ether'));
       }
-    });
-*/
-
-web3.eth.sendTransaction({from:account_one,to:account_zero,value:web3.eth.getBalance(account_one).toNumber()});
-account_one_starting_balance = web3.eth.getBalance(account_one).toNumber();
-console.log('here is the balance')
-console.log(account_one_starting_balance);
-
-
-
-    console.log("TEST2");
-    priv.distributeDividends(total_dividend,{from:account_zero}).then(function(tx_id){
-     account_one_ending_balance = web3.eth.getBalance(account_one).toNumber();
-    /*  account_two_ending_balance = web3.eth.getBalance(account_two).toNumber();
-      account_three_ending_balance = web3.eth.getBalance(account_three).toNumber();*/
-
-      console.log("TEST3");
-      return watcher.get();
-    }).then(function(events){
-      console.log("TEST4");
-      console.log(events.length);
-      console.log(events[0].args.totDiv.toNumber());
-      assert.notEqual(account_one_starting_balance,account_one_ending_balance,
-                      "The account 1 balances are equal");
-      /*var total_expected = account_one_starting_balance+account_two_starting_balance+
-                        account_three_starting_balance+total_dividend;
-      var total_end = account_one_ending_balance+account_two_ending_balance+
-                      account_three_ending_balance;
-      assert.equal(total_expected, total_end,"Ether dividend missmatch");*/
-
-    }).catch(function(e){
-      console.log("we have an error");
-      console.log(e);}).then(done).catch(done);
-
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*contract('MetaCoin', function(accounts) {
-  it("should put 10000 MetaCoin in the first account", function(done) {
-    var meta = MetaCoin.deployed();
-
-    meta.getBalance.call(accounts[0]).then(function(balance) {
-      assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
-    }).then(done).catch(done);
-  });
-  it("should call a function that depends on a linked library  ", function(done){
-    var meta = MetaCoin.deployed();
-    var metaCoinBalance;
-    var metaCoinEthBalance;
-
-    meta.getBalance.call(accounts[0]).then(function(outCoinBalance){
-      metaCoinBalance = outCoinBalance.toNumber();
-      return meta.getBalanceInEth.call(accounts[0]);
-    }).then(function(outCoinBalanceEth){
-      metaCoinEthBalance = outCoinBalanceEth.toNumber();
-
     }).then(function(){
-      assert.equal(metaCoinEthBalance,2*metaCoinBalance,"Library function returned unexpeced function, linkage may be broken");
-
+      return priv.changeDividends.sendTransaction(50,{from:account_zero})
+            .then(function(){
+              return priv.percentDividends.call();
+            });
+    }).then(function(div){
+      assert.equal(50,div.toNumber(),"dividends percent not set properly");
+    }).then(function(){
+      account_one_starting_balance= web3.eth.getBalance(account_one);
+      console.log("account one starting balance");
+      console.log(account_one_starting_balance.toNumber());
+    }).then(function(){
+      var pay = parseInt(web3.toWei(400,'ether'));
+      priv.receivePayment.sendTransaction({from:accounts[3],value:pay});
+    }).then(function(){
+      account_one_ending_balance =web3.eth.getBalance(account_one);
+      console.log("account one ending balance");
+      console.log(account_one_ending_balance.toNumber());
     }).then(done).catch(done);
-  });
-  it("should send coin correctly", function(done) {
-    var meta = MetaCoin.deployed();
+  }).catch(done);
 
-    // Get initial balances of first and second account.
-    var account_one = accounts[0];
-    var account_two = accounts[1];
-
-    var account_one_starting_balance;
-    var account_two_starting_balance;
-    var account_one_ending_balance;
-    var account_two_ending_balance;
-
-    var amount = 10;
-
-    meta.getBalance.call(account_one).then(function(balance) {
-      account_one_starting_balance = balance.toNumber();
-      return meta.getBalance.call(account_two);
-    }).then(function(balance) {
-      account_two_starting_balance = balance.toNumber();
-      return meta.sendCoin(account_two, amount, {from: account_one});
-    }).then(function() {
-      return meta.getBalance.call(account_one);
-    }).then(function(balance) {
-      account_one_ending_balance = balance.toNumber();
-      return meta.getBalance.call(account_two);
-    }).then(function(balance) {
-      account_two_ending_balance = balance.toNumber();
-
-      assert.equal(account_one_ending_balance, account_one_starting_balance - amount, "Amount wasn't correctly taken from the sender");
-      assert.equal(account_two_ending_balance, account_two_starting_balance + amount, "Amount wasn't correctly sent to the receiver");
-    }).then(done).catch(done);
-  });
 });
-*/
+
+
+
+
+
+
+
+
+
+
+});

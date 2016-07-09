@@ -12,7 +12,7 @@ module.exports = {
   deploy: [
     "owned",
     "SharesManager",
-    "testingSol",
+    "hasProposals",
     "Private"
   ],
 /*  after_deploy: [
