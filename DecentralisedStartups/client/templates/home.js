@@ -6,8 +6,6 @@
  before connecting to the website.
 */
 
-/* TODO: rethink the personal api allowance and how could I structure it*/
-
 
 
 Template.home.events({
