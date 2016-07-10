@@ -21,6 +21,7 @@ contract Private is owned, SharesManager, hasProposals {
   bool public building;
   bool public production;
   uint public percentDividends;
+  string public description;
 
     modifier onlyShareholders {
           if (balances[msg.sender] == 0) throw;
@@ -28,12 +29,15 @@ contract Private is owned, SharesManager, hasProposals {
       }
 
     /* First time setup */
-    function Private(address _owner) {
+    function Private(address _owner, string _desc) {
       if(_owner != 0){
         owner = _owner;
       }else{
         owner = msg.sender;
       }
+
+      description = _desc;
+
       investment =false;
       recruiting = false;
       building = false;
@@ -102,7 +106,7 @@ contract Private is owned, SharesManager, hasProposals {
 
     function fuel() onlyOwner{}
 
-    function addProposal(uint _reward, uint _deposit) onlyOwner {
+    function addProposal(uint _reward, uint _deposit, string _desc) onlyOwner {
       if(!recruiting || _reward<_deposit ){
         throw;
       }
@@ -114,6 +118,8 @@ contract Private is owned, SharesManager, hasProposals {
       p.deposit = _deposit;
       p.completed = false;
       p.appointed = false;
+      p.finalised = false;
+      p.description = _desc;
       proposalsNumber = proposalsNumber +1;
     }
 
