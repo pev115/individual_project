@@ -1,9 +1,9 @@
 DAOs =  new Mongo.Collection('daos');
-Proposals = new Mongo.Collection('proposals');
+//Proposals = new Mongo.Collection('proposals');
 
 var Schemas = {};
 
-Schemas.DAOs = new SimpleSchema({
+Schemas.DAO = new SimpleSchema({
     address:{
       type:String,
       label:"Address",
@@ -43,15 +43,18 @@ Schemas.DAOs = new SimpleSchema({
         type: Boolean,
         label:"Investment",
         defaultValue: false
+    },
+    proposals:{
+        type:[Schemas.Proposal]
     }
 
 });
 
 
-DAOs.attachSchema(Schemas.DAOs);
 
 
-Schemas.Proposals =  new SimpleSchema({
+
+Schemas.Proposal =  new SimpleSchema({
     DAO_id: {
         type:String,
         label: "DAO_id"
@@ -87,4 +90,6 @@ Schemas.Proposals =  new SimpleSchema({
 });
 
 
-Proposals.attachSchema(Schemas.Proposals);
+DAOs.attachSchema(Schemas.DAO);
+
+/*Proposals.attachSchema(Schemas.Proposal);*/
