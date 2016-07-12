@@ -43,7 +43,6 @@ contract Private is owned, SharesManager, hasProposals {
       building = false;
       production = false;
       percentDividends = 0;
-      proposalsNumber = 0;
     }
 
     function toggleSharesIssue() onlyOwner  {
@@ -99,50 +98,57 @@ contract Private is owned, SharesManager, hasProposals {
       for (uint i=0; i<nbShareholders; ++i){
         address holder = shareholders[i];
         uint shares= balances[holder];
-        holder.send(((msg.value*percentDividends)/100)*(shares/totalSupply));
+        if(!holder.send(((msg.value*percentDividends)/100)*(shares/totalSupply))){
+          throw;
+        }
       }
 
     }
 
     function fuel() onlyOwner{}
 
-    function addProposal(uint _reward, uint _deposit, string _desc) onlyOwner {
-      if(!recruiting || _reward<_deposit ){
+
+
+
+
+    function addProposal(uint _reward, uint _deposit, string _desc, uint _ID) onlyOwner {
+      if(!recruiting || proposals[_ID].ID!=0 ){
         throw;
       }
 
-      uint proposalID=  proposals.length++;
-      proposal p = proposals[proposalID];
-      p.ID = proposalID;
+      proposal p = proposals[_ID];
+      p.ID = _ID;
       p.reward = _reward;
       p.deposit = _deposit;
       p.completed = false;
       p.appointed = false;
       p.finalised = false;
       p.description = _desc;
-      proposalsNumber = proposalsNumber +1;
     }
 
-    function hireConrtactor (address _contractor, uint proposalID) onlyOwner{
-      if(proposalID < proposalsNumber){
+    function hireContractor (address _contractor, uint _ID) onlyOwner{
+      if(proposals[_ID].ID == 0){
         throw;
       }
-      proposal p = proposals[proposalID];
+
+      proposal p = proposals[_ID];
       if(p.appointed == true || p.finalised == true){
         throw;
       }
       p.appointed = true;
       p.contractor = _contractor;
-      _contractor.send(p.deposit);
-
-    }
-
-    function layoffContractor (uint proposalID) onlyOwner{
-      if(proposalID < proposalsNumber){
+      if(!_contractor.send(p.deposit)){
         throw;
       }
 
-      proposal p = proposals[proposalID];
+    }
+
+    function layoffContractor (uint _ID) onlyOwner{
+      if(proposals[_ID].ID == 0){
+        throw;
+      }
+
+      proposal p = proposals[_ID];
 
       if(p.appointed ==false || p.finalised==true){
         throw;
@@ -153,38 +159,42 @@ contract Private is owned, SharesManager, hasProposals {
       }
 
       p.appointed = false;
-      p.contractor = 0;
+      p.completed= false;
+      p.contractor = 0; /*potential bug*/
 
     }
 
-    function completeWork (uint proposalID){
-      if(proposalID < proposalsNumber){
+    function completeWork (uint _ID){
+      if(proposals[_ID].ID == 0){
         throw;
       }
 
-      proposal p = proposals[proposalID];
-
+      proposal p = proposals[_ID];
       if(msg.sender != p.contractor){
         throw;
       }
-
       p.completed = true;
-
     }
 
-    function finalise(uint proposalID) onlyOwner{
-      if(proposalID < proposalsNumber){
+    function finalise(uint _ID) onlyOwner{
+      if(proposals[_ID].ID==0){
         throw;
       }
 
-      proposal p = proposals[proposalID];
 
-      if(p.appointed == false){
+
+      proposal p = proposals[_ID];
+
+      if(p.appointed == false || p.completed ==false){
         throw;
       }
 
-      uint payment = p.reward - p.deposit;
-      p.contractor.send(payment);
+      uint payment = p.reward;
+
+      if(!p.contractor.send(payment)){
+        throw;
+      }
+
       p.finalised = true;
 
     }
