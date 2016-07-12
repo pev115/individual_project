@@ -6,21 +6,23 @@
             {{> afQuickField name='owner'}}
             {{> afQuickField name='title'}}
             {{> afQuickField name='recruiting'}}
-            {{> afQuickField name='building'}}
-            {{> afQuickField name='producing'}}
             {{> afQuickField name='investment'}}
             {{#if afFieldValueIs name = "recruiting" value=true}}
-                <button id='add-props' type="button">
+
+
+            {{> afArrayField name = 'proposals'}}
+                <!--  <button id='add-props' type="button">
                     Add Proposal
                 </button>
 
 
-                {{#each props}}
+               {{#each props}}
                     {{> AddProposal}}
                 {{/each}}
+                -->
 
             {{/if}}
-            {{> afQuickField name='description' rows=6}}
+            {{> afQuickField name='description' label = "Project Description" rows=6}}
 
 
         </fieldset>

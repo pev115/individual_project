@@ -3,6 +3,45 @@ DAOs =  new Mongo.Collection('daos');
 
 var Schemas = {};
 
+Proposal =  new SimpleSchema({
+    ID: {
+        type:Number,
+        label: "ID",
+        optional:true,
+        autoform:{
+            omit: true
+        }
+    },
+    title:{
+        type:String,
+        label:"Title",
+        max:140,
+        autoform:{
+            label: "Job Title"
+        }
+    },
+    description:{
+        type: String,
+        label: "Description",
+        autoform:{
+            rows: 4,
+            label: "Proposal Description"
+        }
+    },
+    reward:{
+        type:Number,
+        label: "Reward"
+    },
+    deposit:{
+        type:Number,
+        label:"Deposit"
+    }
+
+
+});
+
+
+
 Schemas.DAO = new SimpleSchema({
     address:{
       type:String,
@@ -45,7 +84,8 @@ Schemas.DAO = new SimpleSchema({
         defaultValue: false
     },
     proposals:{
-        type:[Schemas.Proposal]
+        type:[Proposal],
+        optional:true
     }
 
 });
@@ -53,41 +93,6 @@ Schemas.DAO = new SimpleSchema({
 
 
 
-
-Schemas.Proposal =  new SimpleSchema({
-    DAO_id: {
-        type:String,
-        label: "DAO_id"
-    },
-    DAO_address:{
-        type:String,
-        label:"Address",
-        defaultValue:"Ox0000"
-    },
-    ID: {
-        type:Number,
-        label: "ID"
-    },
-    title:{
-      type:String,
-      label:"Title",
-      max:140
-    },
-    description:{
-        type: String,
-        label: "Description"
-    },
-    reward:{
-        type:Number,
-        label: "Reward"
-    },
-    deposit:{
-        type:Number,
-        label:"Deposit"
-    }
-
-
-});
 
 
 DAOs.attachSchema(Schemas.DAO);
