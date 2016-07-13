@@ -160,7 +160,7 @@ contract Private is owned, SharesManager, hasProposals {
 
       p.appointed = false;
       p.completed= false;
-      p.contractor = 0; /*potential bug*/
+      p.contractor = 0; 
 
     }
 
