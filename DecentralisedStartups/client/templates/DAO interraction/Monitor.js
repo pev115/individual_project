@@ -9,6 +9,19 @@
 /*TODO: Think about how to handle contract mining*/
 
 Template.Monitor.helpers({
+    displayRecruiting: function(){
+        var txt = this.recruiting + '';
+        console.log(txt);
+        return txt;
+
+    }
+});
+
+
+
+
+/*
+Template.Monitor.helpers({
     DAO_not_exists: function(){
        return !contractObjectExists();
     }
@@ -19,7 +32,6 @@ Template.Monitor.helpers({
 
 
 
-/*helper functions*/
 function contractObjectExists(){
     var contract = Session.get('contract');
     if (typeof contract !== 'undefined'){
@@ -31,9 +43,33 @@ function contractObjectExists(){
     }
     
 }
-/*
-function minedContractExists(){
-    var
-    
-}
-    */
+
+
+ Template.Interact.helpers({
+ DAO_address: function(){
+ var created_DAO = Session.get('contract');
+ if(typeof created_DAO !== 'undefined'){
+ return created_DAO.address;
+ }else{
+ return "not available";
+ }
+ },
+ min_quorum: function(){
+ var created_DAO = web3.eth.contract(Session.get('contract').abi).at(Session.get('contract').address);
+ var min_quorum=created_DAO.minimumQuorum.call();
+ if(min_quorum!=='undefined'){
+ return min_quorum;
+ }else{
+ return "not available";
+ }
+
+ }
+ });
+
+
+
+
+
+*/
+
+

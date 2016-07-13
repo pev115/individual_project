@@ -11,9 +11,10 @@
 Template.home.events({
     /* on click, create and deploy the contract */
     'click #create_DAO_btn': function(){
-
         Router.go('/Create');
-
+    },
+    'click #connect_DAO_btn': function(){
+        Router.go('/Connect');
     }
 
 });

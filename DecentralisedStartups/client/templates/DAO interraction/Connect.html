@@ -1,3 +1,12 @@
 <template name="Connect">
-    <h1>Connect to your DAO</h1>
+    <form id  ="connect_DAO_form">
+        <fieldset>
+            <legend>Connect to your DAO</legend>
+            Address: <input type="text" id = "connect_DAO_address"><br><br>
+            <button type = "submit">Connect </button>
+            {{#if currentDAO}}
+            <a href="{{pathFor route='Monitor' data = currentDAO}}">Go to current</a>
+            {{/if}}
+        </fieldset>
+    </form>
 </template>
