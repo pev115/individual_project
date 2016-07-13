@@ -1,6 +1,5 @@
 contract hasProposals{
-  uint public proposalsNumber;
-  proposal[] public proposals;
+  mapping (uint => proposal)  public proposals;
 
   struct proposal{
     uint ID;
