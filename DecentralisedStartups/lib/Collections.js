@@ -46,7 +46,7 @@ Schemas.DAO = new SimpleSchema({
     address:{
       type:String,
       label:"Address",
-      defaultValue:"Ox0000"
+      defaultValue:"0x0000"
     },
     owner:{
         type: String,

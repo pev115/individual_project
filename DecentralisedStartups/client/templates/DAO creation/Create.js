@@ -14,10 +14,14 @@ var hooksObject = {
         var _id = this.docId;
         var _recruiting =this.insertDoc.recruiting;
         var _investment = this.insertDoc.investment;
+
+
         console.log("HERE TOO1");
         console.log(this.docId);
+
         var contract = web3.eth.contract(privateContract.abi);
         console.log(contract);
+
          contract.new(_owner,_desc,{from:_owner,data:privateContract.code,gas:4700000},
             function(e,contract){
              console.log(e, contract);
@@ -30,6 +34,7 @@ var hooksObject = {
                  console.log(_recruiting);
 
                 DAOs.update(_id,{$set:{address:contract.address}});
+
                 if(_investment == true){
                     contract.toggleSharesIssue.sendTransaction({from:_owner});
                 }else if(_recruiting== true){
