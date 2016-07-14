@@ -7,13 +7,6 @@ Template.Connect.helpers({
         }
         return path;
 
-        /*var _address = Session.get('current_DAO');
-        var DAO = DAOs.findOne({address :_address});
-        console.log(DAO);
-        return DAO;*/
-    },
-    test: function(){
-        return Session.get('testing');
     }
 });
 
@@ -26,7 +19,9 @@ Template.Connect.events({
         console.log(event);
         var path = '/Monitor/'+address;
         console.log(path);
-        Session.set('current_DAO',address);
+        //if(DAOs.findOne({address:address})) {
+        //    Session.set('current_DAO', address);
+      //  }
         Router.go(path);
 
     }

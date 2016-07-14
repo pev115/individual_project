@@ -6,7 +6,13 @@
  before connecting to the website.
  */
 
-/*TODO: Think about how to handle contract mining*/
+/*TODO: Think about how to keep currentDAO upon refresh*/
+
+Template.Monitor.onCreated(function(){
+    console.log("I AM HEEEEEREEEEE!!!!");
+    console.log(this.data.address);
+    Session.set('current_DAO', this.data.address);
+});
 
 Template.Monitor.helpers({
     displayRecruiting: function(){

@@ -15,6 +15,9 @@ Template.home.events({
     },
     'click #connect_DAO_btn': function(){
         Router.go('/Connect');
+    },
+    'click #Browse_DAO_btn': function(){
+        Router.go('/Browse');
     }
 
 });

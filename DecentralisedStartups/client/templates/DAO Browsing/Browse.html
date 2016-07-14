@@ -1,5 +1,23 @@
 <template name="Browse">
+    <form id="search">
+        <input type="text" id="searchValue" placeholder="Enter search terms here."/>
+        <button type="submit">Search</button>
+    </form>
+    <hr/>
+    <h1>The DAOs:</h1>
+    <div class="container">
+        <ul class="list-group">
 
+
+        {{#each daos}}
+            <li class="list-group-item list-group-item-success">
+                <p>{{title}}</p>
+                <p>{{address}}</p>
+        </li>
+        {{/each}}
+
+    </ul>
+    </div>
 
 
 </template>
