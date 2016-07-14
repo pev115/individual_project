@@ -1,6 +1,19 @@
 <template name="Browse">
     <form id="search">
         <input type="text" id="searchValue" placeholder="Enter search terms here."/>
+        <div class="checkbox">
+            <label><input type="checkbox" id="searchRecruiting"> Recruiting </label>
+        </div>
+
+        <div class="checkbox">
+            <label><input type="checkbox" id ="searchInvestment"> Looking for Investment</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" id ="searchProducing"> Producing</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" id ="searchBuilding"> Building </label>
+        </div>
         <button type="submit">Search</button>
     </form>
     <hr/>
@@ -13,6 +26,7 @@
             <li class="list-group-item list-group-item-success">
                 <p>{{title}}</p>
                 <p>{{address}}</p>
+                <button type="button" class ="btn btn-primary">GO!</button>
         </li>
         {{/each}}
 
