@@ -4,8 +4,8 @@
             <legend>Connect to your DAO</legend>
             Address: <input type="text" id = "connect_DAO_address"><br><br>
             <button type = "submit">Connect </button>
-            {{#if currentDAO}}
-            <a href="{{pathFor route='Monitor' data = currentDAO}}">Go to current</a>
+            {{#if currentDAOpath}}
+            <a href="{{currentDAOpath}}">Go to current</a>
             {{/if}}
         </fieldset>
     </form>
