@@ -1,6 +1,7 @@
-/* TODO: make it more scalable by subscribing incrementally not all at once
-* By subscibing incrementally, think about if it is possible to check the displayed fields in
-* ethereum
+/* TODO: Add the button for more DAOs display
+* think about if it is possible to check the displayed fields in ethereum
+* See if I can use a more specific id for the go button.
+* Seems to work -> Still make more testigg : changed the button reference from class to id
 * */
 
 Template.Browse.onCreated(function(){
@@ -26,7 +27,7 @@ Template.Browse.events({
         Session.set("searchBuilding", $("#searchBuilding").is(':checked'));
 
     },
-    "click .btn-primary":function(event){
+    "click #browse_go_button":function(event){
         event.preventDefault();
         console.log("HHHHHEEEERRREEE");
         var _address = this.address;
@@ -57,12 +58,12 @@ Template.Browse.helpers({
         console.log(options);
 
 
-        Meteor.subscribe("DAOSearch", Session.get("searchValue"));
+        Meteor.subscribe("DAOSearch", Session.get("searchValue"),5,options);
         if (Session.get("searchValue")) {
-            return DAOs.find(options, { sort: [["score", "desc"]],limit:2 });
+            return DAOs.find({}, { sort: [["score", "desc"]]});
         } else {
             console.log("I will try to sort");
-            return DAOs.find(options,{limit:2});
+            return DAOs.find({});
         }
     }
 

@@ -6,13 +6,18 @@ Meteor.publish('singleDAO',function(_address){
     return DAOs.find({address:_address});
 });
 
-Meteor.publish('DAOSearch',function(searchValue) {
+Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
     if (!searchValue) {
-        return DAOs.find({});
+        return DAOs.find(options,{limit:_limit});
     }
+
+    options.$text={$search:searchValue};
+
     console.log("Searching for ", searchValue);
+    console.log(options);
     var cursor = DAOs.find(
-        { $text: {$search: searchValue} },
+        options,
+       /* { $text: {$search: searchValue} },*/
         {
             fields: {
                 score: { $meta: "textScore" }
@@ -20,7 +25,8 @@ Meteor.publish('DAOSearch',function(searchValue) {
 
             sort: {
                 score: { $meta: "textScore" }
-            }
+            },
+            limit: _limit
         }
     );
     return cursor;
