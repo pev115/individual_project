@@ -4,6 +4,11 @@ Template.Create.onCreated(function() {
 });
 */
 
+
+/*TODO: make it more secure by not allowing someone to just insert and delete from terminal
+ * make sure nothing is added to the database if not validated by ethereum
+ * check out what the bug with the 0 address is
+ */
 var hooksObject = {
 
     onSuccess: function(insert,result) {

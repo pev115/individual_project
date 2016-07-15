@@ -1,4 +1,5 @@
 <template name="Browse">
+    <div class="container">
     <form id="search">
         <input type="text" id="searchValue" placeholder="Enter search terms here."/>
         <div class="checkbox">
@@ -16,21 +17,30 @@
         </div>
         <button type="submit">Search</button>
     </form>
+        </div>
     <hr/>
     <h1>The DAOs:</h1>
     <div class="container">
+
         <ul class="list-group">
 
+            {{#with daos}}
+                {{#if this.count}}
+                    {{#each this}}
+                        <li class="list-group-item list-group-item-success">
+                            <p>{{title}}</p>
+                            <p>{{address}}</p>
+                            <button type="button" class ="btn btn-primary">GO!</button>
+                        </li>
+                    {{/each}}
+                {{else}}
+                    <li class="list-group-item list-group-item-danger">
+                        <p>No DAO found matching the search criteria</p>
+                    </li>
+                {{/if}}
+            {{/with}}
 
-        {{#each daos}}
-            <li class="list-group-item list-group-item-success">
-                <p>{{title}}</p>
-                <p>{{address}}</p>
-                <button type="button" class ="btn btn-primary">GO!</button>
-        </li>
-        {{/each}}
-
-    </ul>
+        </ul>
     </div>
 
 

@@ -6,6 +6,11 @@ Router.configure({
 
 
 Router.route('/',{name:'home'});
+/*TODO: Think about: how not to subscribe to the entire thing but only actually grab the
+ * one that is wanted;
+ * could do that by not subscribing to anything and subscring to the template helper,
+ * with a search for the address
+ */
 Router.route('/Connect',{
     name:'Connect',
     waitOn: function(){return Meteor.subscribe('DAOs');}

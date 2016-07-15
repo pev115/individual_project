@@ -8,13 +8,12 @@ Meteor.publish('singleDAO',function(_address){
 
 Meteor.publish('DAOSearch',function(searchValue) {
     if (!searchValue) {
-        return DAOs.find({},{sort:{submitted:-1}});
+        return DAOs.find({});
     }
     console.log("Searching for ", searchValue);
     var cursor = DAOs.find(
         { $text: {$search: searchValue} },
         {
-
             fields: {
                 score: { $meta: "textScore" }
             },

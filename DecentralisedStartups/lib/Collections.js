@@ -1,3 +1,8 @@
+/*TODO: Take our inscure
+ * put all the necessary fields to the DAOs collection.
+ */
+
+
 DAOs =  new Mongo.Collection('daos');
 //Proposals = new Mongo.Collection('proposals');
 
