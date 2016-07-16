@@ -1,7 +1,4 @@
-/* TODO: Add the button for more DAOs display
-* think about if it is possible to check the displayed fields in ethereum
-* See if I can use a more specific id for the go button.
-* Seems to work -> Still make more testigg : changed the button reference from class to id
+/* TODO: think about if it is possible to check the displayed fields in ethereum
 * */
 
 Template.Browse.onCreated(function(){
@@ -11,7 +8,9 @@ Template.Browse.onCreated(function(){
     Session.set("searchInvestment", false);
     Session.set("searchProducing", false);
     Session.set("searchBuilding", false);
+    Session.set('DAOSearchLimit',5);
 });
+
 
 Template.Browse.events({
     "submit #search": function (event) {
@@ -25,6 +24,7 @@ Template.Browse.events({
         Session.set("searchInvestment", $("#searchInvestment").is(':checked'));
         Session.set("searchProducing", $("#searchProducing").is(':checked'));
         Session.set("searchBuilding", $("#searchBuilding").is(':checked'));
+        Session.set('DAOSearchLimit',5);
 
     },
     "click #browse_go_button":function(event){
@@ -34,6 +34,18 @@ Template.Browse.events({
         var path = '/Monitor/'+_address;
         console.log(path);
         Router.go(path);
+    },
+
+    'click #add_more_DAO': function(event){
+    event.preventDefault();
+        var limit = Session.get('DAOSearchLimit');
+        if(!limit){
+            Session.set('DAOSearchLimit',10);
+        }else{
+            limit =limit +5;
+            Session.set('DAOSearchLimit',limit);
+        }
+
     }
 });
 
@@ -41,6 +53,7 @@ Template.Browse.helpers({
 
     daos: function() {
         var options={};
+        var limit;
 
         if(Session.get("searchRecruiting")){
             options.recruiting =true;
@@ -56,9 +69,14 @@ Template.Browse.helpers({
         }
         console.log("these are the options");
         console.log(options);
+        var sessionLimit = Session.get('DAOSearchLimit');
+        if(!sessionLimit){
+            limit=5;
+        }else{
+            limit = sessionLimit;
+        }
 
-
-        Meteor.subscribe("DAOSearch", Session.get("searchValue"),5,options);
+        Meteor.subscribe("DAOSearch", Session.get("searchValue"),limit,options);
         if (Session.get("searchValue")) {
             return DAOs.find({}, { sort: [["score", "desc"]]});
         } else {
