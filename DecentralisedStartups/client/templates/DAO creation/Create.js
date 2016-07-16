@@ -4,29 +4,26 @@
  });
  */
 
-
-/*TODO: Check that all addressses are to owner and that no test addresses remain
- * check that iron router subscriptions are put back to normal
- make it more secure by not allowing someone to just insert and delete from terminal
+/*TODO: make it more secure by not allowing someone to just insert and delete from terminal
+ * Implement the timestapm so that I can sort ti correctly by date!
  * Implement a notifications system everytime something did not go through
  * Think about the default account vs coinbase vs who is sending transactions basically and how to present that to the user
- * make sure nothing is added to the database if not validated by ethereum
- * check out what the bug with the 0 address is
  * Do something with the transactionhash
  * Try to see if I can do with pudding promises
+ * Think about having a session variable that would display during mining and that would outline the process
+ * like the console.logs but visible!
+ * Implement a redirection system
  */
 var hooksObject = {
 
     onSuccess: function(insert,result) {
         console.log("Executing onSuccess hook...");
-        var error_in_proposal_mining=false;
         var _owner = this.insertDoc.owner;
         var _desc = this.insertDoc.description;
         var _id = this.docId;
         var _recruiting =this.insertDoc.recruiting;
         var _investment = this.insertDoc.investment;
         var _proposals = this.insertDoc.proposals;
-
 
         console.log("The doc ID is:");
         console.log(this.docId);
@@ -82,27 +79,8 @@ var hooksObject = {
                                             console.log("Updating the database...");
                                             DAOs.update({_id: _id}, {$set: obj});
                                             console.log("Sending to ethereum...");
-                                            contract.addProposal.sendTransaction(_proposals[i].reward, _proposals[i].deposit,
-                                                _proposals[i].description, uniqueID, {from: _owner}, function (e, r) {
-                                                    if (!e) {
-                                                        console.log("proposal send to ethereum without error.");
-                                                        console.log("The database object is:");
-                                                        console.log(DAOs.findOne({_id: _id}));
+                                            processProposal(contract,uniqueID,_proposals[i],_owner,_id);
 
-                                                    } else {
-
-                                                        console.log("Error processing the proposal in ethereum:");
-                                                        console.log(e);
-                                                        console.log("Setting the error flag");
-                                                        error_in_proposal_mining = true;
-                                                        
-                                                        console.log("Removing from the database...");
-                                                        DAOs.update({_id: _id}, {$pull:{proposals:{ID:uniqueID}}});
-                                                        console.log("Verifying proposal is removed correctly:");
-                                                        console.log(DAOs.findOne({_id: _id}));
-
-                                                    }
-                                                });
                                         }
                                     }
 
@@ -117,7 +95,6 @@ var hooksObject = {
                     console.log("Contract not mined in Ethereum.");
                     console.log(e);
                     console.log("removing entirely from Database...");
-
                     DAOs.remove(_id);
                     console.log("Checking it has been removed...");
                     console.log(DAOs.findOne({_id: _id}));
@@ -136,7 +113,30 @@ var hooksObject = {
 AutoForm.addHooks('DAOform',hooksObject);
 
 
+function processProposal(contract, uniqueID,proposal,owner,DAOId){
+    console.log("the contract is");
+    console.log(contract);
+    contract.addProposal.sendTransaction(proposal.reward, proposal.deposit,
+        proposal.description, uniqueID, {from: owner}, function (e, r) {
+            if (!e) {
+                console.log("proposal send to ethereum successfully.");
+                console.log("The database object is:");
+                console.log("The uniqueId is");
+                console.log(uniqueID);
+                console.log(DAOs.findOne({_id: DAOId}));
 
+            } else {
+
+                console.log("Error processing the proposal in ethereum:");
+                console.log(e);
+                console.log("Removing from the database...");
+                DAOs.update({_id: DAOId}, {$pull:{proposals:{ID:uniqueID}}});
+                console.log("Verifying proposal is removed correctly:");
+                console.log(DAOs.findOne({_id: DAOId}));
+
+            }
+        });
+}
 
 
 /*
