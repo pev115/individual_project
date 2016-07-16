@@ -1,3 +1,7 @@
+/*TODO: Check if connected to ethereum, if not issue a warning
+* Think about what account to use , default account or coinbase ect..
+ * Take out create waiton */
+
 Router.configure({
     layoutTemplate:'layout',
     notFoundTemplate:'DAONotFound',
@@ -16,7 +20,10 @@ Router.route('/Connect',{
     waitOn: function(){return Meteor.subscribe('DAOs');}
 }
 );
-Router.route('/Create',{name:'Create'});
+Router.route('/Create',{
+    name:'Create',
+    waitOn: function(){return Meteor.subscribe('DAOs');}
+});
 Router.route('/Browse',{name:'Browse'});
 
 Router.route('/Monitor/:_address',{
