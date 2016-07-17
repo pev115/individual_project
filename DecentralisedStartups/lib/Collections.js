@@ -49,15 +49,23 @@ Proposal =  new SimpleSchema({
 
 Schemas.DAO = new SimpleSchema({
     address:{
-      type:String,
-      label:"Address",
-      defaultValue:"0x0000"
+        type:String,
+        label:"Address",
+        defaultValue:"0x0000"
+    },
+    balance:{
+        type: Number,
+        defaultValue:0
     },
     owner:{
         type: String,
         label: "Owner",
         max:42,
         min:42
+    },
+    transactionHashes:{
+        type: [String],
+        defaultValue:[]
     },
     title:{
         type: String,
@@ -67,6 +75,14 @@ Schemas.DAO = new SimpleSchema({
     description:{
         type: String,
         label: "Description"
+    },
+    percentDividends:{
+        type: Number,
+        defaultValue:0
+    },
+    totalShares:{
+        type:Number,
+        defaultValue:0
     },
     recruiting: {
         type: Boolean,

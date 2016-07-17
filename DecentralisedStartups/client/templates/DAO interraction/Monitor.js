@@ -6,7 +6,8 @@
  before connecting to the website.
  */
 
-/*TODO: Think about how to keep currentDAO upon refresh*/
+/*TODO: Think about how to keep currentDAO upon refresh
+* Think about getting building automatic*/
 
 Template.Monitor.onCreated(function(){
     console.log("I AM HEEEEEREEEEE!!!!");
@@ -15,11 +16,63 @@ Template.Monitor.onCreated(function(){
 });
 
 Template.Monitor.helpers({
-    displayRecruiting: function(){
-        var txt = this.recruiting + '';
+    displayBalance: function(){
+        var txt = this.balance + '';
         console.log(txt);
         return txt;
 
+    },
+    displayPercentDividends:function(){
+        var txt = this.percentDividends +'';
+        return txt;
+    },
+    displayTotalShares:function(){
+        var txt = this.totalShares+'';
+        return txt;
+    },
+    displayReward:function(){
+        var div =this.percentDividends;
+        var shares = this.totalShares;
+        if(div=== 0){
+            return '0';
+        }else if(typeof  shares=== "number" && typeof div ==="number"){
+            var _reward = div/(shares*100);
+            var reward = reward.toFixed(6);
+            return reward +'';
+        }else{
+            return 'undefined';
+        }
+    },
+    showDescription: function(){
+        return Session.get('showDescription');
+    },
+    
+    templateType: function(){
+        var type = Session.get('template_type');
+        if(typeof type !== 'string'){
+            console.log("setting the default display");
+            type ='proposalDisplay';
+        }
+        return type;
+    }
+});
+
+
+
+Template.Monitor.events({
+    'click .toggle_description': function(){
+        if(Session.get('showDescription')){
+            Session.set('showDescription',false);
+        }else{
+            Session.set('showDescription',true);
+        }
+    },
+    'click .template-type-selector':function(choice){
+        console.log("HHHHHHHHHHHHHHHHHHHHHHH");
+        console.log(choice);
+        var type = $(choice.target).val();
+        console.log(type);
+        Session.set('template_type',type);
     }
 });
 

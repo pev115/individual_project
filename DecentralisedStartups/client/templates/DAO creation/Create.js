@@ -21,7 +21,7 @@
  * only allow removes if there is no contract in ethereum.
  * to consider: does allow/deny code run on client or server? would it have the local
  * node connection
- *
+ *Think about if it is possible for someone to submit something if it is not mined yet 
  */
 var hooksObject = {
 

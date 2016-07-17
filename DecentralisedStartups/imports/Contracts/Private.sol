@@ -93,6 +93,8 @@ contract Private is owned, SharesManager, hasProposals {
         percentDividends = percent;
     }
 
+
+
     function receivePayment(){
       if(!production){
         throw;
