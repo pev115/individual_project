@@ -5,7 +5,7 @@
  */
 
 /*TODO: make it more secure by not allowing someone to just insert and delete from terminal
- * Implement the timestapm so that I can sort ti correctly by date!
+ * Implement the timestapm so that I can sort ti correctly by date!->Check out the meteor colection hooks package
  * Implement a notifications system everytime something did not go through
  * Think about the default account vs coinbase vs who is sending transactions basically and how to present that to the user
  * Do something with the transactionhash
@@ -13,6 +13,15 @@
  * Think about having a session variable that would display during mining and that would outline the process
  * like the console.logs but visible!
  * Implement a redirection system
+ * Security: Need not allow inserts and removes but do it anyway. For remove I could
+ * check that the contract does not exist in the blockchain with server side method and if it does
+ * do not remove it it does not remove.
+ * Can also do through allow and deny: only allow inserts if there is something in ethereum and if
+ * there is no other entry to database with same id
+ * only allow removes if there is no contract in ethereum.
+ * to consider: does allow/deny code run on client or server? would it have the local
+ * node connection
+ *
  */
 var hooksObject = {
 

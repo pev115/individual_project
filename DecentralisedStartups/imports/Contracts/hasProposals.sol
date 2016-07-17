@@ -1,3 +1,7 @@
+/* NEW TODO:
+add title
+*/
+
 contract hasProposals{
   mapping (uint => proposal)  public proposals;
 

@@ -12,9 +12,13 @@ Can have the board receiving a fixed percent of shares and everytime there is a 
 dividends
 Implement a way to tie proposals to a specific product that can be sold only when all proposals
 for the product are finalised
-
 */
 
+/*NEW TODO:
+put a rating system
+put a total shareholder payout
+add title
+*/
 
 contract Private is owned, SharesManager, hasProposals {
   bool public recruiting;
