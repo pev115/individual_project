@@ -7,7 +7,9 @@
  */
 
 /*TODO: Think about how to keep currentDAO upon refresh
-* Think about getting building automatic*/
+* Think about getting building automatic for the table:
+* http://stackoverflow.com/questions/8232713/how-to-display-scroll-bar-onto-a-html-table
+* */
 
 Template.Monitor.onCreated(function(){
     console.log("I AM HEEEEEREEEEE!!!!");
@@ -73,6 +75,8 @@ Template.Monitor.events({
         var type = $(choice.target).val();
         console.log(type);
         Session.set('template_type',type);
+        $(".template-type-selector.active").removeClass("active");
+        $(choice.target).addClass("active");
     }
 });
 

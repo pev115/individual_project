@@ -1,8 +1,27 @@
 <template name="proposalDisplay">
 
 
-    <h1>Placeholder for proposal space</h1>
-    <p> testing {{address}}</p>
-    <p>YO!</p>
+    <h1>Job Listings</h1>
+
+
+
+
+            {{#each proposal}}
+
+                <div class ="col-md-3">
+                    <div class = {{panelClass}}>
+                    <div class = "panel-heading">
+                        {{title}}
+                    </div>
+                    <div class="panel-body">
+                        <h5><u>Proposal ID:</u> {{ID}}</h5>
+                        <p>contractor: TODO</p>
+                        <p>Total Reward: :{{totalReward}}</p>
+                    </div>
+                    </div>
+                </div>
+
+            {{/each}}
+
 
 </template>

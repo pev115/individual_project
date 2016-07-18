@@ -1,5 +1,7 @@
 /*TODO: Take our inscure
  * put all the necessary fields to the DAOs collection.
+ * do another shcema for the transaction hashes so that I have the created date too
+ * this would need to be updated using a meteor method
  */
 
 
@@ -40,7 +42,39 @@ Proposal =  new SimpleSchema({
     deposit:{
         type:Number,
         label:"Deposit"
-    }
+    },
+    contractor:{
+        type:String,
+        label:"Contractor",
+        defaultValue:"0x000",
+        autoform:{
+            omit:true
+        }
+    },
+    appointed:{
+        type:Boolean,
+        label:"Appointed",
+        defaultValue:false,
+        autoform:{
+            omit:true
+        }
+    },
+    completed:{
+        type:Boolean,
+        label:"Completed",
+        defaultValue:false,
+        autoform:{
+            omit:true
+        }
+    },
+    finalised:{
+        type:Boolean,
+        label:"Finalised",
+        defaultValue:false,
+        autoform:{
+            omit:true
+        }
+    },
 
 
 });
