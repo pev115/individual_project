@@ -85,95 +85,34 @@
             </div>
         </div>
 
-
         <div class="row">
-            <div class="col-md-12" style="background-color:#bfbfbf">
-                <div class="col-md-6" >
-                    <div class="row">
-                        <h4 class="text-center">Financial Information</h4>
-                    </div>
-                    <div class="row text-center">
-                        <h6 >Percent Dividends</h6>
-                        <p>{{displayPercentDividends}}</p>
-                    </div>
-                    <div class="row text-center">
-                        <h6>Total Shares</h6>
-                        <p>{{displayTotalShares}}</p>
-                    </div>
-                    <div class="row text-center">
-                        <h6>Reward per Share per Ether</h6>
-                        <p>{{displayReward}}</p>
-                    </div>
-
-                </div>
-                <div class="col-md-6">
-                    <h4 class="text-center">Transaction Hash table</h4>
-                    <p class="text-center"> TODO</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            {{#if showDescription}}
-                <button  class="btn btn-block btn-warning toggle_description" >Hide official Declaration</button>
-                <div class="col-md-12 bg-warning " >
-                    <h4   class ="text-center"> Official Declaration</h4>
-                    <p>{{description}}</p>
-                </div>
-            {{else}}
-                <button  class="btn btn-block btn-warning toggle_description" >Show official Declaration</button>
-
-            {{/if}}
-        </div>
-
-
-<!--
-        <div class="row">
-            <ul class="nav nav-tabs nav-justified">
-                <li role="presentation "  class="col-md-3">
-                    <a class = "btn bnt-primary btn-lg" href="#">Proposals</a>
+            <ul class="nav nav-pills nav-justified monitor-template-selector" >
+                <li class="bg-info active" data-monitor-template = "infoDisplay">
+                    <a href="#">
+                        Info
+                    </a>
                 </li>
-                <li role="presentation" class="col-md-3">
-                    <a class = "btn bnt-primary btn-lg" href="#">Products</a>
+                <li class="bg-info " data-monitor-template = "proposalDisplay">
+                    <a href="#">Job Offers</a>
                 </li>
-                <li role="presentation" class="col-md-3">
-                    <a class = "btn bnt-primary btn-lg" href="#">Owner Controls</a>
+                <li class="bg-info " data-monitor-template = "productDisplay">
+                    <a href="#">Products</a>
                 </li>
-                <li role="presentation" class="col-md-3">
-                    <a class = "btn bnt-warning btn-lg" href="#">Investor Controls</a>
+                <li class="bg-info " data-monitor-template = "ownerControls">
+                    <a href="#">Owner Controls</a>
                 </li>
+                <li class="bg-info " data-monitor-template = "investorControls">
+                    <a href="#">Investor Controls</a>
+                </li>
+
             </ul>
         </div>
--->
 
-
-        <div class="btn-group btn-group-justified" role="group" >
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary template-type-selector active" value="proposalDisplay">
-                    Job Offers
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary template-type-selector" value="productDisplay">
-                    Products
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary template-type-selector"   value="ownerControls">
-                    Owner Controls
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary template-type-selector" value="investorControls">
-                    Investor Controls
-                </button>
-            </div>
-        </div>
 
 
         <div class="col-md-12">
 
-            {{> Template.dynamic template = templateType}}
+            {{> Template.dynamic template = monitorTemplate data = monitorData}}
 
         </div>
 

@@ -1,0 +1,43 @@
+<template name="infoDisplay">
+
+    <div class="row">
+        <div class="col-md-12 bg-default" >
+            <div class="col-md-6" >
+                <div class="row">
+                    <h4 class="text-center">Financial Information</h4>
+                </div>
+                <div class="row text-center">
+                    <h6 >Percent Dividends</h6>
+                    <p>{{displayPercentDividends}}</p>
+                </div>
+                <div class="row text-center">
+                    <h6>Total Shares</h6>
+                    <p>{{displayTotalShares}}</p>
+                </div>
+                <div class="row text-center">
+                    <h6>Reward per Share per Ether</h6>
+                    <p>{{displayReward}}</p>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <h4 class="text-center">Transaction Hash table</h4>
+                <p class="text-center"> TODO</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {{#if showDescription}}
+            <button  class="btn btn-block btn-warning toggle_description" >Hide official Declaration</button>
+            <div class="col-md-12 bg-warning " >
+                <h4   class ="text-center"> Official Declaration</h4>
+                <p>{{description}}</p>
+            </div>
+        {{else}}
+            <button  class="btn btn-block btn-warning toggle_description" >Show official Declaration</button>
+
+        {{/if}}
+    </div>
+
+</template>

@@ -30,17 +30,10 @@ Template.proposalDisplay.helpers({
 });
 
 Template.proposalDisplay.events({
-    "click .proposal-panel":function(){
-       console.log("window:");
-        console.log(window.location.pathname);
-        var path = window.location.pathname;
-        var tororo = toz.includes(this.ID+"");
-        if (!tororo) {
-            path =+ '/'+ this.ID;
-        }
-        //var path = window.location.pathname +'/'+ this.ID;
-        console.log(path);
-        Router.go(path);
-        Session.set('template_type','proposalMonitoring');
+    "click .proposal-panel":function(event,template){
+        console.log(event);
+        console.log(template);
+        console.log(Template.instance().parentData());
+        console.log(Template.instance().parentView.monitorTemplate('templateName'));
     }
 });

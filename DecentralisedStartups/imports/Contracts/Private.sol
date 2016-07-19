@@ -12,6 +12,7 @@ Can have the board receiving a fixed percent of shares and everytime there is a 
 dividends
 Implement a way to tie proposals to a specific product that can be sold only when all proposals
 for the product are finalised
+add employee rating : have a list and when someone has been contracted he can give a rating
 */
 
 /*NEW TODO:

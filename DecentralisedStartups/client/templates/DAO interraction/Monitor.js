@@ -13,8 +13,10 @@
 
 Template.Monitor.onCreated(function(){
     console.log("I AM HEEEEEREEEEE!!!!");
-    console.log(this.data.address);
+    console.log(this);
     Session.set('current_DAO', this.data.address);
+    this.monitorTemplate = new ReactiveDict();
+    this.monitorTemplate.set('templateName','infoDisplay');
 });
 
 Template.Monitor.helpers({
@@ -24,59 +26,30 @@ Template.Monitor.helpers({
         return txt;
 
     },
-    displayPercentDividends:function(){
-        var txt = this.percentDividends +'';
-        return txt;
+    monitorTemplate: function(){
+        return Template.instance().monitorTemplate.get('templateName');
     },
-    displayTotalShares:function(){
-        var txt = this.totalShares+'';
-        return txt;
-    },
-    displayReward:function(){
-        var div =this.percentDividends;
-        var shares = this.totalShares;
-        if(div=== 0){
-            return '0';
-        }else if(typeof  shares=== "number" && typeof div ==="number"){
-            var _reward = div/(shares*100);
-            var reward = reward.toFixed(6);
-            return reward +'';
+    monitorData: function(){
+        var template = Template.instance().monitorTemplate.get('templateName');
+        var data = Template.instance().monitorTemplate.get('templateData');
+        if(template==="proposalMonitoring" && data){
+            return data;
         }else{
-            return 'undefined';
+            return this;
         }
-    },
-    showDescription: function(){
-        return Session.get('showDescription');
-    },
-    
-    templateType: function(){
-        var type = Session.get('template_type');
-        if(typeof type !== 'string'){
-            console.log("setting the default display");
-            type ='proposalDisplay';
-        }
-        return type;
     }
 });
 
 
 
 Template.Monitor.events({
-    'click .toggle_description': function(){
-        if(Session.get('showDescription')){
-            Session.set('showDescription',false);
-        }else{
-            Session.set('showDescription',true);
-        }
-    },
-    'click .template-type-selector':function(choice){
+    'click .monitor-template-selector li':function(event,template){
         console.log("HHHHHHHHHHHHHHHHHHHHHHH");
-        console.log(choice);
-        var type = $(choice.target).val();
-        console.log(type);
-        Session.set('template_type',type);
-        $(".template-type-selector.active").removeClass("active");
-        $(choice.target).addClass("active");
+        console.log(template);
+        var selectorTab = $(event.target).closest("li");
+        selectorTab.addClass("active");
+        $(".monitor-template-selector li").not(selectorTab).removeClass("active");
+        template.monitorTemplate.set('templateName',selectorTab.data("monitorTemplate"));
     }
 });
 

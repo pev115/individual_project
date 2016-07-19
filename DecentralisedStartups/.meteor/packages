@@ -27,3 +27,5 @@ aldeed:collection2
 twbs:bootstrap
 aldeed:autoform
 underscore
+reactive-dict
+aldeed:template-extension
