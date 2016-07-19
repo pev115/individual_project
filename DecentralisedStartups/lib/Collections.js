@@ -8,6 +8,8 @@
 DAOs =  new Mongo.Collection('daos');
 //Proposals = new Mongo.Collection('proposals');
 
+Transactions = new Mongo.Collection('transactions');
+
 var Schemas = {};
 
 Proposal =  new SimpleSchema({
@@ -145,9 +147,22 @@ Schemas.DAO = new SimpleSchema({
 
 
 
-
+Schemas.Transaction = new SimpleSchema({
+    DAO:{
+        type:String,
+        label:"DAO",
+    },
+    transactionHash:{
+        type:String,
+        label:"TransactionHash"
+    },
+    date:{
+        type: Number,
+        label:"Date"
+    }
+});
 
 
 DAOs.attachSchema(Schemas.DAO);
-
+Transactions.attachSchema(Schemas.Transaction);
 /*Proposals.attachSchema(Schemas.Proposal);*/

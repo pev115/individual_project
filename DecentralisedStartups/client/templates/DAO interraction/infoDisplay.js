@@ -1,3 +1,11 @@
+Template.infoDisplay.onRendered(function(){
+    var tx = Transactions.find().fetch();
+    console.log(tx);
+    console.log(tx.length);
+});
+
+
+
 Template.infoDisplay.events({
     'click .toggle_description': function(){
         console.log(this);
