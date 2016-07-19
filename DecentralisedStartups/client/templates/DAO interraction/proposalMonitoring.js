@@ -1,9 +1,16 @@
 Template.proposalMonitoring.helpers({
-prop:function(){
-    console.log("checking what we put prop to");
-    console.log(this);
-
-   return $.grep(this.proposals,function(e){return e.ID= Router.current().params._proposalID})[0];
+contractor:function(){
+    if(this.appointed){
+        return this.contractor;
+    }else{
+        return "Not appointed";
+    }
 }
 
+});
+
+Template.proposalMonitoring.events({
+    "click #back-to-proposalDisplay":function(event,template){
+        Template.instance().get('monitorTemplate').set('templateName','proposalDisplay');
+    }
 });

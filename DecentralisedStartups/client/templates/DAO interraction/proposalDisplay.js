@@ -24,6 +24,18 @@ Template.proposalDisplay.helpers({
         }else{
             return class_base+"default";
         }
+    },
+    phase: function(){
+        if(this.finalised){
+            return "Finalised";
+
+        }else if(this.completed){
+            return "Completed";
+        }else if(this.appointed){
+            return "Contracted";
+        }else{
+            return "Recruiting";
+        }
 
     }
     
@@ -32,8 +44,10 @@ Template.proposalDisplay.helpers({
 Template.proposalDisplay.events({
     "click .proposal-panel":function(event,template){
         console.log(event);
-        console.log(template);
-        console.log(Template.instance().parentData());
-        console.log(Template.instance().parentView.monitorTemplate('templateName'));
+        console.log("YOLLOOO");
+        console.log(this);
+        Template.instance().get('monitorTemplate').set('templateData',this);
+        console.log(Template.instance().get('monitorTemplate').get('templateData'));
+        Template.instance().get('monitorTemplate').set('templateName','proposalMonitoring');
     }
 });

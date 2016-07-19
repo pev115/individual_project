@@ -74,9 +74,7 @@ Proposal =  new SimpleSchema({
         autoform:{
             omit:true
         }
-    },
-
-
+    }
 });
 
 
