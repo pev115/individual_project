@@ -1,23 +1,48 @@
 <template name="Create">
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="col-md-8 col-md-offset-2">
 
-    {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
-        <fieldset>
-            <legend>Create your own DAO</legend>
-            {{> afQuickField name='owner'}}
-            {{> afQuickField name='title'}}
-            {{> afQuickField name='recruiting'}}
-            {{> afQuickField name='investment'}}
+            {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
+                <fieldset>
+                    <legend>Create your own DAO</legend>
+                    <div class ="col-md-6 col-md-offset-3">
+                        {{> afQuickField name='owner'}}
+                    </div>
+                    <div class ="col-md-6 col-md-offset-3">
+                        {{> afQuickField name='title'}}
+                    </div>
 
-            {{#if afFieldValueIs name = "recruiting" value=true}}
-                {{> afArrayField name = 'proposals'}}
-            {{/if}}
+                    <div class ="col-md-3 col-md-offset-3">
+                    {{> afQuickField name='recruiting'}}
+                    </div>
+                    <div class ="col-md-3 col-md-offset-1">
+                    {{> afQuickField name='investment'}}
+                    </div>
 
-            {{> afQuickField name='description' label = "Project Description" rows=6}}
+                    {{#if afFieldValueIs name = "recruiting" value=true}}
+                    <div class ="col-md-8 col-md-offset-2">
+                        {{> afArrayField name = 'proposals'}}
+                    </div>
+                    {{/if}}
+
+                    <div class ="col-md-8 col-md-offset-2">
+                    {{> afQuickField name='description' label = "Project Description" rows=6}}
+                    </div>
+
+                </fieldset>
+                <button type="submit" class="btn btn-primary center-block">Insert</button>
+            {{/autoForm}}
 
 
-        </fieldset>
-        <button type="submit" class="btn btn-primary">Insert</button>
-    {{/autoForm}}
+        </div>
+
+
+    </div>
+
+
+
+</div>
 
 
 
