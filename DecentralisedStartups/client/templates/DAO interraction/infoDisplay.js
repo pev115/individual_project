@@ -1,7 +1,6 @@
-Template.infoDisplay.onRendered(function(){
-    var tx = Transactions.find().fetch();
-    console.log(tx);
-    console.log(tx.length);
+Template.infoDisplay.onCreated(function(){
+    this.transactionLimit = new ReactiveVar();
+    this.transactionLimit.set(7);
 });
 
 
@@ -15,10 +14,14 @@ Template.infoDisplay.events({
             Session.set('showDescription',true);
         }
     },
+    'click .load-more-hashes': function(){
+        var currentLimit =Template.instance().transactionLimit.get();
+        var nextLimit = currentLimit+7;
+        Template.instance().transactionLimit.set(nextLimit);
+    }
 });
 
 Template.infoDisplay.helpers({
-
     displayPercentDividends:function(){
         var txt = this.percentDividends +'';
         return txt;
@@ -34,7 +37,7 @@ Template.infoDisplay.helpers({
             return '0';
         }else if(typeof  shares=== "number" && typeof div ==="number"){
             var _reward = div/(shares*100);
-            var reward = reward.toFixed(6);
+            var reward = _reward.toFixed(6);
             return reward +'';
         }else{
             return 'undefined';
@@ -42,7 +45,13 @@ Template.infoDisplay.helpers({
     },
     showDescription: function(){
         return Session.get('showDescription');
+    },
+    transactions: function() {
+        var limit = Template.instance().transactionLimit.get();
+        console.log(limit);
+        console.log(this._id);
+        console.log(this);
+        Meteor.subscribe("Transactions", this._id, limit);
+        return Transactions.find({});
     }
-
-
 });

@@ -17,7 +17,6 @@ Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
     console.log(options);
     var cursor = DAOs.find(
         options,
-       /* { $text: {$search: searchValue} },*/
         {
             fields: {
                 score: { $meta: "textScore" }
@@ -30,5 +29,11 @@ Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
         }
     );
     return cursor;
+});
+
+Meteor.publish('Transactions',function(DAO_id,_limit){
+    return Transactions.find({DAO:DAO_id},{limit:_limit,sort:{date:-1}})
+
+
 });
 
