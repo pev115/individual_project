@@ -1,6 +1,13 @@
+/*TODO: Fix the sorting of the daos to also include by date*/
+
 Meteor.publish('DAOs',function(){
     return DAOs.find();
 });
+
+Meteor.publish('AllTransactions',function(){
+    return Transactions.find();
+});
+
 
 Meteor.publish('singleDAO',function(_address){
     return DAOs.find({address:_address});
@@ -32,8 +39,10 @@ Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
 });
 
 Meteor.publish('Transactions',function(DAO_id,_limit){
-    return Transactions.find({DAO:DAO_id},{limit:_limit,sort:{date:-1}})
-
-
+    return Transactions.find({DAO:DAO_id},{limit:_limit,sort:{date:-1}});
 });
 
+
+Meteor.publish('Proposals',function(DAO_id,_limit){
+    return Transactions.find({DAO:DAO_id},{limit:_limit,sort:{date:-1}});
+});

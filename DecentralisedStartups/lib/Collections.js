@@ -6,13 +6,14 @@
 
 
 DAOs =  new Mongo.Collection('daos');
-//Proposals = new Mongo.Collection('proposals');
-
+Proposals = new Mongo.Collection('proposals');
 Transactions = new Mongo.Collection('transactions');
+
+
 
 var Schemas = {};
 
-Proposal =  new SimpleSchema({
+Schemas.Proposal =  new SimpleSchema({
     ID: {
         type:Number,
         label: "ID",
@@ -20,6 +21,18 @@ Proposal =  new SimpleSchema({
         autoform:{
             omit: true
         }
+    },
+    createdDate:{
+        type:Date,
+        label:"CreatedDate",
+        defaultValue:new Date(),
+        autoform:{
+            omit:true
+        }
+    },
+    DAO_Id:{
+        type:String,
+        label:"DAO_Id"
     },
     title:{
         type:String,
@@ -87,6 +100,11 @@ Schemas.DAO = new SimpleSchema({
         label:"Address",
         defaultValue:"0x0000"
     },
+    createdDate:{
+        type:Date,
+        label:"CreatedDate",
+        defaultValue:new Date()
+    },
     balance:{
         type: Number,
         defaultValue:0
@@ -137,10 +155,6 @@ Schemas.DAO = new SimpleSchema({
         type: Boolean,
         label:"Investment",
         defaultValue: false
-    },
-    proposals:{
-        type:[Proposal],
-        optional:true
     }
 
 });
@@ -148,21 +162,22 @@ Schemas.DAO = new SimpleSchema({
 
 
 Schemas.Transaction = new SimpleSchema({
-    DAO:{
+    DAO_Id:{
         type:String,
-        label:"DAO",
+        label:"DAO_Id",
     },
     transactionHash:{
         type:String,
         label:"TransactionHash"
     },
-    date:{
-        type: Number,
-        label:"Date"
+    createdDate:{
+        type: Date,
+        label:"CreatedDate",
+        defaultValue:new Date()
     }
 });
 
 
 DAOs.attachSchema(Schemas.DAO);
 Transactions.attachSchema(Schemas.Transaction);
-/*Proposals.attachSchema(Schemas.Proposal);*/
+Proposals.attachSchema(Schemas.Proposal);

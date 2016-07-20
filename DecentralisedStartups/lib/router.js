@@ -5,7 +5,12 @@
 Router.configure({
     layoutTemplate:'layout',
     notFoundTemplate:'DAONotFound',
-    loadingTemplate: 'loading',
+    loadingTemplate: 'loading'  /*,
+    waitOn:function(){
+        var cursor1= Meteor.subscribe('DAOs');
+        var cursor2= Meteor.subscribe('AllTransactions');
+        return [cursor1,cursor2];
+    } /**/
 });
 
 
