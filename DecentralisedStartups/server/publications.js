@@ -50,3 +50,8 @@ Meteor.publish('Transactions',function(DAO_id,_limit){
 Meteor.publish('Proposals',function(DAO_id){
     return Proposals.find({DAO_Id:DAO_id},{sort:{createdDate:-1}});
 });
+
+
+Meteor.publish('completeUser',function(){
+    return Meteor.users.find(this.userId);
+});
