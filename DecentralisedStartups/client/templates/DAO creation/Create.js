@@ -161,7 +161,7 @@ AutoForm.addHooks('DAOform',hooksObject);
 
 
 
-*/
+ */
 
 
 
@@ -265,30 +265,30 @@ AutoForm.addHooks('DAOform',hooksObject);
 
 /*
 
-function processProposal(contract, uniqueID,proposal,owner,DAOId){
-    console.log("the contract is");
-    console.log(contract);
-    contract.addProposal.sendTransaction(proposal.reward, proposal.deposit,
-        proposal.description, uniqueID, {from: owner}, function (e, r) {
-            if (!e) {
-                console.log("proposal send to ethereum successfully.");
-                console.log("The database object is:");
-                console.log("The uniqueId is");
-                console.log(uniqueID);
-                console.log(DAOs.findOne({_id: DAOId}));
+ function processProposal(contract, uniqueID,proposal,owner,DAOId){
+ console.log("the contract is");
+ console.log(contract);
+ contract.addProposal.sendTransaction(proposal.reward, proposal.deposit,
+ proposal.description, uniqueID, {from: owner}, function (e, r) {
+ if (!e) {
+ console.log("proposal send to ethereum successfully.");
+ console.log("The database object is:");
+ console.log("The uniqueId is");
+ console.log(uniqueID);
+ console.log(DAOs.findOne({_id: DAOId}));
 
-            } else {
+ } else {
 
-                console.log("Error processing the proposal in ethereum:");
-                console.log(e);
-                console.log("Removing from the database...");
-                DAOs.update({_id: DAOId}, {$pull:{proposals:{ID:uniqueID}}});
-                console.log("Verifying proposal is removed correctly:");
-                console.log(DAOs.findOne({_id: DAOId}));
+ console.log("Error processing the proposal in ethereum:");
+ console.log(e);
+ console.log("Removing from the database...");
+ DAOs.update({_id: DAOId}, {$pull:{proposals:{ID:uniqueID}}});
+ console.log("Verifying proposal is removed correctly:");
+ console.log(DAOs.findOne({_id: DAOId}));
 
-            }
-        });
-} */
+ }
+ });
+ } */
 
 
 
