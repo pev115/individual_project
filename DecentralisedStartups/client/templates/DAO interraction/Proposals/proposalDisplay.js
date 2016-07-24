@@ -1,8 +1,9 @@
 Template.proposalDisplay.helpers({
    proposal: function(){
        console.log(this);
-       console.log(this.proposals);
-       return this.proposals;
+       console.log(this._id);
+       Meteor.subscribe("Proposals",this._id);
+       return Proposals.find();
    } ,
     totalReward:function(){
         console.log("finding total");

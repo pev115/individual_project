@@ -7,6 +7,9 @@ Meteor.publish('DAOs',function(){
 Meteor.publish('AllTransactions',function(){
     return Transactions.find();
 });
+Meteor.publish('AllProposals',function(){
+    return Proposals.find();
+});
 
 
 Meteor.publish('singleDAO',function(_address){
@@ -15,10 +18,11 @@ Meteor.publish('singleDAO',function(_address){
 
 Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
     if (!searchValue) {
-        return DAOs.find(options,{limit:_limit});
+        return DAOs.find(options,{limit:_limit, sort:{createdDate:-1}});
     }
 
     options.$text={$search:searchValue};
+
 
     console.log("Searching for ", searchValue);
     console.log(options);
@@ -39,10 +43,10 @@ Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
 });
 
 Meteor.publish('Transactions',function(DAO_id,_limit){
-    return Transactions.find({DAO:DAO_id},{limit:_limit,sort:{date:-1}});
+    return Transactions.find({DAO_Id:DAO_id},{limit:_limit,sort:{createdDate:-1}});
 });
 
 
-Meteor.publish('Proposals',function(DAO_id,_limit){
-    return Transactions.find({DAO:DAO_id},{limit:_limit,sort:{date:-1}});
+Meteor.publish('Proposals',function(DAO_id){
+    return Proposals.find({DAO_Id:DAO_id},{sort:{createdDate:-1}});
 });
