@@ -23,6 +23,16 @@
  * node connection
  *Think about if it is possible for someone to submit something if it is not mined yet 
  */
+
+
+
+/*
+Template.Create.onCreated(function(){
+    console.log(this);
+});*/
+
+
+
 var hooksObject = {
     onSuccess: function(insert,result) {
         console.log("Executing onSuccess hook...");

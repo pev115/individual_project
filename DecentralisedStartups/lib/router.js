@@ -27,7 +27,11 @@ Router.route('/profile/:_userID',{
 
 Router.route('/Connect',{name:'Connect'});
 
-Router.route('/Create',{name:'Create'});
+Router.route('/Create',{
+    name:'Create',
+    notFoundTemplate:'loginNeededForCreate',
+    data:function(){return Meteor.userId();}
+});
 
 Router.route('/Browse',{name:'Browse'});
 
@@ -73,4 +77,4 @@ Router.route('/Monitor/:_address',function() {
     });
 })
 */
-Router.onBeforeAction('dataNotFound',{only:['Monitor','userProfile']});
+Router.onBeforeAction('dataNotFound',{only:['Monitor','userProfile','Create']});

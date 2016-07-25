@@ -12,5 +12,12 @@ Template.userProfile.helpers({
      return Meteor.userId();
    }
 });
+
+Template.userProfile.events({
+    'click #create_DAO_btn':function(){
+        Router.go('/Create');
+    }
+
+});
         
         
