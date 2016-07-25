@@ -1,6 +1,7 @@
 /*TODO: think about user securty: how to ensure that someone cannot just update his profile unless he has the right to do so
 * Only allow updating the address by warning that the ratings are going to permanently dissappear.
 eg the employer for the rating or no duplicate address users
+See what happens when user has no unlocked account and tries to interract
  */
 Accounts.ui.config({
     passwordSignupFields:'USERNAME_ONLY',
