@@ -4,10 +4,9 @@
 
 Router.configure({
     layoutTemplate:'layout',
-    notFoundTemplate:'DAONotFound',
     loadingTemplate: 'loading',
     waitOn:function(){
-          return Meteor.subscribe('completeUser');
+          return Meteor.subscribe('loggedInUser');
 /*
       var cursor1= Meteor.subscribe('DAOs');
         var cursor2= Meteor.subscribe('AllTransactions');
@@ -19,6 +18,13 @@ Router.configure({
 
 Router.route('/',{name:'home'});
 
+Router.route('/profile/:_userID',{
+    name:'userProfile',
+    notFoundTemplate:'userNotFound',
+    waitOn:function(){return Meteor.subscribe('profileUser',this.params._userID);},
+    data:function(){return Meteor.users.findOne(this.params._userID);}
+});
+
 Router.route('/Connect',{name:'Connect'});
 
 Router.route('/Create',{name:'Create'});
@@ -27,6 +33,7 @@ Router.route('/Browse',{name:'Browse'});
 
 Router.route('/Monitor/:_address/:_proposalID?',{
     name:'Monitor',
+    notFoundTemplate:'DAONotFound',
     waitOn: function(){return Meteor.subscribe('singleDAO', this.params._address);},
     data: function() {return DAOs.findOne({address: this.params._address});}
     
@@ -66,4 +73,4 @@ Router.route('/Monitor/:_address',function() {
     });
 })
 */
-Router.onBeforeAction('dataNotFound',{only:'Monitor'});
+Router.onBeforeAction('dataNotFound',{only:['Monitor','userProfile']});

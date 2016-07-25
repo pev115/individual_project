@@ -1,4 +1,3 @@
-/*TODO: Fix the sorting of the daos to also include by date*/
 
 Meteor.publish('DAOs',function(){
     return DAOs.find();
@@ -52,6 +51,10 @@ Meteor.publish('Proposals',function(DAO_id){
 });
 
 
-Meteor.publish('completeUser',function(){
+Meteor.publish('loggedInUser',function(){
     return Meteor.users.find(this.userId);
+});
+
+Meteor.publish('profileUser',function(user_id){
+    return Meteor.users.find(user_id);
 });
