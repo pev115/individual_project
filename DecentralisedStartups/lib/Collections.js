@@ -5,6 +5,8 @@
  */
 
 
+/*TODO:Think about splitting the collections to one file per collection*/
+
 DAOs =  new Mongo.Collection('daos');
 Proposals = new Mongo.Collection('proposals');
 Transactions = new Mongo.Collection('transactions');
@@ -181,3 +183,41 @@ Schemas.Transaction = new SimpleSchema({
 DAOs.attachSchema(Schemas.DAO);
 Transactions.attachSchema(Schemas.Transaction);
 Proposals.attachSchema(Schemas.Proposal);
+
+
+DAOs.allow({
+    insert:function(userId,doc){
+        return true;
+    },
+    update: function(userId,doc){
+        return true;
+    },
+    remove:function(userId,doc){
+        return true;
+    }
+});
+
+
+Proposals.allow({
+    insert:function(userId,doc){
+        return true;
+    },
+    update: function(userId,doc){
+        return true;
+    },
+    remove:function(userId,doc){
+        return true;
+    }
+});
+
+Transactions.allow({
+    insert:function(userId,doc){
+        return true;
+    },
+    update: function(userId,doc){
+        return true;
+    },
+    remove:function(userId,doc){
+        return true;
+    }
+});
