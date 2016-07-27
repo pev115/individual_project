@@ -50,6 +50,10 @@ Meteor.publish('Proposals',function(DAO_id){
     return Proposals.find({DAO_Id:DAO_id},{sort:{createdDate:-1}});
 });
 
+Meteor.publish('ProposalsForContractor',function(options, _limit){
+    return Proposals.find(options,{limit:_limit,sort:{createdDate:-1}});
+});
+
 
 Meteor.publish('loggedInUser',function(){
     return Meteor.users.find(this.userId);

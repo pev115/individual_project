@@ -18,6 +18,10 @@ Template.infoDisplay.events({
         var currentLimit =Template.instance().transactionLimit.get();
         var nextLimit = currentLimit+7;
         Template.instance().transactionLimit.set(nextLimit);
+    },
+    'click .thash-table-row':function(event){
+        var clicked = $(event.target).closest('tr');
+        console.log(clicked);
     }
 });
 
