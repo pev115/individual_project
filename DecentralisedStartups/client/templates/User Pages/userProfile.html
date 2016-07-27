@@ -131,6 +131,40 @@
                         <p>{{rating}} ({{reviews}} votes)</p>
                     </div>
                 </div>
+
+
+                <div class="row">
+
+
+                    <div class ="DAO-ownership-list">
+                        <ul class="list-group">
+                            {{#each this.feedback}}
+                                <li class="list-group-item list-group-item-default">
+
+                                    <p>Rating : {{rating}}</p>
+                                    {{> starsRating rating = rating size='sm'}}
+                                    <p>{{comment}}</p>
+                                    <p>{{proposalID}}</p>
+
+                                </li>
+                            {{/each}}
+
+                        </ul>
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="row">
+                    <h1>Description:</h1>
+                    <p>{{this.description}}</p>
+                </div>
+
+
+
             </div>
         </div>
 

@@ -1,18 +1,20 @@
 /* TODO: Clean up the table class names and unite with the infor display table class names
-make it more secure by not passing options in the proposals subscription but the two elements separately
-make suer that there is no bug in the table display of the stages and that the stage is always consistent with the existence of a contractor
+implement what happens when you click on the table rows
+ make it more secure by not passing options in the proposals subscription but the two elements separately
+ make suer that there is no bug in the table display of the stages and that the stage is always consistent with the existence of a contractor
  * Think about If I need to subscribe to the logged in user everywhere
  * make the button go to the right
  * See how can I have a proper description field
  *restrict user rating to a max of 5
  * nuWTPAeogw4PG8x8t
- *
+ *Unify dao ownership list css aswell
+ * Need to fix the fact that if description is too long it does not break properlyu
  * */
 
 Template.userProfile.onCreated(function(){
     this.ownedDAOLimit=new ReactiveVar();
     this.ownedDAOLimit.set(2);
-    
+
     this.jobsLimit = new ReactiveVar();
     this.jobsLimit.set(10);
 
@@ -64,8 +66,13 @@ Template.userProfile.helpers({
         }
     },
     onlyCurrentJobs:function(){
-    return Template.instance().onlyAppointed.get();
-}
+        return Template.instance().onlyAppointed.get();
+    },
+    employerFeedback:function(){
+        console.log("Checking employer feedback..");
+        console.log(this.feedback);
+        return this.feedback;
+    }
 });
 
 Template.userProfile.events({
