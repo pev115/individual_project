@@ -7,6 +7,12 @@
 
 /*TODO:Think about splitting the collections to one file per collection*/
 
+
+SimpleSchema.messages({
+    noOwnerAccount:"[label] needs to have an account."
+});
+
+
 DAOs =  new Mongo.Collection('daos');
 Proposals = new Mongo.Collection('proposals');
 Transactions = new Mongo.Collection('transactions');
@@ -115,7 +121,44 @@ Schemas.DAO = new SimpleSchema({
         type: String,
         label: "Owner",
         max:42,
-        min:42
+        min:42,
+        custom: function(){
+            if(Meteor.isClient && this.isSet){
+                console.log("executing the client side............");
+                console.log("checking the owner custom validation");
+                console.log("subscribing...");
+                Meteor.subscribe('addressUser',this.value);
+                var found = Meteor.users.findOne({address:this.value});
+                if(!found){
+                    console.log("NOT FOUND");
+                    return  'noOwnerAccount';
+                }else{
+                    console.log("FOUND");
+                    return true;
+                }
+                /*Meteor.call('accountsIsOwnerFound',this.value,function(error,found){
+                    console.log("Going to callback");
+                    if(!found) {
+                        console.log("Not found");
+                        DAOs.simpleSchema().namedContext("DAOform").addInvalidKeys([{
+                            name: "owner",
+                            type: "noOwnerAccount"
+                        }]);
+                    }
+                });/**/
+            }
+            if(Meteor.isServer){
+                console.log("Executing the server side.........................");
+                var found = Meteor.users.findOne({address:this.value});
+                if(!found){
+                    console.log("NOT FOUND");
+                    return 'noOwnerAccount';
+                }else{
+                    console.log("FOUND");
+                    return true;
+                }
+            }
+        }
     },
     transactionHashes:{
         type: [String],
@@ -178,6 +221,7 @@ Schemas.Transaction = new SimpleSchema({
         defaultValue:new Date()
     }
 });
+
 
 
 DAOs.attachSchema(Schemas.DAO);

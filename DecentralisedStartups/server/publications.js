@@ -58,3 +58,7 @@ Meteor.publish('loggedInUser',function(){
 Meteor.publish('profileUser',function(user_id){
     return Meteor.users.find(user_id);
 });
+
+Meteor.publish('addressUser',function(user_address){
+   return Meteor.users.find({address:user_address});
+});

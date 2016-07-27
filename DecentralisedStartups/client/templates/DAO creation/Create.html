@@ -1,35 +1,43 @@
 <template name="Create">
-<div class="container-fluid">
-    <div class="col-md-12">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="col-md-8 col-md-offset-2">
 
-            {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
-                <fieldset>
-                    <legend>Create your own DAO</legend>
-                    <div class ="col-md-6 col-md-offset-3">
-                        {{> afQuickField name='owner'}}
-                    </div>
-                    <div class ="col-md-6 col-md-offset-3">
-                        {{> afQuickField name='title'}}
-                    </div>
+                {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
+                    <fieldset>
+                        <legend>Create your own DAO</legend>
+                        <div class ="col-md-6 col-md-offset-3">
+                                {{> afQuickField name='owner' id='owner-text-field-create'}}
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="set-owner-checkbox-for-create"> Set myself as the Onwer
+                                </label>
+                            </div>
+                        </div>
 
-                    <div class ="col-md-8 col-md-offset-2">
-                    {{> afQuickField name='description' label = "Project Description" rows=6}}
-                    </div>
 
-                </fieldset>
-                <button type="submit" class="btn btn-primary center-block">Insert</button>
-            {{/autoForm}}
+
+                        <div class ="col-md-6 col-md-offset-3">
+                            {{> afQuickField name='title'}}
+                        </div>
+
+                        <div class ="col-md-8 col-md-offset-2">
+                            {{> afQuickField name='description' label = "Project Description" rows=6}}
+                        </div>
+
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary center-block">Insert</button>
+                {{/autoForm}}
+
+
+            </div>
 
 
         </div>
 
 
+
     </div>
-
-
-
-</div>
 
 
 
@@ -90,7 +98,7 @@
 
 
 
-<!--
+    <!--
     <div class="container">
         <h2>Create your DAO</h2>
         <form role="form">
@@ -129,8 +137,8 @@
              <option value = "NGO">NGO, Unimplemented </option>
          </select>
          {{#if type }}
-             {{> Template.dynamic template =type}}
-         {{/if}}
+        {{> Template.dynamic template =type}}
+    {{/if}}
      </from>
 -->
 </template>

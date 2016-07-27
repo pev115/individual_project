@@ -32,6 +32,22 @@ Template.Create.onCreated(function(){
 });*/
 
 
+Template.Create.events({
+    'change #set-owner-checkbox-for-create': function (event){
+        var address= Meteor.users.findOne(Meteor.userId()).address;
+        console.log(address);
+        console.log(Transactions.findOne());
+        if(event.target.checked){
+            $('#owner-text-field-create').val(address);
+        }else{
+            $('#owner-text-field-create').val('');
+        }
+    }
+});
+
+
+
+
 
 var hooksObject = {
     onSuccess: function(insert,result) {
