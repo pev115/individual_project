@@ -54,6 +54,9 @@ Meteor.publish('ProposalsForContractor',function(options, _limit){
     return Proposals.find(options,{limit:_limit,sort:{createdDate:-1}});
 });
 
+Meteor.publish('singleProposal',function(ID){
+   return Proposals.find({_id:ID});
+});
 
 Meteor.publish('loggedInUser',function(){
     return Meteor.users.find(this.userId);

@@ -96,9 +96,9 @@ Template.userProfile.events({
         console.log(proposalId);
         console.log("Here is clicked");
         console.log(clicked);
-        console.log(Proposals.findOne({_id:proposalId}));
-        var proposalToDisplay =Proposals.findOne({_id:proposalId});
-        Session.set('proposalToDisplayDirectly',proposalToDisplay);
+        //console.log(Proposals.findOne({_id:proposalId}));
+        //var proposalToDisplay =Proposals.findOne({_id:proposalId});
+        Session.set('proposalToDisplayDirectly',proposalId);
         var path = '/Monitor/'+proposalToDisplay.DAO_Id;
         Router.go(path);
     },

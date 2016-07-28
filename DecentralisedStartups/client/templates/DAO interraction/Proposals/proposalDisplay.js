@@ -45,9 +45,12 @@ Template.proposalDisplay.helpers({
 Template.proposalDisplay.events({
     "click .proposal-panel":function(event,template){
         console.log(event);
-        console.log("YOLLOOO");
+        console.log("YOLLOOooooooooooooooo0000000000000000000000000ooooooooooooooO");
         console.log(this);
-        Template.instance().get('monitorTemplate').set('templateData',this);
+        console.log("Now fid one");
+        var proposalCursor = Proposals.find(this._id);
+        console.log(proposalCursor);
+        Template.instance().get('monitorTemplate').set('templateData',this._id);
         console.log(Template.instance().get('monitorTemplate').get('templateData'));
         Template.instance().get('monitorTemplate').set('templateName','proposalMonitoring');
     }
