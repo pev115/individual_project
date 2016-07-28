@@ -1,16 +1,15 @@
-/* TODO: Clean up the table class names and unite with the infor display table class names
+/* TODO: Implement special view for the currently logged in user
+Clean up the table class names and unite with the infor display table class names
 implement what happens when you click on the table rows
  make it more secure by not passing options in the proposals subscription but the two elements separately
  make suer that there is no bug in the table display of the stages and that the stage is always consistent with the existence of a contractor
  * Think about If I need to subscribe to the logged in user everywhere
- * make the button go to the right
- * See how can I have a proper description field
+
+ * See how can I have a proper description field (also if description field is too long does not break jproperly
  *restrict user rating to a max of 5
  * nuWTPAeogw4PG8x8t
  *Unify dao ownership list css aswell
- * Need to fix the fact that if description is too long it does not break properlyu
  * */
-
 Template.userProfile.onCreated(function(){
     this.ownedDAOLimit=new ReactiveVar();
     this.ownedDAOLimit.set(2);
@@ -40,7 +39,7 @@ Template.userProfile.helpers({
         return DAOs.find({});
     },
     jobs:function(){
-        var options={}
+        var options={};
         options.contractor =this.address;
         var limit = Template.instance().jobsLimit.get();
         console.log(limit);

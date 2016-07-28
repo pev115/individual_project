@@ -5,7 +5,9 @@
  */
 
 
-/*TODO:Think about splitting the collections to one file per collection*/
+/*TODO:Think about splitting the collections to one file per collection
+* Make the proposal IDs unique and think of what happens if a the random function happens to create twice the same
+* ID*/
 
 
 SimpleSchema.messages({
@@ -20,6 +22,26 @@ Transactions = new Mongo.Collection('transactions');
 
 
 var Schemas = {};
+/*
+Contestant = new SimpleSchema({
+    address:{
+        type:String,
+        label:'Address'
+    },
+    userID:{
+       type:String,
+        label:'UserID'
+    },
+    userName:{
+        type:String,
+        label:'UserName'
+    },
+    rating:{
+       type:Number,
+        label:"Rating"
+    }
+});
+*/
 
 Schemas.Proposal =  new SimpleSchema({
     ID: {
@@ -70,6 +92,31 @@ Schemas.Proposal =  new SimpleSchema({
         type:String,
         label:"Contractor",
         defaultValue:"0x000",
+        autoform:{
+            omit:true
+        }
+    },
+    contestants:{
+        type:[{
+            address:{
+                type:String,
+                label:'Address'
+            },
+            userID:{
+                type:String,
+                label:'UserID'
+            },
+            userName:{
+                type:String,
+                label:'UserName'
+            },
+            rating:{
+                type:Number,
+                label:"Rating"
+            }
+        }],
+        label:'Contestants',
+        defaultValue:[],
         autoform:{
             omit:true
         }
