@@ -22,7 +22,7 @@ Transactions = new Mongo.Collection('transactions');
 
 
 var Schemas = {};
-/*
+
 Contestant = new SimpleSchema({
     address:{
         type:String,
@@ -41,7 +41,7 @@ Contestant = new SimpleSchema({
         label:"Rating"
     }
 });
-*/
+
 
 Schemas.Proposal =  new SimpleSchema({
     ID: {
@@ -97,24 +97,7 @@ Schemas.Proposal =  new SimpleSchema({
         }
     },
     contestants:{
-        type:[{
-            address:{
-                type:String,
-                label:'Address'
-            },
-            userID:{
-                type:String,
-                label:'UserID'
-            },
-            userName:{
-                type:String,
-                label:'UserName'
-            },
-            rating:{
-                type:Number,
-                label:"Rating"
-            }
-        }],
+        type:[Contestant],
         label:'Contestants',
         defaultValue:[],
         autoform:{

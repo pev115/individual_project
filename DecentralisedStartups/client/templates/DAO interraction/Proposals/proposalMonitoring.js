@@ -1,4 +1,5 @@
-/*TODO: Make the apply button do a popup for confirmation*/
+/*TODO: Make the apply button do a popup for confirmation
+ * Implement proper security for not allowing people to apply twice*/
 
 Template.proposalMonitoring.helpers({
     jobProposal:function(){
@@ -12,7 +13,23 @@ Template.proposalMonitoring.helpers({
         }else{
             return "Not appointed";
         }
+    },
+    allowedToApply:function(){
+        console.log("The contestants are:");
+        console.log(this.contestants);
+        console.log(this.contestants[0]);
+
+        var currentUserId = Meteor.userId();
+        var inContestants = $.grep(this.contestants, function(e){ return e.userID == currentUserId; });
+        console.log("the matched contestants are:");
+        console.log(inContestants);
+        if(currentUserId && inContestants.length ==0){
+            return true;
+        }else{
+            return false;
+        }
     }
+
 
 });
 
