@@ -19,12 +19,15 @@ SimpleSchema.messages({
 DAOs =  new Mongo.Collection('daos');
 Proposals = new Mongo.Collection('proposals');
 Transactions = new Mongo.Collection('transactions');
-
+Contestants =  new Mongo.Collection('contestants');
 
 
 var Schemas = {};
 
-Contestant = new SimpleSchema({
+Schemas.Contestant = new SimpleSchema({
+    proposalID:{
+        type:String
+    },
     address:{
         type:String
 
@@ -40,6 +43,14 @@ Contestant = new SimpleSchema({
     rating:{
        type:Number
 
+    },
+    createdDate: {
+        type: Date,
+        label: "CreatedDate",
+        defaultValue: new Date(),
+        autoform: {
+            omit: true
+        }
     }
 });
 
@@ -93,13 +104,6 @@ Schemas.Proposal =  new SimpleSchema({
         type:String,
         label:"Contractor",
         defaultValue:"0x000",
-        autoform:{
-            omit:true
-        }
-    },
-    contestants:{
-        type:[Contestant],
-        optional:true,
         autoform:{
             omit:true
         }
@@ -166,16 +170,6 @@ Schemas.DAO = new SimpleSchema({
                     console.log("FOUND");
                     return true;
                 }
-                /*Meteor.call('accountsIsOwnerFound',this.value,function(error,found){
-                    console.log("Going to callback");
-                    if(!found) {
-                        console.log("Not found");
-                        DAOs.simpleSchema().namedContext("DAOform").addInvalidKeys([{
-                            name: "owner",
-                            type: "noOwnerAccount"
-                        }]);
-                    }
-                });/**/
             }
             if(Meteor.isServer){
                 console.log("Executing the server side.........................");
@@ -257,6 +251,7 @@ Schemas.Transaction = new SimpleSchema({
 DAOs.attachSchema(Schemas.DAO);
 Transactions.attachSchema(Schemas.Transaction);
 Proposals.attachSchema(Schemas.Proposal);
+Contestants.attachSchema(Schemas.Contestant);
 
 
 DAOs.allow({
@@ -297,6 +292,18 @@ Transactions.allow({
 });
 
 Meteor.users.allow({
+    insert:function(userId,doc){
+        return true;
+    },
+    update: function(userId,doc){
+        return true;
+    },
+    remove:function(userId,doc){
+        return true;
+    }
+});
+
+Contestants.allow({
     insert:function(userId,doc){
         return true;
     },

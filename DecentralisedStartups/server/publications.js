@@ -9,6 +9,9 @@ Meteor.publish('AllTransactions',function(){
 Meteor.publish('AllProposals',function(){
     return Proposals.find();
 });
+Meteor.publish('AllContestants',function(){
+    return Contestants.find();
+});
 
 
 Meteor.publish('singleDAO',function(_address){
@@ -68,4 +71,8 @@ Meteor.publish('profileUser',function(user_id){
 
 Meteor.publish('addressUser',function(user_address){
    return Meteor.users.find({address:user_address});
+});
+
+Meteor.publish('contestantsByProposal',function(_proposalID){
+    return Contestants.find({proposalID:_proposalID},{sort:{createdDate:-1}});
 });
