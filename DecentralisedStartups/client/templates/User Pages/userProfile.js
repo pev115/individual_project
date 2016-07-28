@@ -9,6 +9,7 @@ implement what happens when you click on the table rows
  *restrict user rating to a max of 5
  * nuWTPAeogw4PG8x8t
  *Unify dao ownership list css aswell
+ * Make the go button of the DAOS list do something
  * */
 Template.userProfile.onCreated(function(){
     this.ownedDAOLimit=new ReactiveVar();
@@ -67,7 +68,7 @@ Template.userProfile.helpers({
     onlyCurrentJobs:function(){
         return Template.instance().onlyAppointed.get();
     },
-    employerFeedback:function(){
+    employerFeedback:function(){  /*TODO: I think this is useless:verify*/
         console.log("Checking employer feedback..");
         console.log(this.feedback);
         return this.feedback;
@@ -97,7 +98,7 @@ Template.userProfile.events({
         console.log("Here is clicked");
         console.log(clicked);
         //console.log(Proposals.findOne({_id:proposalId}));
-        //var proposalToDisplay =Proposals.findOne({_id:proposalId});
+        var proposalToDisplay =Proposals.findOne({_id:proposalId});
         Session.set('proposalToDisplayDirectly',proposalId);
         var path = '/Monitor/'+proposalToDisplay.DAO_Id;
         Router.go(path);

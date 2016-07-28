@@ -1,3 +1,7 @@
+/*TODO:investigate: proposals seem to be ordered by last accessed see what is happening*/
+
+
+
 Template.proposalDisplay.helpers({
    proposal: function(){
        console.log(this);

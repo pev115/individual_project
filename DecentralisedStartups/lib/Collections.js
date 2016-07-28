@@ -2,6 +2,7 @@
  * put all the necessary fields to the DAOs collection.
  * do another shcema for the transaction hashes so that I have the created date too
  * this would need to be updated using a meteor method
+ * see if I can put schema for user accounts
  */
 
 
@@ -25,20 +26,20 @@ var Schemas = {};
 
 Contestant = new SimpleSchema({
     address:{
-        type:String,
-        label:'Address'
+        type:String
+
     },
     userID:{
-       type:String,
-        label:'UserID'
+       type:String
+
     },
     userName:{
-        type:String,
-        label:'UserName'
+        type:String
+
     },
     rating:{
-       type:Number,
-        label:"Rating"
+       type:Number
+
     }
 });
 
@@ -98,8 +99,7 @@ Schemas.Proposal =  new SimpleSchema({
     },
     contestants:{
         type:[Contestant],
-        label:'Contestants',
-        defaultValue:[],
+        optional:true,
         autoform:{
             omit:true
         }
