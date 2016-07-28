@@ -9,6 +9,7 @@
 /*TODO: Think about how to keep currentDAO upon refresh
 * Think about getting building automatic for the table:
 * http://stackoverflow.com/questions/8232713/how-to-display-scroll-bar-onto-a-html-table
+* On all other template creations check if proposalToDisplayDirectly is set, and if it is, uset it.
 * */
 
 Template.Monitor.onCreated(function(){
@@ -17,6 +18,14 @@ Template.Monitor.onCreated(function(){
     Session.set('current_DAO', this.data.address);
     this.monitorTemplate = new ReactiveDict();
     this.monitorTemplate.set('templateName','infoDisplay');
+    var proposalToDisplay =Session.get('proposalToDisplayDirectly');
+    if(proposalToDisplay){
+        this.monitorTemplate.set('templateData',proposalToDisplay);
+        this.monitorTemplate.set('templateName','proposalMonitoring');
+        Session.set('proposalToDisplayDirectly',false);
+        delete Session.keys['proposalToDisplayDirectly'];
+    }
+
 });
 
 Template.Monitor.helpers({

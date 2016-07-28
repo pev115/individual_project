@@ -12,7 +12,7 @@ Meteor.publish('AllProposals',function(){
 
 
 Meteor.publish('singleDAO',function(_address){
-    return DAOs.find({address:_address});
+    return DAOs.find({$or:[{address:_address},{_id:_address}]});
 });
 
 Meteor.publish('DAOSearch',function(searchValue,_limit, options) {

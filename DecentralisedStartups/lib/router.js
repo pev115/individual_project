@@ -35,11 +35,11 @@ Router.route('/Create',{
 
 Router.route('/Browse',{name:'Browse'});
 
-Router.route('/Monitor/:_address/:_proposalID?',{
+Router.route('/Monitor/:_address',{
     name:'Monitor',
     notFoundTemplate:'DAONotFound',
     waitOn: function(){return Meteor.subscribe('singleDAO', this.params._address);},
-    data: function() {return DAOs.findOne({address: this.params._address});}
+    data: function() {return DAOs.findOne({$or:[{address: this.params._address},{_id:this.params._address}]});}
     
 });
 /*

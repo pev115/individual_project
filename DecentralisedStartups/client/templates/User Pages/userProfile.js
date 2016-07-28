@@ -92,8 +92,15 @@ Template.userProfile.events({
     },
     'click .thash-table-row':function(event){
         var clicked = $(event.target).closest('tr');
+        var proposalId=clicked.data("proposalid");
+        console.log(proposalId);
         console.log("Here is clicked");
         console.log(clicked);
+        console.log(Proposals.findOne({_id:proposalId}));
+        var proposalToDisplay =Proposals.findOne({_id:proposalId});
+        Session.set('proposalToDisplayDirectly',proposalToDisplay);
+        var path = '/Monitor/'+proposalToDisplay.DAO_Id;
+        Router.go(path);
     },
     'click .profile-toggle-only-current-jobs':function(){
         if(Template.instance().onlyAppointed.get()){
