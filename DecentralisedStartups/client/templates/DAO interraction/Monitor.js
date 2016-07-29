@@ -6,7 +6,8 @@
  before connecting to the website.
  */
 
-/*TODO: Think about how to keep currentDAO upon refresh
+/*TODO: BUG:when going straight to the proposal page we do not get the button lighting up correctly
+Think about how to keep currentDAO upon refresh
 * Think about getting building automatic for the table:
 * http://stackoverflow.com/questions/8232713/how-to-display-scroll-bar-onto-a-html-table
 * On all other template creations check if proposalToDisplayDirectly is set, and if it is, uset it.

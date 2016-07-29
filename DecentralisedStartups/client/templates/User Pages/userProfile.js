@@ -7,9 +7,7 @@ implement what happens when you click on the table rows
 
  * See how can I have a proper description field (also if description field is too long does not break jproperly
  *restrict user rating to a max of 5
- * nuWTPAeogw4PG8x8t
  *Unify dao ownership list css aswell
- * Make the go button of the DAOS list do something
  * */
 Template.userProfile.onCreated(function(){
     this.ownedDAOLimit=new ReactiveVar();
@@ -110,6 +108,11 @@ Template.userProfile.events({
             Template.instance().onlyAppointed.set(true);
         }
 
+    },
+    'click #profile-go-button':function(){
+        console.log(this);
+        var path = '/Monitor/'+this.address;
+        Router.go(path);
     }
 
 });

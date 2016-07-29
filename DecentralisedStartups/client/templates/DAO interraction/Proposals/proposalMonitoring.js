@@ -1,5 +1,6 @@
 /*TODO: Make the apply button do a popup for confirmation
  * Implement proper security for not allowing people to apply twice*/
+/*TODO: BUG: When adding new contestant it appears at the buttom unless refresh*/
 
 Template.proposalMonitoring.helpers({
     jobProposalContext:function(){
@@ -29,6 +30,24 @@ Template.proposalMonitoring.helpers({
         }else{
             return false;
         }
+    },
+    isSelf:function(){
+        console.log("Testing contestant list context");
+        console.log(this);
+        if(Meteor.userId() === this.userID){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    isOwner:function(){
+        var owner= DAOs.findOne().owner;
+        if(Meteor.user() && Meteor.user().address=== owner){
+            return true;
+        }else{
+            return false;
+
+        }
     }
 });
 
@@ -53,8 +72,36 @@ Template.proposalMonitoring.events({
         };
         console.log("THIS IS THE FUCKING CONTESTANT");
         console.log(Contestant);
-       /* Proposals.update({_id:this._id},{$push:{contestants:Contestant}});*/
+        /* Proposals.update({_id:this._id},{$push:{contestants:Contestant}});*/
         Contestants.insert(Contestant);
         console.log(this);
+    },
+    'click #contestant-go-to-profile':function(){
+        var path= '/profile/'+Meteor.userId();
+        Router.go(path);
+    },
+    'click #contestant-remove-application':function(){
+        console.log(this);
+        Contestants.remove(this._id);
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

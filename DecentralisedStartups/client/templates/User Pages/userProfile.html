@@ -97,7 +97,7 @@
                                         <li class="list-group-item list-group-item-success">
                                             <p>{{title}}</p>
                                             <p>{{address}}</p>
-                                            <button type="button" class ="btn btn-primary" id ="profile_go_button">GO!</button>
+                                            <button type="button" class ="btn btn-primary" id ="profile-go-button">GO!</button>
                                         </li>
                                     {{/each}}
 
@@ -140,7 +140,6 @@
                         <ul class="list-group">
                             {{#each this.feedback}}
                                 <li class="list-group-item list-group-item-default">
-
                                     <p>Rating : {{rating}}</p>
                                     {{> starsRating rating = rating size='sm'}}
                                     <p>{{comment}}</p>
