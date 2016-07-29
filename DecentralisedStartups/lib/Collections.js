@@ -66,6 +66,7 @@ Schemas.Proposal =  new SimpleSchema({
         type:Number,
         label: "ID",
         optional:true,
+        /*unique:true,*/
         autoform:{
             omit: true
         }
