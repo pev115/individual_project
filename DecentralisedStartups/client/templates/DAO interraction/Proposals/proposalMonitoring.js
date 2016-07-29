@@ -2,34 +2,34 @@
  * Implement proper security for not allowing people to apply twice*/
 
 Template.proposalMonitoring.helpers({
-    jobProposal:function(){
+    jobProposalContext:function(){
         var ID= this.toString();
         Meteor.subscribe('singleProposal',ID);
-        return Proposals.findOne();
+        Meteor.subscribe('contestantsByProposal',ID);
+        return [Proposals.findOne(), Contestants.find().fetch()];
     },
     contractor:function(){
-        if(this.appointed){
+        console.log("Checking the context...");
+        console.log(this);
+        console.log(this[0]);
+        console.log(this[1]);
+        if(this[0].appointed){
             return this.contractor;
         }else{
             return "Not appointed";
         }
     },
     allowedToApply:function(){
-        console.log("The contestants are:");
-        console.log(this.contestants);
-
         var currentUserId = Meteor.userId();
-        //var inContestants = $.grep(this.contestants, function(e){ return e.userID == currentUserId; });
-       // console.log("the matched contestants are:");
-       // console.log(inContestants);
-        if(currentUserId /*&& inContestants.length ==0*/){
+        var inContestants = $.grep(this[1], function(e){ return e.userID == currentUserId; });
+        console.log("the matched contestants are:");
+        console.log(inContestants);
+        if(currentUserId && inContestants.length ==0){
             return true;
         }else{
             return false;
         }
     }
-
-
 });
 
 Template.proposalMonitoring.events({
@@ -45,6 +45,7 @@ Template.proposalMonitoring.events({
         console.log(this);
         console.log("adding to contestants...");
         var Contestant= {
+            proposalID:this[0]._id,
             address:Meteor.user().address,
             userID:Meteor.userId(),
             userName:Meteor.user().username,
@@ -53,7 +54,7 @@ Template.proposalMonitoring.events({
         console.log("THIS IS THE FUCKING CONTESTANT");
         console.log(Contestant);
        /* Proposals.update({_id:this._id},{$push:{contestants:Contestant}});*/
-        Proposals.update({_id:this._id},{$set:{contestants:[Contestant]}});
+        Contestants.insert(Contestant);
         console.log(this);
     }
 });

@@ -26,22 +26,28 @@ var Schemas = {};
 
 Schemas.Contestant = new SimpleSchema({
     proposalID:{
-        type:String
+        type:String,
+        label:"ProposalID"
     },
     address:{
-        type:String
+        type:String,
+        label:"Address"
 
     },
     userID:{
-       type:String
-
+       type:String,
+        label:"UserID"/*,
+        unique:true*/
     },
     userName:{
-        type:String
+        type:String,
+        label:"UserID"
 
     },
     rating:{
-       type:Number
+       type:Number,
+        decimal:true,
+        label:"UserID"
 
     },
     createdDate: {
@@ -94,11 +100,13 @@ Schemas.Proposal =  new SimpleSchema({
     },
     reward:{
         type:Number,
-        label: "Reward"
+        label: "Reward",
+        decimal:true
     },
     deposit:{
         type:Number,
-        label:"Deposit"
+        label:"Deposit",
+        decimal:true
     },
     contractor:{
         type:String,
@@ -149,7 +157,8 @@ Schemas.DAO = new SimpleSchema({
     },
     balance:{
         type: Number,
-        defaultValue:0
+        defaultValue:0,
+        decimal:true
     },
     owner:{
         type: String,
@@ -199,11 +208,13 @@ Schemas.DAO = new SimpleSchema({
     },
     percentDividends:{
         type: Number,
-        defaultValue:0
+        defaultValue:0,
+        decimal:true
     },
     totalShares:{
         type:Number,
-        defaultValue:0
+        defaultValue:0,
+        decimal:true
     },
     recruiting: {
         type: Boolean,
