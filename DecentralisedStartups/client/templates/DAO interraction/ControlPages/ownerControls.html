@@ -27,14 +27,75 @@
                     <button class="btn btn-primary btn-lg center-block" id="toggleProduction">Toggle Production</button>
                 </div>
             </div>
+
+
+
+
+
+
+
             <div class="row">
-                <div class="col-md-6 ">
-                    <p>TODO: form for changing dividend value</p>
+                <div class="col-md-4 col-md-offset-1">
+
+                    {{#autoForm collection="DAOs" id="changeDividendsForm" type="normal" doc=this}}
+                        <fieldset>
+                            {{> afQuickField name='percentDividends'}}
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary center-block" id="submitChangeDividendsButton">
+                            Submit
+                        </button>
+                    {{/autoForm}}
+
+
+
                 </div>
-                <div class ="col-md-6">
-                    <p>TODO: form for fueling</p>
+                <div class ="col-md-4 col-md-offset-1">
+                    <form id="fuelForm">
+                        <div class="form-group">
+                            <label for="fuelAmountInput">Fuel your DAO</label>
+                            <input type="number" class="form-control" id="fuelAmountInput" placeholder="Amount in Ether">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
                 </div>
+
+
+
             </div>
+
+
+
+
+
+            <!--
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-1">
+                                <form id="changeDividendsForm">
+                                    <div class="form-group">
+                                        <label for="dividendsPercentInput">New Dividends Percentage</label>
+                                        <input type="number" class="form-control" id="dividendsPercentInput" placeholder="Percent of dividends (eg.66)">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
+
+                            </div>
+                            <div class ="col-md-4 col-md-offset-1">
+                                <form id="fuelForm">
+                                    <div class="form-group">
+                                        <label for="fuelAmountInput">Fuel your DAO</label>
+                                        <input type="number" class="form-control" id="fuelAmountInput" placeholder="Amount in Ether">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
+                            </div>
+
+
+
+                        </div>
+
+            -->
+
+
         </div>
     </div>
 
@@ -42,7 +103,7 @@
         <div class="col-md-12 bg-success">
             <div class="row">
 
-                    <h2>Proposal Commands</h2>
+                <h2>Proposal Commands</h2>
 
 
             </div>
@@ -64,7 +125,9 @@
 
             <div class ="row">
                 <div class ="col-md-12">
-                    <button type="button" class="btn btn-info btn-lg center-block" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                    <button type="button" class="btn btn-info btn-lg center-block" data-toggle="modal" data-target="#proposalCreationModal" >
+                        Add Proposal
+                    </button>
                 </div>
 
             </div>
@@ -75,7 +138,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="proposalCreationModal" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -86,7 +149,29 @@
                 </div>
                 <div class="modal-body">
 
+                    {{#autoForm collection="Proposals" id="ProposalForm" type="insert" }}
+                        <fieldset>
+                            <div class ="col-md-8 col-md-offset-2">
+                                {{> afQuickField name='title'}}
+                            </div>
 
+                            <div class ="col-md-4 col-md-offset-2">
+                                {{> afQuickField name='deposit'}}
+                            </div>
+                            <div class ="col-md-4 ">
+                                {{> afQuickField name='reward'}}
+                            </div>
+
+                            <div class ="col-md-10 col-md-offset-1">
+                                {{> afQuickField name='description' label = "Job Description" rows=6}}
+                            </div>
+
+
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary center-block" id="submitProposalButton">
+                            Add Proposal
+                        </button>
+                    {{/autoForm}}
 
 
 

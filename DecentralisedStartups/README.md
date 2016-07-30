@@ -50,6 +50,10 @@ I haven't added but might be useful ; packages that support.md files : markdown 
 * Command to connect the node : ```geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```
 
 ##TODO :
+/////IMPORTANT
+* CHANGE FROM using coinbases to using the correct user accounts when interracting with ethereum
+
+
 
     * Check why allowing for the personal api is not secure
     * Define the DAO framework to work with-> an interface common to all the DAOs that will allow interraction.

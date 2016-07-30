@@ -26,5 +26,12 @@ tbody.thash-body{
 
 }
 
+/*this is to take away the arrows from the inputs*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 
 

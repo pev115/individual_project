@@ -1,4 +1,4 @@
-/*TODO: Take our inscure
+/*TODO:
  * put all the necessary fields to the DAOs collection.
  * do another shcema for the transaction hashes so that I have the created date too
  * this would need to be updated using a meteor method
@@ -60,7 +60,7 @@ Schemas.Contestant = new SimpleSchema({
     }
 });
 
-
+/*TODO: change the autoform to normal and change the optionals that are not really*/
 Schemas.Proposal =  new SimpleSchema({
     ID: {
         type:Number,
@@ -81,7 +81,8 @@ Schemas.Proposal =  new SimpleSchema({
     },
     DAO_Id:{
         type:String,
-        label:"DAO_Id"
+        label:"DAO_Id",
+        optional:true
     },
     title:{
         type:String,
@@ -112,7 +113,7 @@ Schemas.Proposal =  new SimpleSchema({
     contractor:{
         type:String,
         label:"Contractor",
-        defaultValue:"0x000",
+        defaultValue:"0x000", /*TODO:think if default is better than optional here*/
         autoform:{
             omit:true
         }

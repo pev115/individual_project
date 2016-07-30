@@ -78,6 +78,8 @@ var hooksObject = {
                         Transactions.insert({DAO_Id:_id,transactionHash:contract.transactionHash});
                         console.log("checking it got inserted correctly");
                         console.log(Transactions.findOne({DAO_Id:_id}));
+                        var path ='/Monitor/'+contract.address;
+                        Router.go(path);
 
                     }else{
                         console.log("GOT To the weird zone");
