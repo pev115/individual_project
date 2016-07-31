@@ -60,6 +60,9 @@ Meteor.publish('ProposalsForContractor',function(options, _limit){
 Meteor.publish('singleProposal',function(ID){
    return Proposals.find({_id:ID});
 });
+Meteor.publish('ProposalUsingID',function(_ID){
+    return Proposals.find({ID:_ID});
+});
 
 Meteor.publish('loggedInUser',function(){
     return Meteor.users.find(this.userId);
@@ -75,4 +78,8 @@ Meteor.publish('addressUser',function(user_address){
 
 Meteor.publish('contestantsByProposal',function(_proposalID){
     return Contestants.find({proposalID:_proposalID},{sort:{createdDate:-1}});
+});
+
+Meteor.publish('contestantByAddress',function(_address){
+   return Contestants.find({address:_address});
 });

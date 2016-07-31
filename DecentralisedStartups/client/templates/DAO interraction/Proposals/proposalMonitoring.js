@@ -1,6 +1,9 @@
 /*TODO: Make the apply button do a popup for confirmation
  * Implement proper security for not allowing people to apply twice*/
-/*TODO: BUG: When adding new contestant it appears at the buttom unless refresh*/
+/*TODO: BUG: When adding new contestant it appears at the buttom unless refresh
+ * put the username in the contractor part of the job offer
+ * FOR EVERYTHING: Need to think of what happens when the sender has no gas to do the transactions
+ * remove person who was just contracted from contestants and make sure he still cannot apply*/
 
 Template.proposalMonitoring.helpers({
     jobProposalContext:function(){
@@ -15,7 +18,7 @@ Template.proposalMonitoring.helpers({
         console.log(this[0]);
         console.log(this[1]);
         if(this[0].appointed){
-            return this.contractor;
+            return this[0].contractor;
         }else{
             return "Not appointed";
         }
@@ -43,6 +46,18 @@ Template.proposalMonitoring.helpers({
     isOwner:function(){
         var owner= DAOs.findOne().owner;
         if(Meteor.user() && Meteor.user().address=== owner){
+            return true;
+        }else{
+            return false;
+
+        }
+    },
+    isOwnerANDisNotHired:function(){
+        console.log("checking context for isNotHired:");
+        console.log(this);
+        var owner= DAOs.findOne().owner;
+        var proposal = Proposals.findOne();
+        if(Meteor.user() && Meteor.user().address=== owner && !proposal.appointed){
             return true;
         }else{
             return false;
@@ -77,13 +92,183 @@ Template.proposalMonitoring.events({
         console.log(this);
     },
     'click #contestant-go-to-profile':function(){
-        var path= '/profile/'+Meteor.userId();
+        var path= '/profile/'+this.userID;
         Router.go(path);
     },
     'click #contestant-remove-application':function(){
         console.log(this);
         Contestants.remove(this._id);
+    },
+    /*TODO: Set up lal the defensive notifications if things fail*/
+    'click #contestant-hire-application':function() {
+        console.log("checking the context for hiring");
+        console.log(this);
+        console.log(Proposals.find().fetch());
+        console.log(DAOs.find().fetch());
+        var currentDAO = DAOs.findOne();
+        var proposal = Proposals.findOne();
+        var contestantAddress = this.address;
+        var proposaluniqueID = proposal.ID;
+        var sender = Meteor.user().address;
+
+        var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+
+        console.log("Check if statement");
+        console.log(sender === currentDAO.owner);
+        console.log(!proposal.appointed);
+        console.log(currentDAO.balance > proposal.deposit);
+        console.log(sender === currentDAO.owner && !proposal.appointed && currentDAO.balance > proposal.deposit);/*TODO:Potential bug for being bigger but not allowing for gas -can mitigate as i know how much gas my function is going ot use and send that amount of gas with the function anyways*/
+
+        var prop= contract.proposals.call(proposaluniqueID);
+        console.log(prop);
+
+        if (sender === currentDAO.owner && !proposal.appointed && currentDAO.balance > proposal.deposit) {
+
+            console.log("Owner verified to be sender." );
+            console.log(contestantAddress);
+            console.log(proposaluniqueID);
+
+            contract.hireContractor.sendTransaction(contestantAddress,proposaluniqueID,{from: sender}, function (e, r) {
+                if (e) {
+                    console.log("Error processing the transaction");
+                    console.log(e);
+                } else {
+                    var newBalance = currentDAO.balance - proposal.deposit; /* TODO: think about if it is better to call ethereum to set the new balance:potential concurrency bug*/
+                    console.log("proposal send to ethereum successfully.");
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Proposals.update({_id:proposal._id},{$set:{contractor:contestantAddress, appointed:true}});
+                    DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});/*TODO: potential concurrency bug*/
+                    console.log("verifying ethereum state");
+                    var prop= contract.proposals.call(proposaluniqueID);
+                    console.log(prop);
+                }
+            });
+
+
+        }else{
+            console.log("either not owner or appointed already");
+        }
+
+
+    },
+
+    'click #proposal-layoff-contractor':function(){
+        console.log("Laying off contractor");
+        var currentDAO = DAOs.findOne();
+        var proposal = Proposals.findOne();
+        var proposaluniqueID = proposal.ID;
+        var sender = Meteor.user().address;
+        var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+        console.log("verifying condition");
+        console.log(sender === currentDAO.owner);
+        console.log(proposal.appointed);
+        console.log(!proposal.finalised);
+        console.log(sender===currentDAO.owner && proposal.appointed && !proposal.finalised);
+        var prop= contract.proposals.call(proposaluniqueID);
+        console.log(prop);
+
+
+        if(sender===currentDAO.owner && proposal.appointed && !proposal.finalised ){
+            console.log("conditions met");
+
+            contract.layoffContractor.sendTransaction(proposaluniqueID,{from: sender}, function (e, r) {
+                if (e) {
+                    console.log("Error processing the transaction");
+                    console.log(e);
+                } else {
+                    console.log("proposal send to ethereum successfully.");
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Proposals.update({_id:proposal._id},{$set:{contractor:"0x000", appointed:false, completed:false}});
+                    console.log("verifying ethereum state");
+                    var prop= contract.proposals.call(proposaluniqueID);
+                    console.log(prop);
+                    /*TODO: Think about if i want this in the contract and here*/
+                    if(!currentDAO.recruiting){
+                        DAOs.update({_id:currentDAO._id},{$set:{recruiting:true}});
+                    }
+                }
+            });
+
+
+        }else{
+            console.log("either not owner or not appointed  or finalised already");
+        }
+
+    },
+    'click #proposal-complete-work':function(){
+        console.log("completing work");
+        var currentDAO = DAOs.findOne();
+        var proposal = Proposals.findOne();
+        var proposaluniqueID = proposal.ID;
+        var sender = Meteor.user().address;
+        var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+        console.log("verifying condition");
+        console.log(sender === proposal.contractor);
+        console.log(proposal.appointed);
+        console.log(!proposal.finalised);
+        console.log(sender === proposal.contractor && proposal.appointed && !proposal.finalised);
+
+        if(sender === proposal.contractor && proposal.appointed && !proposal.finalised){
+            console.log("conditions met");
+
+            contract.completeWork.sendTransaction(proposaluniqueID,{from: sender}, function (e, r) {
+                if (e) {
+                    console.log("Error processing the transaction");
+                    console.log(e);
+                } else {
+                    console.log("proposal send to ethereum successfully.");
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Proposals.update({_id:proposal._id},{$set:{completed:true}});
+                    /*TODO:Need to upload something at that stage*/
+                    console.log("verifying ethereum state");
+                    var prop= contract.proposals.call(proposaluniqueID);
+                    console.log(prop);
+                }
+            });
+
+        }else{
+            console.log("one of conditions not met");
+        }
+    },
+
+    'click #proposal-finalise':function(){
+        console.log("completing work");
+        var currentDAO = DAOs.findOne();
+        var proposal = Proposals.findOne();
+        var proposaluniqueID = proposal.ID;
+        var sender = Meteor.user().address;
+        var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+        console.log("verifying condition");
+        console.log(sender === currentDAO.owner);
+        console.log(proposal.appointed);
+        console.log(proposal.completed);
+        console.log(!proposal.finalised);
+        console.log(currentDAO.balance > proposal.reward);
+        console.log(sender === currentDAO.owner &&  proposal.appointed && proposal.completed && !proposal.finalised && currentDAO.balance > proposal.reward);
+
+        if(sender === currentDAO.owner &&  proposal.appointed && proposal.completed && !proposal.finalised && currentDAO.balance > proposal.reward){
+            console.log("conditions met");
+
+            contract.finalise.sendTransaction(proposaluniqueID,{from: sender}, function (e, r) {
+                if (e) {
+                    console.log("Error processing the transaction");
+                    console.log(e);
+                } else {
+                    console.log("proposal send to ethereum successfully.");
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Proposals.update({_id:proposal._id},{$set:{finalised:true}});
+                    /*TODO:Need to upload something at that stage*/
+                    console.log("verifying ethereum state");
+                    var prop= contract.proposals.call(proposaluniqueID);
+                    console.log(prop);
+                }
+            });
+        }else{
+            console.log("one of conditions not met");
+        }
     }
+
+
 });
 
 

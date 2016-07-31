@@ -28,16 +28,9 @@
                 </div>
             </div>
 
-
-
-
-
-
-
             <div class="row">
                 <div class="col-md-4 col-md-offset-1">
-
-                    {{#autoForm collection="DAOs" id="changeDividendsForm" type="normal" doc=this}}
+                    {{#autoForm collection="DAOs" id="changeDividendsForm" type="normal" doc=this schema=changeDivSchema }}
                         <fieldset>
                             {{> afQuickField name='percentDividends'}}
                         </fieldset>
@@ -45,72 +38,44 @@
                             Submit
                         </button>
                     {{/autoForm}}
-
-
-
                 </div>
+
                 <div class ="col-md-4 col-md-offset-1">
-                    <form id="fuelForm">
-                        <div class="form-group">
-                            <label for="fuelAmountInput">Fuel your DAO</label>
-                            <input type="number" class="form-control" id="fuelAmountInput" placeholder="Amount in Ether">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                    {{#autoForm collection="DAOs" id="fuelForm" type="normal" doc=this schema=fuelSchema }}
+                        <fieldset>
+                            {{> afQuickField name='balance' placeholder="Amount in Ether"}}
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary center-block" id="submitFuelButton">
+                            Submit
+                        </button>
+                    {{/autoForm}}
                 </div>
-
-
-
             </div>
-
-
-
-
-
-            <!--
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-1">
-                                <form id="changeDividendsForm">
-                                    <div class="form-group">
-                                        <label for="dividendsPercentInput">New Dividends Percentage</label>
-                                        <input type="number" class="form-control" id="dividendsPercentInput" placeholder="Percent of dividends (eg.66)">
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </form>
-
-                            </div>
-                            <div class ="col-md-4 col-md-offset-1">
-                                <form id="fuelForm">
-                                    <div class="form-group">
-                                        <label for="fuelAmountInput">Fuel your DAO</label>
-                                        <input type="number" class="form-control" id="fuelAmountInput" placeholder="Amount in Ether">
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                </form>
-                            </div>
-
-
-
-                        </div>
-
-            -->
-
-
         </div>
     </div>
+
+
+
 
     <div class ="row">
         <div class="col-md-12 bg-success">
             <div class="row">
-
                 <h2>Proposal Commands</h2>
-
-
             </div>
 
             <div class ="row">
                 <div class="col-md-3 ">
-                    <p>TODO: form for Hire contractor</p>
+                    {{#autoForm collection="Proposals" id="hireContractorForm" type="normal"  schema=hireContractorSchema }}
+                        <legend>Hire Contractor</legend>
+                        <fieldset>
+                            {{> afQuickField name='ID' placeholder='Proposal ID' }}
+                            {{> afQuickField name='contractor' placeholder='Contestant Address' defaultValue=false}}
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary center-block" id="submitHireContractorButton">
+                            Submit
+                        </button>
+                    {{/autoForm}}
+
                 </div>
                 <div class ="col-md-3 ">
                     <p>TODO: form for layoff contractor</p>
@@ -137,10 +102,12 @@
 
 
 
+
+
+
     <!-- Modal -->
     <div class="modal fade" id="proposalCreationModal" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,14 +139,6 @@
                             Add Proposal
                         </button>
                     {{/autoForm}}
-
-
-
-
-
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -190,6 +149,55 @@
     </div>
 
 
-
-
 </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+                 <div class="row">
+                     <div class="col-md-4 col-md-offset-1">
+                         <form id="changeDividendsForm">
+                             <div class="form-group">
+                                 <label for="dividendsPercentInput">New Dividends Percentage</label>
+                                 <input type="number" class="form-control" id="dividendsPercentInput" placeholder="Percent of dividends (eg.66)">
+                             </div>
+                             <button type="submit" class="btn btn-default">Submit</button>
+                         </form>
+
+                     </div>
+                     <div class ="col-md-4 col-md-offset-1">
+                         <form id="fuelForm">
+                             <div class="form-group">
+                                 <label for="fuelAmountInput">Fuel your DAO</label>
+                                 <input type="number" class="form-control" id="fuelAmountInput" placeholder="Amount in Ether">
+                             </div>
+                             <button type="submit" class="btn btn-default">Submit</button>
+                         </form>
+                     </div>
+
+
+
+                 </div>
+
+     -->

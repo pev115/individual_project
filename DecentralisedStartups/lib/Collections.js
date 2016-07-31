@@ -66,10 +66,10 @@ Schemas.Proposal =  new SimpleSchema({
         type:Number,
         label: "ID",
         optional:true,
-        /*unique:true,*/
+        /*unique:true,
         autoform:{
             omit: true
-        }
+        }*/
     },
     createdDate:{
         type:Date,
@@ -113,10 +113,10 @@ Schemas.Proposal =  new SimpleSchema({
     contractor:{
         type:String,
         label:"Contractor",
-        defaultValue:"0x000", /*TODO:think if default is better than optional here*/
-        autoform:{
+        defaultValue:"0x000"  /*TODO:think if default is better than optional here*/
+       /*, autoform:{
             omit:true
-        }
+        }*/
     },
     appointed:{
         type:Boolean,
@@ -168,6 +168,9 @@ Schemas.DAO = new SimpleSchema({
         max:42,
         min:42,
         custom: function(){
+            console.log("CHECKING THE CUSTOM OWNER VALIDATION");
+            console.log(this);
+            console.log(this.isSet);
             if(Meteor.isClient && this.isSet){
                 console.log("executing the client side............");
                 console.log("checking the owner custom validation");
@@ -184,6 +187,7 @@ Schemas.DAO = new SimpleSchema({
             }
             if(Meteor.isServer){
                 console.log("Executing the server side.........................");
+                console.log(this);
                 var found = Meteor.users.findOne({address:this.value});
                 if(!found){
                     console.log("NOT FOUND");
@@ -211,7 +215,8 @@ Schemas.DAO = new SimpleSchema({
     percentDividends:{
         type: Number,
         defaultValue:0,
-        decimal:true
+        min:0,
+        max:100
     },
     totalShares:{
         type:Number,

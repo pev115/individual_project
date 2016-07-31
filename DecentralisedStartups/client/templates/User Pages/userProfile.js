@@ -8,6 +8,8 @@ implement what happens when you click on the table rows
  * See how can I have a proper description field (also if description field is too long does not break jproperly
  *restrict user rating to a max of 5
  *Unify dao ownership list css aswell
+ * Implement a way of notifications when getting contracted
+ *or seeing balance that changes  
  * */
 Template.userProfile.onCreated(function(){
     this.ownedDAOLimit=new ReactiveVar();

@@ -19,6 +19,14 @@ add employee rating : have a list and when someone has been contracted he can gi
 put a rating system
 put a total shareholder payout
 add title
+check the appointed -completed finalised workflow again very carefuly
+take out automatic recruiting switch when laying off contractor
+i think get rid of the finalised= true in the hireContractor
+think about very carefully what happens if the dao soes not have enough funds for the deposit
+ identify all th points where the contract can throw (eg. where the contract sends money and make sure
+ they are correctly reflected in the website's ui
+ in complete work add condition that appointed is true and finalised is false
+MUST DO: on finalise check that finalise is false!!!!
 */
 
 contract Private is owned, SharesManager, hasProposals {
