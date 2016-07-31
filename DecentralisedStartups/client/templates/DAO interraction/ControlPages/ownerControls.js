@@ -401,7 +401,9 @@ AutoForm.addHooks('fuelForm',hooksFuelForm);
 
 /*TODO: need to make sure that Im using the applicant collection
 * See what happens when I insert wrong and inexisting inputs for contractor and proposalID
-* test the thing (did not tre
+* test the thing (did not test the thing)
+* need to finish it...
+* 
 * */
 
 
