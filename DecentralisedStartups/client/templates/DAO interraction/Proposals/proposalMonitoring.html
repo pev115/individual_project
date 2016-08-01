@@ -41,7 +41,7 @@
                                 <li class="list-group-item list-group-item-default">
                                     <p> Contestant Address: {{address}}</p>
                                     <button type="button" class ="btn btn-primary" id ="contestant-go-to-profile">
-                                       GO!
+                                        GO!
                                     </button>
                                     <p>Contestant Username:{{userName}}</p>
                                     <p>Rating: </p>
@@ -84,14 +84,57 @@
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-danger btn-lg center-block" id="proposal-layoff-contractor">Layoff contractor</button>
+                <button class="btn btn-danger btn-lg center-block" id="proposal-toggle-modal-layoff">Layoff contractor</button>
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-primary btn-lg center-block" id="proposal-remove">Remove proposal</button>
+                <button class="btn btn-primary btn-lg center-block" id="proposal-toggle-modal-finalise">Remove proposal</button>
             </div>
         </div>
 
 
+
+
+
+
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="leaveCommentModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add a job offering to your DAO</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{#if finalising}}
+                            <div class="col-md-4">
+                                <button class="btn btn-success btn-lg center-block" id="proposal-finalise">Finalise</button>
+                            </div>
+                        {{/if}}
+                        {{#if firing}}
+                            <div class="col-md-4">
+                                <button class="btn btn-danger btn-lg center-block" id="proposal-layoff-contractor">Layoff contractor</button>
+                            </div>
+                        {{/if}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
     {{/with}}
+
 </template>

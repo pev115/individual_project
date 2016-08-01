@@ -1,9 +1,21 @@
 /*TODO: Make the apply button do a popup for confirmation
  * Implement proper security for not allowing people to apply twice*/
-/*TODO: BUG: When adding new contestant it appears at the buttom unless refresh
+/*TODO:
+ IMPORTANT: FINISH implementing the modal for comment and rating leaving. There is the bug that the button
+ does not appear now -> need to have just one reactive var and switch the value every time i change
+ BUG: When adding new contestant it appears at the buttom unless refresh
  * put the username in the contractor part of the job offer
  * FOR EVERYTHING: Need to think of what happens when the sender has no gas to do the transactions
  * remove person who was just contracted from contestants and make sure he still cannot apply*/
+
+Template.proposalMonitoring.onCreated(function(){
+    this.finalising = new ReactiveVar();
+    this.finalising.set(false);
+
+    this.firing = new ReactiveVar();
+    this.firing.set(false);
+});
+
 
 Template.proposalMonitoring.helpers({
     jobProposalContext:function(){
@@ -64,6 +76,24 @@ Template.proposalMonitoring.helpers({
             return false;
 
         }
+    },
+    finalising:function(){
+        if(Template.instance().finalising.get()){
+            Template.instance().finalising.set(false);
+            return true;
+        }else{
+            return false;
+        }
+    },
+    firing: function(){
+        console.log("showing off firing");
+        console.log(Template.instance().firing.get());
+        if(Template.instance().firing.get()){
+            Template.instance().firing.set(false);
+            return true;
+        }else{
+            return false;
+        }
     }
 });
 
@@ -98,6 +128,10 @@ Template.proposalMonitoring.events({
     'click #contestant-remove-application':function(){
         console.log(this);
         Contestants.remove(this._id);
+    },
+    'click #proposal-toggle-modal-layoff': function(){
+      Template.instance().firing.set(true);
+       $('#leaveCommentModal').modal('toggle');
     },
 
     /*Ethereum interactions */
@@ -299,8 +333,6 @@ Template.proposalMonitoring.events({
         }else{
             console.log("one of conditions not met");
         }
-
-
 
     }
 
