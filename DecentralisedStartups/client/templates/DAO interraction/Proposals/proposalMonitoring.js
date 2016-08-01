@@ -23,6 +23,7 @@ Template.proposalMonitoring.helpers({
             return "Not appointed";
         }
     },
+    /*TODO: Not allow applying if the DAO is not recruiting*/
     allowedToApply:function(){
         var currentUserId = Meteor.userId();
         var inContestants = $.grep(this[1], function(e){ return e.userID == currentUserId; });
@@ -87,7 +88,6 @@ Template.proposalMonitoring.events({
         };
         console.log("THIS IS THE FUCKING CONTESTANT");
         console.log(Contestant);
-        /* Proposals.update({_id:this._id},{$push:{contestants:Contestant}});*/
         Contestants.insert(Contestant);
         console.log(this);
     },
@@ -99,6 +99,8 @@ Template.proposalMonitoring.events({
         console.log(this);
         Contestants.remove(this._id);
     },
+
+    /*Ethereum interactions */
     /*TODO: Set up lal the defensive notifications if things fail*/
     'click #contestant-hire-application':function() {
         console.log("checking the context for hiring");
@@ -182,10 +184,6 @@ Template.proposalMonitoring.events({
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
-                    /*TODO: Think about if i want this in the contract and here*/
-                    if(!currentDAO.recruiting){
-                        DAOs.update({_id:currentDAO._id},{$set:{recruiting:true}});
-                    }
                 }
             });
 
@@ -205,8 +203,9 @@ Template.proposalMonitoring.events({
         console.log("verifying condition");
         console.log(sender === proposal.contractor);
         console.log(proposal.appointed);
+        console.log(!proposal.completed);
         console.log(!proposal.finalised);
-        console.log(sender === proposal.contractor && proposal.appointed && !proposal.finalised);
+        console.log(sender === proposal.contractor && proposal.appointed && !proposal.finalised && !proposal.completed);
 
         if(sender === proposal.contractor && proposal.appointed && !proposal.finalised){
             console.log("conditions met");
