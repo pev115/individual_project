@@ -229,7 +229,7 @@ Template.proposalMonitoring.events({
             console.log("one of conditions not met");
         }
     },
-
+    /*TODO: must implement system to give review when owner layoff or finalse*/
     'click #proposal-finalise':function(){
         console.log("completing work");
         var currentDAO = DAOs.findOne();
@@ -265,6 +265,43 @@ Template.proposalMonitoring.events({
         }else{
             console.log("one of conditions not met");
         }
+    },
+
+
+    'click #proposal-remove':function(){
+        console.log("remove proposal");
+        var currentDAO = DAOs.findOne();
+        var proposal = Proposals.findOne();
+        var proposaluniqueID = proposal.ID;
+        var sender = Meteor.user().address;
+        var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+        console.log("verifying condition");
+        console.log(sender === currentDAO.owner);
+        console.log(!proposal.appointed);
+        console.log(sender === currentDAO.owner && !proposal.appointed);
+        if(sender === currentDAO.owner && !proposal.appointed){
+            console.log("conditions met");
+
+            contract.removeProposal.sendTransaction(proposaluniqueID,{from: sender}, function (e, r) {
+                if (e) {
+                    console.log("Error processing the transaction");
+                    console.log(e);
+                } else {
+                    console.log("proposal send to ethereum successfully.");
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Proposals.remove({_id:proposal._id});
+                    console.log("verifying ethereum state");
+                    var prop= contract.proposals.call(proposaluniqueID);
+                    console.log(prop);
+                }
+            });
+            Template.instance().get('monitorTemplate').set('templateName','proposalDisplay');
+        }else{
+            console.log("one of conditions not met");
+        }
+
+
+
     }
 
 

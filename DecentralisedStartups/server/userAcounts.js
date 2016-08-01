@@ -1,3 +1,6 @@
+/*TODO: must provide the mechanism for the feedback to go there as well as rating and reviews. Must also
+provide a way to edit user profile
+ */
 Accounts.onCreateUser(function(options,user){
    // console.log("Theses are the onCreateUser arguments:");
    // console.log(options);
