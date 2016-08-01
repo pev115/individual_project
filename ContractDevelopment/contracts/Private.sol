@@ -5,8 +5,6 @@ import "SharesManager.sol";
 import "hasProposals.sol";
 /*TODO:
 Must do:
-implement remove proposal
-
 
 Important:
 Implement a hashing for the description
@@ -22,7 +20,11 @@ Implement different types of proposals through new contracts eg. salary
 Implement a way to lock funds of proposals eg through sending them to another contract
 put a rating system
 
+Think about:
+Do I want events?
+
 Less important:
+implement modifiers for reccuring bits
 Implement a way to tie proposals to a specific product that can be sold only when all proposals
 for the product are finalised
 think about securing all functions with sending back ether if there is value
@@ -138,7 +140,23 @@ contract Private is owned, SharesManager, hasProposals {
       p.completed = false;
       p.appointed = false;
       p.finalised = false;
+      p.contractor = 0;
       p.description = _desc;
+    }
+
+    function removeProposal(uint _ID) onlyOwner{
+      if(proposals[_ID].ID == 0){
+        throw;
+      }
+
+      proposal p = proposals[_ID];
+
+      if(p.appointed == true){
+        throw;
+      }
+
+      p.ID = 0;
+
     }
 
 

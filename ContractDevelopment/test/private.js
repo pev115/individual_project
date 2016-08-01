@@ -1,3 +1,6 @@
+
+/*TODO: fizx weird bug with payment distributed test */
+
 contract('Private', function(accounts){
 
 
@@ -291,14 +294,126 @@ contract('Private', function(accounts){
         return priv.proposals.call(_ID);
       });
     }).then(function(prop){
-      console.log("I am here");
-      console.log(prop);
       assert.equal(prop[5],false, "appointed did not return to false after layoff");
+      assert.equal(prop[4],false, "completed not false after layoff");
       assert.equal(prop[6],'0x0000000000000000000000000000000000000000', "Did not set contractor to 0");
     }).then(done).catch(done);
 
   }).catch(done);
   });
+
+
+
+
+
+
+
+
+
+
+    it("Checks proposals are removed correctly",function(done){
+      Private.new(accounts[0],"testDescription",{from:accounts[0]}).then(function(priv){
+          var account_zero = accounts[0];
+          var _reward= 2;
+          var _deposit= 3;
+          var _desc="This is a proposal";
+          var _ID = 12;
+          var _contractor = accounts[2];
+
+          priv.toggleRecruiting.sendTransaction({from:account_zero})
+          .then(function(){
+            return priv.recruiting.call();
+          }).then(function(rec){
+            assert.equal(rec,true,"The recruiting did not toggle");
+            return priv.addProposal.sendTransaction(_reward,_deposit,_desc,_ID,{from:accounts[0]})
+            .then(function(){
+              return priv.proposals(_ID);
+            });
+          }).then(function(prop){
+              assert.equal(prop[0],_ID, "The id of the proposal does not match the input");
+          }).then(function(){
+            return priv.fuel.sendTransaction({from:accounts[0],value:20}).then(function(){
+              return web3.eth.getBalance(priv.address);
+            });
+          }).then(function(blance){
+            assert.equal(blance,20,"fueling failed");
+            return priv.hireContractor.sendTransaction(_contractor,_ID,{form:accounts[0]})
+                    .then(function(){
+                      return priv.proposals.call(_ID);
+                    });
+          }).then(function(prop){
+            assert.equal(prop[6],_contractor, "the contractor was not set properly");
+            assert.equal(prop[5],true,"Appointed not set properly");
+          }).then(function(){
+
+             priv.removeProposal.sendTransaction(_ID,{form:accounts[0]})
+             .catch(function(e){
+               err = true;
+             }).then(function(){
+               assert.equal(err,true, "proposal removed even though it was appointed");
+             });
+            return priv.proposals.call(_ID);
+
+          }).then(function(prop){
+            assert.equal(prop[0],_ID, "proposal not having an ID when it should have one");
+          }).then(function(){
+            return priv.layoffContractor.sendTransaction(_ID,{from:accounts[0]})
+            .then(function(){
+              return priv.proposals.call(_ID);
+            });
+          }).then(function(prop){
+            assert.equal(prop[5],false, "appointed did not return to false after layoff");
+            assert.equal(prop[4],false, "completed not false after layoff");
+            assert.equal(prop[6],'0x0000000000000000000000000000000000000000', "Did not set contractor to 0");
+          }).then(function(){
+            return priv.removeProposal.sendTransaction(_ID,{form:accounts[0]})
+            .then(function(){
+              return priv.proposals.call(_ID);
+            });
+
+          }).then(function(prop){
+              assert.equal(prop[0],0, "proposal's ID is not 0 after removing");
+              assert.equal(prop[5],0, "proposal appointed is true even though the ID is 0");
+              assert.equal(prop[4],false, "completed not false even though ID is 0");
+              assert.equal(prop[6],'0x0000000000000000000000000000000000000000', "contractor not 0 even though ID is 0");
+          }).then(function(){
+            var err= false;
+            priv.hireContractor.sendTransaction(_contractor,_ID,{form:accounts[0]}).catch(function(e){
+              err = true;
+            }).then(function(){
+              assert.equal(err,true, "could hire even though the proposal's ID was 0");
+            });
+          }).then(function(){
+            priv.removeProposal.sendTransaction(_ID,{form:accounts[0]})
+            .catch(function(e){
+              err = true;
+            }).then(function(){
+              assert.equal(err,true, "Did not throw even though tryied to remove a proposal already removed");
+            });
+          }).then(function(){
+            priv.removeProposal.sendTransaction(54,{form:accounts[0]})
+            .catch(function(e){
+              err = true;
+            }).then(function(){
+              assert.equal(err,true, "Did not throw even though tryied to remove a proposal that does not exist");
+            });
+          }).then(done).catch(done);
+      }).catch(done);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -343,6 +458,11 @@ contract('Private', function(accounts){
       }).then(done).catch(done);
     }).catch(done);
   });
+
+
+
+
+
 
 
 });
