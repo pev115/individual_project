@@ -1,4 +1,5 @@
 contract Board{
+
 /*
   address[] public Board;
   bool public appointed;
