@@ -26,7 +26,12 @@
         </div>
 
 
-
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h3 class="text-center">Job Description</h3>
+        <p>{{description}}</p>
+    </div>
+</div>
 
         <div class = "row">
             <div class ="col-md-12">
@@ -80,7 +85,7 @@
         <div class ="row">
             <h2 class="text-center"><u>Owner Actions:</u></h2>
             <div class="col-md-4">
-                <button class="btn btn-success btn-lg center-block" id="proposal-finalise">Finalise</button>
+                <button class="btn btn-success btn-lg center-block" id="proposal-toggle-modal-finalise">Finalise</button>
             </div>
 
             <div class="col-md-4">
@@ -88,7 +93,7 @@
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-primary btn-lg center-block" id="proposal-toggle-modal-finalise">Remove proposal</button>
+                <button class="btn btn-primary btn-lg center-block" id="proposal-remove">Remove proposal</button>
             </div>
         </div>
 
@@ -111,16 +116,24 @@
                         <h4 class="modal-title">Add a job offering to your DAO</h4>
                     </div>
                     <div class="modal-body">
-                        {{#if finalising}}
-                            <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label for="contractorRatingFeedback">Please rate this contractor</label>
+                                {{> starsRating id='contractorRatingFeedback' size ='lg' mutable=true}}
+                            </div>
+                            <div class ="form-group">
+                                <label for="contractorCommentFeedback">Please also leave a comment on his performance</label>
+                                <textarea class="form-control"  id="contractorCommentFeedback" rows="4"></textarea>
+                            </div>
+
+                        <div class="col-md-4">
+                            {{#if finalising}}
                                 <button class="btn btn-success btn-lg center-block" id="proposal-finalise">Finalise</button>
-                            </div>
-                        {{/if}}
-                        {{#if firing}}
-                            <div class="col-md-4">
+                            {{/if}}
+                            {{#if firing}}
                                 <button class="btn btn-danger btn-lg center-block" id="proposal-layoff-contractor">Layoff contractor</button>
-                            </div>
-                        {{/if}}
+                            {{/if}}
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

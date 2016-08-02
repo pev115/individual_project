@@ -6,14 +6,14 @@
  BUG: When adding new contestant it appears at the buttom unless refresh
  * put the username in the contractor part of the job offer
  * FOR EVERYTHING: Need to think of what happens when the sender has no gas to do the transactions
- * remove person who was just contracted from contestants and make sure he still cannot apply*/
+ * remove person who was just contracted from contestants and make sure he still cannot apply
+ * think about how I upgrade the balances
+ * BUG: if the contestants rating changes, it does not change in the contestant list
+ * could do as described here https://dweldon.silvrback.com/common-mistakes  */
 
 Template.proposalMonitoring.onCreated(function(){
-    this.finalising = new ReactiveVar();
-    this.finalising.set(false);
-
-    this.firing = new ReactiveVar();
-    this.firing.set(false);
+    this.modalUse = new ReactiveVar();
+    this.modalUse.set("none");
 });
 
 
@@ -77,19 +77,16 @@ Template.proposalMonitoring.helpers({
 
         }
     },
+
     finalising:function(){
-        if(Template.instance().finalising.get()){
-            Template.instance().finalising.set(false);
+        if(Template.instance().modalUse.get()==="finalising"){
             return true;
         }else{
             return false;
         }
     },
     firing: function(){
-        console.log("showing off firing");
-        console.log(Template.instance().firing.get());
-        if(Template.instance().firing.get()){
-            Template.instance().firing.set(false);
+        if(Template.instance().modalUse.get()=== "firing"){
             return true;
         }else{
             return false;
@@ -130,8 +127,12 @@ Template.proposalMonitoring.events({
         Contestants.remove(this._id);
     },
     'click #proposal-toggle-modal-layoff': function(){
-      Template.instance().firing.set(true);
-       $('#leaveCommentModal').modal('toggle');
+        Template.instance().modalUse.set("firing");
+        $('#leaveCommentModal').modal('toggle');
+    },
+    'click #proposal-toggle-modal-finalise': function(){
+        Template.instance().modalUse.set("finalising");
+        $('#leaveCommentModal').modal('toggle');
     },
 
     /*Ethereum interactions */
@@ -195,6 +196,16 @@ Template.proposalMonitoring.events({
         var proposaluniqueID = proposal.ID;
         var sender = Meteor.user().address;
         var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+
+
+
+        var _rating =$('#contractorRatingFeedback').data('userrating');
+        var _comment = $('#contractorCommentFeedback').val();
+        var _contractor = proposal.contractor;
+
+
+
+
         console.log("verifying condition");
         console.log(sender === currentDAO.owner);
         console.log(proposal.appointed);
@@ -215,13 +226,24 @@ Template.proposalMonitoring.events({
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     Proposals.update({_id:proposal._id},{$set:{contractor:"0x000", appointed:false, completed:false}});
+
+
+                    console.log("checking feedback variables");
+                    console.log(_rating);
+                    console.log(_comment);
+                    console.log(_rating +' , '+ _comment +' , '+_contractor + ' , '+ proposaluniqueID );
+
+                    addFeedback(_rating,_comment,proposaluniqueID,_contractor);
+
+
+
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
                 }
             });
-
-
+            Template.instance().modalUse.set("none");
+            $('#leaveCommentModal').modal('toggle');
         }else{
             console.log("either not owner or not appointed  or finalised already");
         }
@@ -265,12 +287,20 @@ Template.proposalMonitoring.events({
     },
     /*TODO: must implement system to give review when owner layoff or finalse*/
     'click #proposal-finalise':function(){
-        console.log("completing work");
+
+        console.log("finalising work");
         var currentDAO = DAOs.findOne();
         var proposal = Proposals.findOne();
         var proposaluniqueID = proposal.ID;
         var sender = Meteor.user().address;
         var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+
+
+        var _rating =$('#contractorRatingFeedback').data('userrating');
+        var _comment = $('#contractorCommentFeedback').val();
+        var _contractor = proposal.contractor;
+
+
         console.log("verifying condition");
         console.log(sender === currentDAO.owner);
         console.log(proposal.appointed);
@@ -290,12 +320,27 @@ Template.proposalMonitoring.events({
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     Proposals.update({_id:proposal._id},{$set:{finalised:true}});
+
+
+
+                    var newBalance = currentDAO.balance - proposal.reward; /* TODO: think about if it is better to call ethereum to set the new balance:potential concurrency bug*/
+                    DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});/*TODO: potential concurrency bug*/
+
+                    console.log("checking feedback variables");
+
+
+                    console.log(_rating);
+                    console.log(_comment);
+                    console.log(_rating +' , '+ _comment +' , '+_contractor + ' , '+ proposaluniqueID );
+                    addFeedback(_rating,_comment,proposaluniqueID,_contractor);
                     /*TODO:Need to upload something at that stage*/
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
                 }
             });
+            Template.instance().modalUse.set("none");
+            $('#leaveCommentModal').modal('toggle');
         }else{
             console.log("one of conditions not met");
         }
@@ -344,7 +389,18 @@ Template.proposalMonitoring.events({
 
 
 
+/*TODO:think about concurrency issues with the reviews update*/
+function  addFeedback(_rating,_comment,proposaluniqueID,_contractor){
+    console.log("adding feedback");
+    Meteor.subscribe('addressUser',_contractor,function(){
+        console.log(Meteor.users.find().fetch());
+        var con = Meteor.users.findOne({address:_contractor});
+        var newReviews =con.reviews+1;
+        var newRating= (((con.rating*con.reviews)+_rating)/(newReviews))
+        Meteor.users.update({_id:con._id},{$set:{rating:newRating,reviews:newReviews},$push:{feedback:{rating:_rating, comment:_comment,proposalID:proposaluniqueID}}});
 
+    });
+  }
 
 
 

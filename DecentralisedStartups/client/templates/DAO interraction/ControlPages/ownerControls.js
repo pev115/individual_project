@@ -404,8 +404,7 @@ AutoForm.addHooks('fuelForm',hooksFuelForm);
 * test the thing (did not test the thing)
 * need to finish it...
 * 
-* */
-
+*
 
 var hooksHireContractorForm ={
 
@@ -417,7 +416,7 @@ var hooksHireContractorForm ={
         console.log(currentDoc);
         console.log(this);
 
-        /*TODO:Think of using the custom schema to first verify that the subscriptions are returning something*/
+        //TODO:Think of using the custom schema to first verify that the subscriptions are returning something
         Meteor.subscribe('ProposalUsingID',insertDoc.ID);
         Meteor.subscribe('contestantByAddress',insertDoc.contractor);
 
@@ -448,3 +447,4 @@ var hooksHireContractorForm ={
 };
 
 AutoForm.addHooks('hireContractorForm',hooksHireContractorForm);
+ */

@@ -1,3 +1,5 @@
+/*TODO: fix infinity bug */
+
 Template.infoDisplay.onCreated(function(){
     this.transactionLimit = new ReactiveVar();
     this.transactionLimit.set(7);
@@ -39,6 +41,8 @@ Template.infoDisplay.helpers({
         var shares = this.totalShares;
         if(div=== 0){
             return '0';
+        }else if(shares===0){
+            return 'No shares are issued';
         }else if(typeof  shares=== "number" && typeof div ==="number"){
             var _reward = div/(shares*100);
             var reward = _reward.toFixed(6);
