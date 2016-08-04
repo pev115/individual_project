@@ -100,13 +100,13 @@
 
 
 <div class="row">
-    {{> upload_bootstrap }}
-    <a href="/public/profpci.jpg" download target="_blank">Download</a>
+
+    <a href="/testing/importantFolder.zip" >Download</a>
 </div>
 
 
 
-
+        <!--download target="_blank"-->
 
 
         <!-- Modal -->
@@ -145,6 +145,32 @@
 
             </div>
         </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="uploadWork" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Upload your work</h4>
+                    </div>
+                    <div class="modal-body">
+
+                            {{> upload_bootstrap formData=this.[0]}}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
 
 
 

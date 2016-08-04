@@ -5,6 +5,7 @@ import "SharesManager.sol";
 import "hasProposals.sol";
 /*TODO:
 Must do:
+!!!!NEW: have to add the proposal ID to the receive payment function so that can verify that the job was finalised
 
 Important:
 Implement a hashing for the description

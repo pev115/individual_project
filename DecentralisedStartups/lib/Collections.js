@@ -7,8 +7,8 @@
 
 
 /*TODO:Think about splitting the collections to one file per collection
-* Make the proposal IDs unique and think of what happens if a the random function happens to create twice the same
-* ID*/
+ * Make the proposal IDs unique and think of what happens if a the random function happens to create twice the same
+ * ID*/
 
 
 SimpleSchema.messages({
@@ -20,9 +20,34 @@ DAOs =  new Mongo.Collection('daos');
 Proposals = new Mongo.Collection('proposals');
 Transactions = new Mongo.Collection('transactions');
 Contestants =  new Mongo.Collection('contestants');
+Products = new Mongo.Collection('products');
 
 
 var Schemas = {};
+
+Schemas.Product = new SimpleSchema({
+    name:{
+        type:String,
+        label:"Name"
+    } ,
+    DAO_Id :{ type:String,
+        label:"DAO_Id"
+    },
+    url:{
+        type:String,
+        label:"URL",
+        optional:true
+    },
+    path:{
+        type:String,
+        label:"Path"
+    },
+    description:{
+        type:String,
+        label:"Description"
+    }
+});
+
 
 Schemas.Contestant = new SimpleSchema({
     proposalID:{
@@ -35,9 +60,9 @@ Schemas.Contestant = new SimpleSchema({
 
     },
     userID:{
-       type:String,
+        type:String,
         label:"UserID"/*,
-        unique:true*/
+         unique:true*/
     },
     userName:{
         type:String,
@@ -45,7 +70,7 @@ Schemas.Contestant = new SimpleSchema({
 
     },
     rating:{
-       type:Number,
+        type:Number,
         decimal:true,
         label:"UserID"
 
@@ -67,9 +92,9 @@ Schemas.Proposal =  new SimpleSchema({
         label: "ID",
         optional:true,
         /*unique:true,
-        autoform:{
-            omit: true
-        }*/
+         autoform:{
+         omit: true
+         }*/
     },
     createdDate:{
         type:Date,
@@ -114,9 +139,9 @@ Schemas.Proposal =  new SimpleSchema({
         type:String,
         label:"Contractor",
         defaultValue:"0x000"  /*TODO:think if default is better than optional here*/
-       /*, autoform:{
-            omit:true
-        }*/
+        /*, autoform:{
+         omit:true
+         }*/
     },
     appointed:{
         type:Boolean,
@@ -270,7 +295,7 @@ DAOs.attachSchema(Schemas.DAO);
 Transactions.attachSchema(Schemas.Transaction);
 Proposals.attachSchema(Schemas.Proposal);
 Contestants.attachSchema(Schemas.Contestant);
-
+Products.attachSchema(Schemas.Product);
 
 DAOs.allow({
     insert:function(userId,doc){
@@ -322,6 +347,18 @@ Meteor.users.allow({
 });
 
 Contestants.allow({
+    insert:function(userId,doc){
+        return true;
+    },
+    update: function(userId,doc){
+        return true;
+    },
+    remove:function(userId,doc){
+        return true;
+    }
+});
+
+Products.allow({
     insert:function(userId,doc){
         return true;
     },

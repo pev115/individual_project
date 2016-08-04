@@ -148,6 +148,8 @@ Template.proposalMonitoring.events({
         var proposaluniqueID = proposal.ID;
         var sender = Meteor.user().address;
 
+
+
         var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
 
         console.log("Check if statement");
@@ -256,11 +258,19 @@ Template.proposalMonitoring.events({
         var proposaluniqueID = proposal.ID;
         var sender = Meteor.user().address;
         var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
+
+
+        var mod =  $('#uploadWork');
+
+
+
+
         console.log("verifying condition");
         console.log(sender === proposal.contractor);
         console.log(proposal.appointed);
         console.log(!proposal.completed);
         console.log(!proposal.finalised);
+
         console.log(sender === proposal.contractor && proposal.appointed && !proposal.finalised && !proposal.completed);
 
         if(sender === proposal.contractor && proposal.appointed && !proposal.finalised){
@@ -278,6 +288,7 @@ Template.proposalMonitoring.events({
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
+                    mod.modal({backdrop:'static', keyboard:false});
                 }
             });
 

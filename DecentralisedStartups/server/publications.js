@@ -12,6 +12,9 @@ Meteor.publish('AllProposals',function(){
 Meteor.publish('AllContestants',function(){
     return Contestants.find();
 });
+Meteor.publish('AllProducts',function(){
+    return Products.find();
+});
 
 
 Meteor.publish('singleDAO',function(_address){
@@ -82,4 +85,8 @@ Meteor.publish('contestantsByProposal',function(_proposalID){
 
 Meteor.publish('contestantByAddress',function(_address){
    return Contestants.find({address:_address});
+});
+
+Meteor.publish('productsByDAO',function(_DAOID){
+    return Products.find({DAO_Id:_DAOID},{sort:{createdDate:-1}});
 });
