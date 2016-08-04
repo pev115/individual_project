@@ -87,6 +87,10 @@ Meteor.publish('contestantByAddress',function(_address){
    return Contestants.find({address:_address});
 });
 
+Meteor.publish('finalisedProductsByDAO',function(_DAOID){
+    return Products.find({DAO_Id:_DAOID, finalised:true},{sort:{createdDate:-1}});
+});
+
 Meteor.publish('productsByDAO',function(_DAOID){
     return Products.find({DAO_Id:_DAOID},{sort:{createdDate:-1}});
 });

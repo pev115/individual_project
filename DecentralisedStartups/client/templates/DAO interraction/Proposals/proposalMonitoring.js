@@ -344,10 +344,18 @@ Template.proposalMonitoring.events({
                     console.log(_comment);
                     console.log(_rating +' , '+ _comment +' , '+_contractor + ' , '+ proposaluniqueID );
                     addFeedback(_rating,_comment,proposaluniqueID,_contractor);
-                    /*TODO:Need to upload something at that stage*/
+
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
+                    console.log("will update products now");
+                    /*TODO: BUG commes from here -> I am subscribing to more here*/
+                    Meteor.subscribe('productsByDAO',currentDAO._id,function(){
+                        var prod = Products.findOne({proposalID:proposal.ID});
+                        Products.update({_id:prod._id},{$set:{finalised:true}});
+                    });
+
+
                 }
             });
             Template.instance().modalUse.set("none");

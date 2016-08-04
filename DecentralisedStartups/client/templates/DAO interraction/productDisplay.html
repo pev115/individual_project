@@ -1,6 +1,45 @@
 <template name="productDisplay">
+    <div class = "row">
+        <div class ="col-md-8 col-md-offset-2">
+            <div class = "panel panel-default">
+                <div class = "panel-heading">
+                    <h2 class="text-center">Products in the Shelf</h2>
+                </div>
+                <div class="panel-body">
+                    {{#each products}}
 
-    <h1>Placeholder for product space</h1>
+                        <div class ="col-md-6">
+                            <div class = "panel panel-info">
+                                <div class = "panel-heading">
+                                    {{name}}
+                                    {{#if isOwner}}
+                                        <button class = "btn btn-sm btn-success">Edit</button>
+                                    {{/if}}
+                                </div>
+                                <div class="panel-body">
+                                    {{#if url}}
+                                        <p><u>More Info:</u> <a href={{url}}>here</a></p>
+                                    {{/if}}
+                                    {{#if description}}
+                                        <h3><u>Description:</u></h3>
+                                        <p>{{description}}</p>
+                                    {{/if}}
+                                    <a class ="btn btn-info" href={{path}}> Download</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    {{/each}}
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
 
 </template>

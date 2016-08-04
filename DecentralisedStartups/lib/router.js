@@ -79,7 +79,7 @@ Router.route('/Monitor/:_address',{
  */
 Router.onBeforeAction('dataNotFound',{only:['Monitor','userProfile','Create']});
 
-
+/*
 if(Meteor.isServer){
 
 
@@ -91,7 +91,7 @@ if(Meteor.isServer){
     };
 
     var dataFile = function() {
-        // TODO write a function to translate the id into a file path
+
         //var file = fileFromId(this.params.id);
         console.log("this is the path");
         console.log(this.params.id);
@@ -124,3 +124,4 @@ if(Meteor.isServer){
 }
 
 Router.route('/uploads/:id', dataFile, {where: 'server'});
+*/

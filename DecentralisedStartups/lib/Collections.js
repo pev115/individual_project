@@ -33,6 +33,10 @@ Schemas.Product = new SimpleSchema({
     DAO_Id :{ type:String,
         label:"DAO_Id"
     },
+    proposalID:{
+        type:String,
+        label:"ProposalID"
+    },
     url:{
         type:String,
         label:"URL",
@@ -44,7 +48,21 @@ Schemas.Product = new SimpleSchema({
     },
     description:{
         type:String,
-        label:"Description"
+        label:"Description",
+        optional:true
+    },
+    finalised:{
+        type:Boolean,
+        label:"Finalised",
+        defaultValue:false
+    },
+    createdDate: {
+        type: Date,
+        label: "CreatedDate",
+        defaultValue: new Date(),
+        autoform: {
+            omit: true
+        }
     }
 });
 
