@@ -19,7 +19,10 @@ Template.proposalMonitoring.onCreated(function(){
 
 Template.proposalMonitoring.helpers({
     jobProposalContext:function(){
+        console.log("job proposal context");
+        console.log(this);
         var ID= this.toString();
+        console.log(ID);
         Meteor.subscribe('singleProposal',ID);
         Meteor.subscribe('contestantsByProposal',ID);
         return [Proposals.findOne(), Contestants.find().fetch()];
@@ -349,10 +352,14 @@ Template.proposalMonitoring.events({
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
                     console.log("will update products now");
-                    /*TODO: BUG commes from here -> I am subscribing to more here*/
-                    Meteor.subscribe('productsByDAO',currentDAO._id,function(){
-                        var prod = Products.findOne({proposalID:proposal.ID});
-                        Products.update({_id:prod._id},{$set:{finalised:true}});
+                    /*TODO: put a callback function(error,result) dong smth if there is an error*/
+                    Meteor.call('finaliseProduct',proposal.ID,function(error,result){
+                       console.log("Checking finalising");
+                        console.log(error);
+                        if(error){
+                            console.log("GOT A FUCKING ERROR");
+                            console.log(error);
+                        }
                     });
 
 

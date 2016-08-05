@@ -34,7 +34,7 @@ Schemas.Product = new SimpleSchema({
         label:"DAO_Id"
     },
     proposalID:{
-        type:String,
+        type:Number,
         label:"ProposalID"
     },
     url:{

@@ -15,8 +15,9 @@ Meteor.startup(function () {
             return fileInfo.name;
         },
         finished:function(fileInfo, formData){
-            console.log("finished hook");
+            console.log("finished hook!!!!!!!!!!!!!!!!!!!!!!!!!");
             console.log(fileInfo);
+            console.log("Checking formdata");
             console.log(formData);
             /*TODO: I may have introduced a bug with path*/
             Products.insert({name:fileInfo.name,proposalID:formData.ID,DAO_Id:formData.DAO_Id,path:'/'+fileInfo.path})

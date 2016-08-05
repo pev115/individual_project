@@ -26,12 +26,17 @@
         </div>
 
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <h3 class="text-center">Job Description</h3>
-        <p>{{description}}</p>
-    </div>
-</div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center">Title: {{this.[0].title}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center">Job Description</h3>
+                <p>{{this.[0].description}}</p>
+            </div>
+        </div>
 
         <div class = "row">
             <div class ="col-md-12">
@@ -67,9 +72,6 @@
 
                         </ul>
                     </div>
-
-
-
 
                 </div>
             </div>
@@ -116,14 +118,14 @@
                     </div>
                     <div class="modal-body">
 
-                            <div class="form-group">
-                                <label for="contractorRatingFeedback">Please rate this contractor</label>
-                                {{> starsRating id='contractorRatingFeedback' size ='lg' mutable=true}}
-                            </div>
-                            <div class ="form-group">
-                                <label for="contractorCommentFeedback">Please also leave a comment on his performance</label>
-                                <textarea class="form-control"  id="contractorCommentFeedback" rows="4"></textarea>
-                            </div>
+                        <div class="form-group">
+                            <label for="contractorRatingFeedback">Please rate this contractor</label>
+                            {{> starsRating id='contractorRatingFeedback' size ='lg' mutable=true}}
+                        </div>
+                        <div class ="form-group">
+                            <label for="contractorCommentFeedback">Please also leave a comment on his performance</label>
+                            <textarea class="form-control"  id="contractorCommentFeedback" rows="4"></textarea>
+                        </div>
 
                         <div class="col-md-4">
                             {{#if finalising}}
@@ -155,7 +157,7 @@
                     </div>
                     <div class="modal-body">
 
-                            {{> upload_bootstrap formData=this.[0]}}
+                        {{> upload_bootstrap formData=this.[0]}}
 
 
                     </div>
