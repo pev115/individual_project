@@ -106,10 +106,20 @@ contract Private is owned, SharesManager, hasProposals {
         percentDividends = percent;
     }
 
-    function receivePayment(){
+    function receivePayment(uint _ID){
       if(!production){
         throw;
       }
+      if(proposals[_ID].ID == 0){
+        throw;
+      }
+
+      proposal p = proposals[_ID];
+      if(p.finalised == false){
+        throw;
+      }
+
+
 
       if(totalSupply!=0){
         uint nbShareholders = shareholders.length;

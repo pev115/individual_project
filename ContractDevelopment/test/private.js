@@ -426,6 +426,16 @@ contract('Private', function(accounts){
       var account_one_starting_balance;
       var account_one_ending_balance;
 
+      var _reward= 2;
+      var _reward2= 4;
+       var _deposit= 3;
+       var _deposit2= 6;
+       var _desc="This is a proposal";
+       var _desc2="This is a new proposal";
+       var _ID = 12;
+
+
+
 
       priv.toggleSharesIssue.sendTransaction({from:account_zero}).then(function(tx){
         var amount = parseInt(web3.toWei(10, 'Ether'));
@@ -449,8 +459,51 @@ contract('Private', function(accounts){
         console.log("account one starting balance");
         console.log(account_one_starting_balance.toNumber());
       }).then(function(){
-        var pay = parseInt(web3.toWei(400,'ether'));
-        priv.receivePayment.sendTransaction({from:accounts[3],value:pay});
+      return  priv.toggleRecruiting.sendTransaction({from:accounts[0]}).then(function(){
+          return priv.addProposal.sendTransaction(_reward,_deposit,_desc,_ID,{from:accounts[0]})
+          .then(function(){
+            return priv.proposals.call(_ID);
+          });
+      });
+      }).then(function(prop){
+          assert.equal(prop[0],_ID, "The id of the proposal does not match the input");
+      }).then(function(){
+
+        return priv.toggleProduction.sendTransaction({from:accounts[0]}).then(function(){
+              return priv.production.call();
+            });
+      }).then(function(changed){
+        assert.equal(changed, true, " production did not toggle");
+      }).then(function(){
+
+        var pay = parseInt(web3.toWei(5,'ether'));
+        var err =false;
+        priv.receivePayment.sendTransaction(_ID,{from:accounts[3],value:pay}).catch(function(e){
+          err = true;
+        }).then(function(){
+          assert.equal(err,true, "could receive payment even if not finalised");
+        });
+      }).then(function(){
+        return priv.fuel.sendTransaction({from:accounts[0],value:5000}).then(function(){
+          return priv.hireContractor.sendTransaction(account_two,_ID,{form:accounts[0]}).then(function(){
+            return priv.completeWork.sendTransaction(_ID,{from:account_two}).then(function(){
+              return priv.finalise.sendTransaction(_ID,{from:accounts[0]}).then(function(){
+                return priv.proposals.call(_ID);
+              });
+            });
+          });
+        });
+      }).then(function(prop){
+        assert.equal(prop[7],true,"The proposal did not switch to finalised properly");
+      }).then(function(){
+
+        var pay = parseInt(web3.toWei(5,'ether'));
+        var err =false;
+        priv.receivePayment.sendTransaction(_ID,{from:accounts[3],value:pay}).catch(function(e){
+          err = true;
+        }).then(function(){
+          assert.equal(err,false, "could not do payment");
+        });
       }).then(function(){
         account_one_ending_balance =web3.eth.getBalance(account_one);
         console.log("account one ending balance");

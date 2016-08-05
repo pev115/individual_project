@@ -2,9 +2,9 @@
 
 
 /*
-Template.productDisplay.onCreated(function(){
-   Meteor.subscribe('AllProducts');
-});/**/
+ Template.productDisplay.onCreated(function(){
+ Meteor.subscribe('AllProducts');
+ });/**/
 Template.productDisplay.onCreated(function(){
     this.currentProduct= new ReactiveVar();
     this.currentProduct.set({});
@@ -33,7 +33,18 @@ Template.productDisplay.helpers({
     selling:function(){
         var currentDAO = DAOs.findOne();
         return currentDAO.producing;
-    }
+    }/*,
+    proposalFinalised:function(){
+        var handle=  Meteor.subscribe('ProposalUsingID',this.proposalID);
+        if (handle.ready()) {
+            var proposal =Proposals.findOne();
+            if (proposal.finalised){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }*/
 });
 
 
@@ -56,7 +67,7 @@ Template.productDisplay.events({
 
 
         var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);
-        
+
         contract.receivePayment.sendTransaction(this.proposalID,{from:sender,value:amount},function(e,r){
             if(e){
                 console.log("error processing the transaction");
@@ -74,7 +85,7 @@ Template.productDisplay.events({
             }
         });
 
-          $('#areYouSureBuy').modal('toggle');
+        $('#areYouSureBuy').modal('toggle');
     },
     'click #press':function(){
         console.log("PREEEEEESSSSS");
