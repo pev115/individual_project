@@ -63,6 +63,11 @@ Schemas.Product = new SimpleSchema({
         autoform: {
             omit: true
         }
+    },
+    price:{
+        type:Number,
+        label:"Price",
+        optional:true
     }
 });
 

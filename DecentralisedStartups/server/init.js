@@ -1,3 +1,8 @@
+
+/*TODO:Check if I can use another path than the public-> the url is different i need to have
+a /upload/ anyways
+ */
+
 Meteor.startup(function () {
     UploadServer.init({
         tmpDir: process.env.PWD + '/public/tmp',

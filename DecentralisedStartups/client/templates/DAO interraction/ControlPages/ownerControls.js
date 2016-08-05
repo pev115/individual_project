@@ -341,7 +341,8 @@ AutoForm.addHooks('changeDividendsForm',hooksChangeDividendsForm);
 
 
 /*TODO: verify units that are sent and if we can send non integer amounts
-* check what happens if try to send more amount than currently owned*/
+* check what happens if try to send more amount than currently owned
+* Think what happens if user is not logged in*/
 
 var hooksFuelForm = {
 

@@ -13,19 +13,25 @@
                                 <div class = "panel-heading">
                                     {{name}}
                                     {{#if isOwner}}
-                                        <button class = "btn btn-sm btn-success">Edit</button>
+                                        <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
                                     {{/if}}
+
                                 </div>
                                 <div class="panel-body">
+                                    {{#if price}}
+                                        <p><u>price:</u> {{price}} Ether</p>
+                                    {{/if}}
                                     {{#if url}}
                                         <p><u>More Info:</u> <a href={{url}}>here</a></p>
                                     {{/if}}
                                     {{#if description}}
-                                        <h3><u>Description:</u></h3>
+                                        <h5><u>Description:</u></h5>
                                         <p>{{description}}</p>
                                     {{/if}}
-                                    <a class ="btn btn-info" href={{path}}> Download</a>
 
+                                    {{#if selling}}
+                                    <button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy" >Buy</button>
+                                    {{/if}}
 
                                 </div>
                             </div>
@@ -40,6 +46,76 @@
         </div>
 
     </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="EditProduct" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit the Product</h4>
+                </div>
+                <div class="modal-body">
+                    {{#with currentProduct}}
+                        {{#autoForm collection="Products" id="editProductsForm" type="update" doc=this}}
+                            <fieldset>
+                                {{> afQuickField name='name'}}
+                                {{> afQuickField name='url'}}
+                                {{> afQuickField name='description' rows=3}}
+                                {{> afQuickField name='price'}}
+                            </fieldset>
+
+                            <button type="submit" class="btn btn-primary center-block">
+                                Save Changes
+                            </button>
+                        {{/autoForm}}
+
+                    {{/with}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="areYouSureBuy" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                {{#with currentProduct}}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2>You are about to pay {{price}} Ether, are you sure you want to proceed?</h2>
+                </div>
+                <div class="modal-body">
+
+
+                        <button class="btn btn-success btn-lg center-block" id="buyProduct">
+                            I am Sure, Proceed!
+                        </button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                {{/with}}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
 
 
 </template>
