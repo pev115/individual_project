@@ -11,6 +11,22 @@
  * BUG: if the contestants rating changes, it does not change in the contestant list
  * could do as described here https://dweldon.silvrback.com/common-mistakes  */
 
+
+Template.uploadFormTemplate.helpers({
+    getFormData :function(){
+        console.log("FUUUUUUUUUUUUUCKYOUUUUUUUUUUUUUUUUUUUUUUUUU");
+        console.log("Checking the form data");
+       var prop = Session.get("propForForm");
+        console.log(prop);
+        return prop;
+    }
+});
+
+Template.uploadFormTemplate.onDestroyed(function(){
+   Session.set("propForForm",'');
+});
+
+
 Template.proposalMonitoring.onCreated(function(){
     this.modalUse = new ReactiveVar();
     this.modalUse.set("none");
@@ -94,7 +110,8 @@ Template.proposalMonitoring.helpers({
         }else{
             return false;
         }
-    }
+    },
+
 });
 
 Template.proposalMonitoring.events({
@@ -265,7 +282,10 @@ Template.proposalMonitoring.events({
 
         var mod =  $('#uploadWork');
 
-
+        console.log("COMPLETING FOOOORM");
+        console.log(proposal);
+        Session.set("propForForm",proposal);
+        console.log(Session.get("propForForm"));
 
 
         console.log("verifying condition");

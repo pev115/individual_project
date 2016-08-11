@@ -8,6 +8,7 @@
 Template.productDisplay.onCreated(function(){
     this.currentProduct= new ReactiveVar();
     this.currentProduct.set({});
+    Meteor.subscribe('AllProducts');
 });
 
 Template.productDisplay.helpers({

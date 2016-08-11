@@ -8,7 +8,7 @@
     abi: [{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"type":"function"},{"inputs":[],"type":"constructor"}],
     binary: "606060405260008054600160a060020a0319163317905560998060226000396000f3606060405260e060020a60003504638da5cb5b81146024578063f2fde38b146042575b005b606d60005473ffffffffffffffffffffffffffffffffffffffff1681565b60226004356000543373ffffffffffffffffffffffffffffffffffffffff9081169116146077576002565b6060908152602090f35b6000805473ffffffffffffffffffffffffffffffffffffffff1916821790555056",
     unlinked_binary: "606060405260008054600160a060020a0319163317905560998060226000396000f3606060405260e060020a60003504638da5cb5b81146024578063f2fde38b146042575b005b606d60005473ffffffffffffffffffffffffffffffffffffffff1681565b60226004356000543373ffffffffffffffffffffffffffffffffffffffff9081169116146077576002565b6060908152602090f35b6000805473ffffffffffffffffffffffffffffffffffffffff1916821790555056",
-    address: "0x398aab9cde6b936150eb6abc576f0e771c4a7190",
+    address: "0xd42eb808ebe99e53c1d1d6d2ff339b97101ee678",
     generated_with: "2.0.9",
     contract_name: "owned"
   };

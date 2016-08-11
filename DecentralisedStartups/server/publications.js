@@ -47,6 +47,37 @@ Meteor.publish('DAOSearch',function(searchValue,_limit, options) {
     return cursor;
 });
 
+
+
+Meteor.publish('ProposalSearch',function(searchValue,_limit, options) {
+    console.log("SEARCHING");
+    if (!searchValue) {
+        console.log("No Search value");
+        return Proposals.find(options,{limit:_limit, sort:{createdDate:-1}});
+    }
+
+    options.$text={$search:searchValue};
+
+
+    console.log("Searching for ", searchValue);
+    console.log(options);
+    var cursor = Proposals.find(
+        options,
+        {
+            fields: {
+                score: { $meta: "textScore" }
+            },
+
+            sort: {
+                score: { $meta: "textScore" }
+            },
+            limit: _limit
+        }
+    );
+    return cursor;
+});
+
+
 Meteor.publish('Transactions',function(DAO_id,_limit){
     return Transactions.find({DAO_Id:DAO_id},{limit:_limit,sort:{createdDate:-1}});
 });

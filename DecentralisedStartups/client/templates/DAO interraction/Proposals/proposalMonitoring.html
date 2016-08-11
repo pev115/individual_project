@@ -146,6 +146,7 @@
 
 
 
+
         <!-- Modal -->
         <div class="modal fade" id="uploadWork" role="dialog">
             <div class="modal-dialog">
@@ -157,8 +158,7 @@
                     </div>
                     <div class="modal-body">
 
-                        {{> upload_bootstrap formData=this.[0]}}
-
+                        {{> uploadFormTemplate}}
 
                     </div>
                     <div class="modal-footer">
@@ -177,4 +177,10 @@
 
     {{/with}}
 
+</template>
+
+<template name="uploadFormTemplate">
+    {{#with getFormData}}
+    {{> upload_bootstrap formData=this }}
+    {{/with}}
 </template>

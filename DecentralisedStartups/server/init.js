@@ -25,7 +25,10 @@ Meteor.startup(function () {
             console.log("Checking formdata");
             console.log(formData);
             /*TODO: I may have introduced a bug with path*/
-            Products.insert({name:fileInfo.name,proposalID:formData.ID,DAO_Id:formData.DAO_Id,path:'/'+fileInfo.path})
+            console.log("insertobject");
+            var insertObject = {name:fileInfo.name,proposalID:formData.ID,DAO_Id:formData.DAO_Id,path:'/'+fileInfo.path};
+            console.log(insertObject);
+            Products.insert(insertObject);
         }
         
     });
