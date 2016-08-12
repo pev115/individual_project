@@ -4,14 +4,24 @@
             <div class = "panel panel-default">
                 <div class = "panel-heading">
                     <h2 class="text-center">Products in the Shelf</h2>
+                    {{#if selling}}
+                    {{else}}
+                        <button class = "btn btn-disabled btn-lg center-block" disabled>This DAO is not selling yet!</button>
+                    {{/if}}
                 </div>
                 <div class="panel-body">
+                <!--
+{{#if isOwner}}
+-->
+
+
                     {{#each products}}
 
                         <div class ="col-md-6">
                             <div class = "panel panel-info">
                                 <div class = "panel-heading">
                                     {{name}}
+
                                     {{#if isOwner}}
                                         <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
                                     {{/if}}
@@ -29,13 +39,25 @@
                                         <p>{{description}}</p>
                                     {{/if}}
 
-                                    {{#if selling}}
 
-                                        <button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy" >Buy</button>
+                                    {{#if productFinalised}}
+                                        {{#if selling}}
+                                            <button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy"> Buy</button>
+                                        {{else}}
+                                        {{/if}}
+
                                     {{else}}
-                                        <button class = "btn btn-disabled current-product-context" disabled>Does not sell</button>
+                                        <button class = "btn btn-disabled current-product-context" disabled>Work not yet Finalised.</button>
 
                                     {{/if}}
+<!--
+{{#if selling}}
+
+<button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy" >Buy</button>
+{{else}}
+<button class = "btn btn-disabled current-product-context" disabled>This DAO is not selling yet!</button>
+
+{{/if}}  -->
 
                                 </div>
                             </div>
@@ -43,12 +65,47 @@
 
                     {{/each}}
 
+<!--
+{{else}}
+
+{{#each finalisedProducts}}
+
+<div class ="col-md-6">
+<div class = "panel panel-info">
+<div class = "panel-heading">
+{{name}}
+</div>
+<div class="panel-body">
+{{#if price}}
+<p><u>price:</u> {{price}} Ether</p>
+{{/if}}
+{{#if url}}
+<p><u>More Info:</u> <a href={{url}}>here</a></p>
+{{/if}}
+{{#if description}}
+<h5><u>Description:</u></h5>
+<p>{{description}}</p>
+{{/if}}
+
+{{#if selling}}
+
+<button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy" >Buy</button>
+{{else}}
+<button class = "btn btn-disabled current-product-context" disabled>This DAO is not selling yet!</button>
+
+{{/if}}
+
+</div>
+</div>
+</div>
+
+{{/each}}
+{{/if}}
+-->
 
                 </div>
-
             </div>
         </div>
-
     </div>
 
 
@@ -115,7 +172,6 @@
             </div>
 
         </div>
-
 
     </div>
 

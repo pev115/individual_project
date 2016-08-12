@@ -118,6 +118,7 @@
                     </div>
                     <div class="modal-body">
 
+
                         <div class="form-group">
                             <label for="contractorRatingFeedback">Please rate this contractor</label>
                             {{> starsRating id='contractorRatingFeedback' size ='lg' mutable=true}}
@@ -157,8 +158,11 @@
                         <h4 class="modal-title">Upload your work</h4>
                     </div>
                     <div class="modal-body">
+                        <p>{{this.[0].title}}</p>
+                        <p>  {{this.[0].ID}} </p>
+                        <p>  {{this.[0].DAO_Id}} </p>
 
-                        {{> uploadFormTemplate}}
+                        {{> upload_bootstrap contentType=this.[0].DAO_Id callbacks = uploadCallback}}
 
                     </div>
                     <div class="modal-footer">
@@ -178,9 +182,10 @@
     {{/with}}
 
 </template>
-
+<!--
 <template name="uploadFormTemplate">
     {{#with getFormData}}
     {{> upload_bootstrap formData=this }}
     {{/with}}
 </template>
+-->

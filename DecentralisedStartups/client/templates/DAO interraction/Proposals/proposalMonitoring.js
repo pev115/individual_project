@@ -11,7 +11,7 @@
  * BUG: if the contestants rating changes, it does not change in the contestant list
  * could do as described here https://dweldon.silvrback.com/common-mistakes  */
 
-
+/*
 Template.uploadFormTemplate.helpers({
     getFormData :function(){
         console.log("FUUUUUUUUUUUUUCKYOUUUUUUUUUUUUUUUUUUUUUUUUU");
@@ -26,6 +26,10 @@ Template.uploadFormTemplate.onDestroyed(function(){
    Session.set("propForForm",'');
 });
 
+
+ n8YSgPkcDN9zerSbv
+ sjP2tPrcCuhhyog6q
+ */
 
 Template.proposalMonitoring.onCreated(function(){
     this.modalUse = new ReactiveVar();
@@ -111,6 +115,30 @@ Template.proposalMonitoring.helpers({
             return false;
         }
     },
+    uploadCallback: function(){
+        return {
+            finished:function(index,fileInfo,templateContext){
+                console.log("FINISHED HOOOOKKK");
+                console.log("THE fileInfo ISSSSSSS: ");
+                console.log(fileInfo);
+                console.log("THE index IISSSSSSSS");
+                console.log(index);
+                console.log("THE CONTEXT ISSSSSSSS");
+                console.log(templateContext);
+                console.log("THIS ISSSSSS");
+                console.log(this);
+                console.log("SESSION VARIABBLLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
+                console.log(Session.get("propForForm"));
+
+
+                var formD = Session.get("propForForm");
+                var insertObject = {name:fileInfo.name,proposalID:formD.ID,DAO_Id:formD.DAO_Id,path:'/'+fileInfo.path};
+                console.log(insertObject);
+                Products.insert(insertObject);
+                Session.set("propForForm",'');
+            }
+        }
+    }
 
 });
 
@@ -282,6 +310,7 @@ Template.proposalMonitoring.events({
 
         var mod =  $('#uploadWork');
 
+
         console.log("COMPLETING FOOOORM");
         console.log(proposal);
         Session.set("propForForm",proposal);
@@ -296,7 +325,7 @@ Template.proposalMonitoring.events({
 
         console.log(sender === proposal.contractor && proposal.appointed && !proposal.finalised && !proposal.completed);
 
-        if(sender === proposal.contractor && proposal.appointed && !proposal.finalised){
+        if(sender === proposal.contractor && proposal.appointed && !proposal.finalised && !proposal.completed){
             console.log("conditions met");
 
             contract.completeWork.sendTransaction(proposaluniqueID,{from: sender}, function (e, r) {

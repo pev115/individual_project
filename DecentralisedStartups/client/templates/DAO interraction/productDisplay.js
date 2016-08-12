@@ -8,11 +8,16 @@
 Template.productDisplay.onCreated(function(){
     this.currentProduct= new ReactiveVar();
     this.currentProduct.set({});
-    Meteor.subscribe('AllProducts');
 });
 
 Template.productDisplay.helpers({
     products:function(){
+        console.log("Subscribing to the products");
+        Meteor.subscribe("productsByDAO",this._id);
+        console.log(this);
+        return Products.find();
+    },
+    finalisedProducts:function(){
         console.log("Subscribing to the products");
         Meteor.subscribe("finalisedProductsByDAO",this._id);
         console.log(this);
@@ -27,18 +32,25 @@ Template.productDisplay.helpers({
         }
     },
     currentProduct:function(){
-        console.log("now enterng currentProf")
+        console.log("now enterng currentProf");
         console.log(Template.instance().currentProduct.get());
         return Template.instance().currentProduct.get();
     },
     selling:function(){
         var currentDAO = DAOs.findOne();
         return currentDAO.producing;
+    },
+    productFinalised:function(){
+        console.log("Product context");
+        console.log(this);
+        var finalised = this.finalised;
+        console.log(finalised);
+        return this.finalised;
     }/*,
     proposalFinalised:function(){
         var handle=  Meteor.subscribe('ProposalUsingID',this.proposalID);
         if (handle.ready()) {
-            var proposal =Proposals.findOne();
+            var proposal = Proposals.findOne();
             if (proposal.finalised){
                 return true;
             }else{
