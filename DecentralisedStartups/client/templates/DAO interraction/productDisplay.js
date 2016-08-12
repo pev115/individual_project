@@ -93,7 +93,7 @@ Template.productDisplay.events({
                 var balance = web3.eth.getBalance(currentDAO.address);
                 var _balance = balance.toNumber();
                 console.log(_balance);
-
+                Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                 DAOs.update ({_id:currentDAO._id},{$set:{balance:_balance}});
             }
         });

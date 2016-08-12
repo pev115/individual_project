@@ -320,6 +320,18 @@ Proposals.attachSchema(Schemas.Proposal);
 Contestants.attachSchema(Schemas.Contestant);
 Products.attachSchema(Schemas.Product);
 
+
+/*
+investSchema = new SimpleSchema({
+    amount :{
+        type:Number,
+        label:Amount,
+        decimal:true
+    }
+});
+
+*/
+
 DAOs.allow({
     insert:function(userId,doc){
         return true;
