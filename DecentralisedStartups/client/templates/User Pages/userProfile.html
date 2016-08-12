@@ -158,8 +158,24 @@
 
 
                 <div class="row">
-                    <h1>Description:</h1>
-                    <p>{{this.description}}</p>
+
+                    {{#if this.description}}
+                        <h1>Description:</h1>
+
+                        {{#if isSelf}}
+                            <button class = "btn btn-sm btn-success" data-toggle="modal" data-target="#EditDesc">Edit</button>
+                        {{/if}}
+
+
+                        <p>{{this.description}}</p>
+
+                    {{else}}
+                        <p>placeholder</p>
+                        {{#if isSelf}}
+
+                        {{/if}}
+                    {{/if}}
+
                 </div>
 
 
