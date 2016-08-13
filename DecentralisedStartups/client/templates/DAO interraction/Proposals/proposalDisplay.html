@@ -12,11 +12,17 @@
                     <div class = {{panelClass}}>
                     <div class = "panel-heading">
                         {{title}}
+
+                        {{#if canRemove}}
+                            <button class = "btn btn-sm btn-warning " id="removeProposalButton">Remove</button>
+                        {{/if}}
+
                     </div>
                     <div class="panel-body">
                         <h5><u>Proposal ID:</u> {{ID}}</h5>
                         <p>{{phase}}</p>
                         <p>Total Reward: :{{totalReward}}</p>
+                        <button class = "btn btn-sm btn-info btn-block goToProposalButton">View Full Description</button>
                     </div>
                     </div>
                 </div>

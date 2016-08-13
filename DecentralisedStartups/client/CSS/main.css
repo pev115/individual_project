@@ -35,3 +35,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
+/*
+body {
+    background: ##5f7cb5;
+    background-image: url("/bg/zenbg-1.png"), url("/bg/zenbg-2.png");
+    background-repeat: repeat-x, repeat;
+}*/
