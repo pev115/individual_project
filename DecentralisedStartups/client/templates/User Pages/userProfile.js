@@ -72,6 +72,14 @@ Template.userProfile.helpers({
         console.log("Checking employer feedback..");
         console.log(this.feedback);
         return this.feedback;
+    },
+    isSelf :function(){
+        console.log("creating self");
+        console.log(this);
+        console.log(Meteor.userId());
+        console.log(this._id === Meteor.userId());
+        return this._id === Meteor.userId();
+
     }
 });
 
@@ -115,6 +123,14 @@ Template.userProfile.events({
         console.log(this);
         var path = '/Monitor/'+this.address;
         Router.go(path);
+    },
+    'click #submitDesc':function(){
+        console.log("getting here");
+        var _desc=$('#DescInputText').val();
+        console.log(_desc);
+        Meteor.users.update({_id:Meteor.userId()},{$set:{description:_desc}});
+        $('#EditDesc').modal('toggle');
+
     }
 
 });

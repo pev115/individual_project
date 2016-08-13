@@ -170,9 +170,9 @@
                         <p>{{this.description}}</p>
 
                     {{else}}
-                        <p>placeholder</p>
-                        {{#if isSelf}}
 
+                        {{#if isSelf}}
+                            <button class = "btn btn-lg btn-success" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
                         {{/if}}
                     {{/if}}
 
@@ -185,19 +185,53 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal fade" id="EditDesc" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit your Description</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Desc">Enter Your Public Description below:</label>
+                        <textarea class="form-control" rows="5" id="DescInputText">{{this.description}}</textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary center-block" id="submitDesc">
+                        Save Changes
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
 
 
 </template>
