@@ -4,7 +4,17 @@ Template.layout.helpers({
         var path;
         if(_address) {
             path = '/Monitor/' + _address;
+        }else{
+            path = '/Monitor/error';
         }
         return path;
+    }
+});
+
+Template.layout.events({
+    'click .principalNavbar li' :function(event,template){
+        var selectorTab = $(event.target).closest("li");
+        selectorTab.addClass("active");
+        $(".principalNavbar li").not(selectorTab).removeClass("active");
     }
 });

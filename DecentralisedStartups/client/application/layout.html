@@ -1,6 +1,6 @@
 <template name  ="layout">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top principalNavbar">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -16,17 +16,22 @@
 
                     <li><a href="{{pathFor 'Browse'}}">Browse</a></li>
                     <li><a href="{{pathFor 'Connect'}}">Connect</a></li>
-                    {{#if currentDAOpath}}
+                   <!-- {{#if currentDAOpath}}
                         <li><a href="{{currentDAOpath}}">Current DAO</a></li>
                     {{else}}
-                        <li><a href="#">Disconnected</a></li>
-                    {{/if}}
+                        <li  disabled><a href="#">Disconnected</a></li>
+                    {{/if}} -->
+
+
+                    <li><a href="{{currentDAOpath}}">Current DAO</a></li>
+
+
+
                     {{#if currentUser}}
                     <li><a href="{{pathFor 'Create'}}">Create</a></li>
                     {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">About</a></li>
                 {{> loginButtons }}
                 </ul>
             </div><!--/.nav-collapse -->

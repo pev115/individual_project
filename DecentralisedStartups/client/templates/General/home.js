@@ -9,11 +9,12 @@
 /*TODO: think about aldeeds template extension to check connected  with ethreum*/
 
 Template.home.events({
-    /* on click, create and deploy the contract */
+    /* on click, create and deploy the contract
 
     'click #connect_DAO_btn': function(){
         Router.go('/Connect');
-    },
+    },*/
+    
     'click #Browse_DAO_btn': function(){
         Router.go('/Browse');
     }

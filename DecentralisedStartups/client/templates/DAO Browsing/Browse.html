@@ -1,7 +1,14 @@
 <template name="Browse">
     <div class="container-fluid">
+
+        <div class="row row-margin">
+            <div class="col-md-12" style="height:20px;">
+            </div>
+
+        </div>
+
         <div class = "row">
-            <div class = "col-md-10 col-md-offset-1">
+            <div class = "col-md-10 col-md-offset-1 ">
 
 
                 <div class ="row">
@@ -19,97 +26,458 @@
 
 
                 <div class ="row">
-                    <div class = "col-md-10 col-md-offset-1">
-                        {{#if DAOtype}}
-
-
+                    <div class = "col-md-12">
+                        <div class="box">
                             <div class ="row">
-                                <div class = "col-md-12">
-                                    <form id="search">
-                                        <input type="text" id="searchValue" placeholder="Enter search terms here."/>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" id="searchRecruiting"> Recruiting </label>
+                                <div class = "col-md-10 col-md-offset-1">
+
+
+
+                                    {{#if DAOtype}}
+
+                                        <div class = "row">
+                                            <div class="col-md-12">
+                                                <h3 class="text-center">Search the DAOs</h3>
+                                            </div>
                                         </div>
 
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" id ="searchInvestment"> Looking for Investment</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" id ="searchProducing"> Producing</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" id ="searchBuilding"> Building </label>
-                                        </div>
-                                        <button type="submit">Search</button>
-                                    </form>
-                                </div>
-                            </div>
+                                        <div class ="row">
+                                            <div class = "col-md-12">
+                                                <div class = "box">
 
 
-                            <div class ="row">
-                                <div class = "col-md-12">
-                                    <h1>The DAOs:</h1>
 
-                                    <ul class="list-group">
+                                                    <div class ="row">
+                                                        <div class="col-md-8 col-md-offset-2 ">
+                                                            <form id="search">
 
-                                        {{#with daos}}
-                                            {{#if this.count}}
-                                                {{#each this}}
-                                                    <li class="list-group-item list-group-item-success">
-                                                        <p>{{title}}</p>
-                                                        <p>{{address}}</p>
-                                                        <button type="button" class ="btn btn-primary" id ="browse_go_button">GO!</button>
-                                                    </li>
-                                                {{/each}}
-                                            {{else}}
-                                                <li class="list-group-item">
-                                                    <p>No DAO found matching the search criteria</p>
-                                                </li>
-                                            {{/if}}
-                                        {{/with}}
-                                        <button  class="btn btn-block btn-primary" id ="add_more_DAO">Load more</button>
-                                    </ul>
-                                </div>
-                            </div>
+                                                                <div class="form-group">
+
+                                                                    <label for="searchValue" class="text-center">Search Terms</label>
+                                                                    <input type="text"  class="form-control" id="searchValue" placeholder="Enter search Keywords here.">
+                                                                </div>
+                                                                <div class ="form-group">
+                                                                    <label class="control-label">Options:</label><br>
+                                                                    <div class ="col-md-6">
+                                                                        <div class="checkbox">
+                                                                            <label><input type="checkbox" id="searchRecruiting"> Recruiting </label>
+                                                                        </div>
+
+                                                                        <div class="checkbox">
+                                                                            <label><input type="checkbox" id ="searchInvestment"> Looking for Investment</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class ="col-md-6">
+                                                                        <div class="checkbox">
+                                                                            <label><input type="checkbox" id ="searchProducing">Selling Products</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                            <label><input type="checkbox" id ="searchBuilding"> Building Products </label>
+                                                                        </div>
+
+                                                                    </div>
 
 
-                        {{else}}
 
-                            <div class ="row">
-                                <div class = "col-md-12">
-                                    <form id="searchJobs">
-                                        <input type="text" id="jobSearch" placeholder="What Jobs are you looking for"/>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" id ="searchForAppointed"> Also look for already appointed Jobs</label>
-                                        </div>
-                                        <input type="number" id="minDeposit" placeholder="Adjust the Minimum deposit"/>
-                                        <input type="number" id="minReward" placeholder="Adjust the Minimum Reward"/>
-                                        <button type="submit">Search</button>
-                                    </form>
-                                </div>
-                            </div>
+                                                                </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {{#each proposals}}
-                                    <!--{{#if counterProposalBrowse}} -->
+                                                                <button type="submit" class="center-block">Search</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
 
-                                        <!-- <div class ="row"> -->
-
-                                        <div class ="col-md-3">
-                                            <div class = "panel proposal-panel panel-default">
-                                                <div class = "panel-heading">
-                                                    {{title}}
                                                 </div>
-                                                <div class="panel-body">
-                                                    <p>Associated DAO: {{AssociatedDAO}}</p>
-                                                    <p>{{phase}}</p>
-                                                    <p>Deposit: {{deposit}}</p>
-                                                    <p>Reward : {{reward}}</p>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class ="row row-up-margin">
+                                            <div class = "col-md-12">
+                                                <h1 class="text-center">The DAOs:</h1>
+                                            </div>
+                                        </div>
+
+                                        <div class ="row">
+                                            <div class = "col-md-12">
+                                                <!--<ul class="list-group"> -->
+
+                                                {{#with daos}}
+                                                    {{#if this.count}}
+                                                        {{#each this}}
+                                                            <div class ="col-md-6">
+                                                                <div class = "panel proposal-panel panel-default">
+                                                                    <div class = "panel-heading text-center">
+                                                                        {{title}}
+                                                                    </div>
+                                                                    <div class="panel-body">
+
+                                                                        <div class="row">
+                                                                            <div class ="col-md-12">
+                                                                                <h5><b>Basic Info</b></h5>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class ="row row-vsm-margin">
+                                                                            <div class ="col-md-12">
+                                                                                <p><u> Address: </u> <br>
+                                                                                    {{address}}
+                                                                                </p>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class ="row row-vsm-margin">
+                                                                            <div class ="col-md-12">
+                                                                                <p><u> Owner: </u>   &nbsp; &nbsp;    {{ownerUserName}}</p>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="row">
+                                                                            <div class ="col-md-12">
+                                                                                <h5><b>Activity Indicators</b></h5>
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <div class="row row-vsm-margin">
+                                                                            <div class="col-md-6">
+                                                                                <p><u>Balance:</u></p>
+                                                                                <p>{{balance}}</p>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <p><u>Rewards on Revenue:</u></p>
+                                                                                <p>{{percentDividends}} %</p>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="row row-vsm-margin">
+                                                                            <div class="col-md-6">
+                                                                                {{#if recruiting}}
+                                                                                    <div class="bnt-box-success text-center"><span style="vertical-align: middle;"> Recruiting</span></div>
+                                                                                {{else}}
+                                                                                    <div class="bnt-box-dis text-center"><span style="vertical-align: middle;" >Recruiting</span></div>
+                                                                                {{/if}}
+
+                                                                            </div>
+                                                                            <div class="col-md-6">
+
+                                                                                {{#if investment}}
+                                                                                    <div class="bnt-box-success text-center" ><span style="vertical-align: middle;">Looking for Investment</span></div>
+                                                                                {{else}}
+                                                                                    <div class="bnt-box-dis text-center" ><span style="vertical-align: middle;">Looking for Investment</span></div>
+                                                                                {{/if}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row row-vsm-margin">
+                                                                            <div class="col-md-6">
+                                                                                {{#if building}}
+                                                                                    <div class="bnt-box-success text-center" ><span style="vertical-align: middle;">Building New Products</span></div>
+                                                                                {{else}}
+                                                                                    <div class="bnt-box-dis text-center"><span style="vertical-align: middle;">Building New Products</span></div>
+                                                                                {{/if}}
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                {{#if producing}}
+                                                                                    <div class="bnt-box-success text-center" ><span style="vertical-align: middle;">Selling Products</span></div>
+                                                                                {{else}}
+                                                                                    <div class="bnt-box-dis text-center"><span style="vertical-align: middle;">Selling Products</span></div>
+                                                                                {{/if}}
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <button type="button" class ="btn btn-primary center-block" id ="browse_go_button">GO!</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!--
+                                                                <li class="list-group-item list-group-item-success">
+                                                                    <p>{{title}}</p>
+                                                                    <p>{{address}}</p>
+                                                                    <button type="button" class ="btn btn-primary" id ="browse_go_button">GO!</button>
+                                                                </li>
+
+                                                                -->
+                                                        {{/each}}
+                                                    {{else}}
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item">
+                                                                <p>No DAO found matching the search criteria</p>
+                                                            </li>
+                                                        </ul>
+                                                    {{/if}}
+                                                {{/with}}
+                                                <button  class="btn btn-block btn-primary" id ="add_more_DAO">Load more</button>
+                                                <!-- </ul> -->
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                    {{else}}
+
+
+
+
+
+
+
+                                        <div clas = "row">
+                                            <div class="col-md-12">
+                                                <h3 class="text-center">Search the Jobs</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class ="row">
+                                            <div class = "col-md-12">
+                                                <div class = "box">
+
+                                                    <div class ="row">
+                                                        <div class="col-md-8 col-md-offset-2 ">
+
+                                                            <form id="searchJobs">
+                                                                <div class="form-group">
+                                                                    <label for="jobSearch" class="text-center">Search Terms</label>
+                                                                    <input type="text" class="form-control" id="jobSearch" placeholder="What Jobs are you looking for">
+                                                                </div>
+                                                                <div class ="form-group">
+                                                                    <label class="control-label">Options:</label><br>
+                                                                    <div class = "col-md-12">
+                                                                        <div class="checkbox">
+                                                                            <label><input type="checkbox" id ="searchForAppointed"> Also look for already appointed Jobs</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class ="form-group">
+                                                                    <div class ="col-md-6">
+                                                                        <label for="minDeposit" class="text-center">Minimum Deposit Required</label>
+                                                                        <input type="number" class="form-control" id="minDeposit" placeholder="Adjust the minimum"/>
+                                                                    </div>
+                                                                    <div class ="col-md-6">
+                                                                        <label for="minReward" class="text-center">Minimum Reward Required</label>
+                                                                        <input type="number" class="form-control" id="minReward" placeholder="Adjust the minimum"/>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-md-12" style="height:10px;">
+                                                                    </div>
+                                                                </div>
+
+                                                                <button type="submit" class ="center-block" >Search</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
-                                            <!-- </div>
+
+
+
+                                        <div class ="row row-up-margin">
+                                            <div class = "col-md-12">
+                                                <h1 class="text-center">The jobs:</h1>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        {{#with proposals}}
+                                            {{#if this.count}}
+                                                {{#each this}}
+                                                    <div class ="col-md-4">
+                                                        <div class = "panel proposal-panel panel-default">
+                                                            <div class = "panel-heading text-center">
+                                                                {{title}}
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class ="row row-sm-down-margin">
+                                                                    <div class="col-md-8">
+                                                                        <div class="bnt-box-success text-center" ><span style="vertical-align: middle;">{{phase}}</span></div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <button type="button" class ="btn btn-primary center-block" id ="job-go-button">GO!</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row row-vsm-margin">
+                                                                    <div class="col-md-12">
+                                                                        <p>
+                                                                            <u>Associated DAO:</u><br>
+                                                                            {{AssociatedDAO}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="row row-vsm-margin">
+                                                                    <div class="col-md-6">
+                                                                        <p>
+                                                                            <u>Deposit:</u> &nbsp;{{deposit}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <p>
+                                                                            <u>Reward :</u>
+                                                                            {{reward}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{/each}}
+                                                {{else}}
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                        <p>No Job found matching the search criteria</p>
+                                                    </li>
+                                                </ul>
+                                                {{/if}}
+                                                {{/with}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                <!--
+
+
+
+
+                                                {{#each proposals}} -->
+                                                <!--{{#if counterProposalBrowse}} -->
+
+                                                    <!-- <div class ="row"> -->
+
+
+
+                                            <!--
+                                                    <div class ="col-md-4">
+                                                        <div class = "panel proposal-panel panel-default">
+                                                            <div class = "panel-heading text-center">
+                                                                {{title}}
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class ="row row-sm-down-margin">
+                                                                    <div class="col-md-8">
+                                                                        <div class="bnt-box-success text-center" ><span style="vertical-align: middle;">{{phase}}</span></div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <button type="button" class ="btn btn-primary center-block" id ="job-go-button">GO!</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row row-vsm-margin">
+                                                                    <div class="col-md-12">
+                                                                        <p>
+                                                                            <u>Associated DAO:</u><br>
+                                                                            {{AssociatedDAO}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                                <div class="row row-vsm-margin">
+                                                                    <div class="col-md-6">
+                                                                        <p>
+                                                                            <u>Deposit:</u> &nbsp;{{deposit}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <p>
+                                                                            <u>Reward :</u>
+                                                                            {{reward}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>   -->
+                                                        <!-- </div>
                                     {{else}}
                                         <div class ="col-md-3">
                                             <div class = "panel proposal-panel panel-default">
@@ -125,20 +493,26 @@
                                             </div>
                                         </div>
                                     {{/if}} -->
-                                    {{/each}}
+                                         <!--       {{/each}}  -->
 
-                                    <button  class="btn btn-block btn-primary" id ="add_more_Props">Load more</button>
+                                                <button  class="btn btn-block btn-primary" id ="add_more_Props">Load more</button>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+                                    {{/if}}
+
                                 </div>
                             </div>
-
-
-
-
-
-
-
-                        {{/if}}
-
+                        </div>
                     </div>
                 </div>
 
@@ -146,5 +520,12 @@
 
             </div>
         </div>
+
+        <div class="row row-margin">
+            <div class="col-md-12" style="height:50px;">
+            </div>
+
+        </div>
+
     </div>
 </template>

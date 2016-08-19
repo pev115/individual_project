@@ -1,5 +1,5 @@
 /* TODO: think about if it is possible to check the displayed fields in ethereum
-* */
+ * */
 
 Template.Browse.onCreated(function(){
     console.log("I AM HEEEEEREEEEEYO!!!!");
@@ -17,13 +17,13 @@ Template.Browse.onCreated(function(){
     this.DAOSearchLimit.set(6);
 
     /*
-    Session.set("searchValue", '');
-    Session.set("searchRecruiting", false);
-    Session.set("searchInvestment", false);
-    Session.set("searchProducing", false);
-    Session.set("searchBuilding", false);
-    Session.set('DAOSearchLimit',5);
-*/
+     Session.set("searchValue", '');
+     Session.set("searchRecruiting", false);
+     Session.set("searchInvestment", false);
+     Session.set("searchProducing", false);
+     Session.set("searchBuilding", false);
+     Session.set('DAOSearchLimit',5);
+     */
 
     this.browseType = new ReactiveVar();
     this.browseType.set('DAO');
@@ -37,7 +37,7 @@ Template.Browse.onCreated(function(){
     this.minReward = new ReactiveVar();
     this.minReward.set(0);
     this.ProposalSearchLimit = new ReactiveVar();
-    this.ProposalSearchLimit.set(8);
+    this.ProposalSearchLimit.set(9);
     this.browseCounter = new ReactiveVar();
     this.browseCounter.set(0);
 });
@@ -65,13 +65,13 @@ Template.Browse.events({
         /*Session.set("searchValue", $("#searchValue").val());
 
 
-        console.log("THE button");
-        Session.set("searchRecruiting", $("#searchRecruiting").is(':checked'));
-        Session.set("searchInvestment", $("#searchInvestment").is(':checked'));
-        Session.set("searchProducing", $("#searchProducing").is(':checked'));
-        Session.set("searchBuilding", $("#searchBuilding").is(':checked'));
-        Session.set('DAOSearchLimit',5);
-        */
+         console.log("THE button");
+         Session.set("searchRecruiting", $("#searchRecruiting").is(':checked'));
+         Session.set("searchInvestment", $("#searchInvestment").is(':checked'));
+         Session.set("searchProducing", $("#searchProducing").is(':checked'));
+         Session.set("searchBuilding", $("#searchBuilding").is(':checked'));
+         Session.set('DAOSearchLimit',5);
+         */
     },
     "submit #searchJobs": function (event) {
         event.preventDefault();
@@ -95,7 +95,7 @@ Template.Browse.events({
     },
 
     'click #add_more_DAO': function(event){
-    event.preventDefault();
+        event.preventDefault();
         var limit = Template.instance().DAOSearchLimit.get();
         if(!limit){
             Template.instance().DAOSearchLimit.set(12);
@@ -109,14 +109,14 @@ Template.Browse.events({
         event.preventDefault();
         var limit = Template.instance().ProposalSearchLimit.get();
         if(!limit){
-            Template.instance().ProposalSearchLimit.set(16);
+            Template.instance().ProposalSearchLimit.set(18);
         }else{
-            limit =limit +6;
+            limit =limit +3;
             Template.instance().ProposalSearchLimit.set(limit);
         }
 
     },
-    
+
     'click .browse-type-selector li':function(event,template){
         console.log("HHHHHHHHHHHHHHHHHHHHHHH");
         console.log(template);
@@ -129,6 +129,15 @@ Template.Browse.events({
         console.log(type);
         template.browseType.set(type);
         console.log(template.browseType.get());
+    },
+    'click #job-go-button':function(event){
+      console.log(event);
+        console.log(this);
+        var proposalId = this._id;
+        Session.set('proposalToDisplayDirectly',proposalId);
+        var path = '/Monitor/'+this.DAO_Id;
+        Router.go(path);
+
     }
 });
 
@@ -141,7 +150,7 @@ Template.Browse.helpers({
         return Template.instance().browseType.get() === "DAO";
     },
     phase: function(){
-         if(this.appointed){
+        if(this.appointed){
             return "Contracted";
         }else{
             return "Recruiting";
@@ -151,13 +160,14 @@ Template.Browse.helpers({
     counterProposalBrowse:function(){
         console.log("here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         var counter = Template.instance().browseCounter.get();
-        counter = (counter+1)%4;
+        counter = (counter+1)%3;
         Template.instance().browseCounter.set(counter);
+        console.log(counter);
         return counter==0;
     },
     AssociatedDAO:function(){
 
-      Meteor.subscribe('singleDAO', this.DAO_Id);
+        Meteor.subscribe('singleDAO', this.DAO_Id);
         return DAOs.findOne({_id:this.DAO_Id}).title;
     },
 
@@ -207,7 +217,7 @@ Template.Browse.helpers({
         var limit;
 
         if(Template.instance().searchForAppointed.get()){
-          delete options.appointed;
+            delete options.appointed;
         }
 
         var minDep = Number(Template.instance().minDeposit.get());
@@ -243,11 +253,19 @@ Template.Browse.helpers({
             console.log("I will try to sort");
             return Proposals.find({});
         }
+    },
+    ownerUserName: function(){
+        Meteor.subscribe('addressUser',this.owner);
+        console.log("Finding the owner");
+        console.log( Meteor.users.findOne({address:this.owner}));
+        var user = Meteor.users.findOne({address:this.owner});
+        var userName = user.username;
+        return userName;
     }
 
     /*,
-    daoLink:function(){
-        console.log("HHHHHEEEERRREEE");
-        console.log(this);
-    }*/
+     daoLink:function(){
+     console.log("HHHHHEEEERRREEE");
+     console.log(this);
+     }*/
 });

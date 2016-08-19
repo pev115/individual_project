@@ -99,7 +99,7 @@ Template.userProfile.events({
         var nextLimit = currentLimit+10;
         Template.instance().jobsLimit.set(nextLimit);
     },
-    'click .thash-table-row':function(event){
+    'click .table-jobs-for-profile':function(event){
         var clicked = $(event.target).closest('tr');
         var proposalId=clicked.data("proposalid");
         console.log(proposalId);

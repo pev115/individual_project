@@ -20,9 +20,14 @@ tbody.thash-body{
 
 }
 
+.table-div{
+    overflow:auto;
+    height:258px;
+}
+
 .DAO-ownership-list{
-    overflow-y: scroll;
-    height: 280px;
+    overflow: auto;
+    height: 290px;
 
 }
 
@@ -33,9 +38,96 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+.row-margin{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
+.row-vsm-margin{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.row-sm-margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+.row-up-margin{
+    margin-top: 30px;
+}
+
+.row-skewed-margin{
+    margin-top: 30px;
+    margin-bottom: 3px;
+}
+.row-down-margin{
+    margin-bottom: 30px;
+}
+.row-down-lg-margin{
+    margin-bottom: 50px;
+}
+.row-sm-down-margin{
+    margin-bottom: 10px;
+}
+
+
+.box {
+    padding: 0.5em;
+    background-color: rgba(227, 210, 210, 0.51);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.subox {
+    padding: 0.5em;
+    background-color: rgba(227, 210, 210, 0.51);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.box-red {
+    padding: 0.5em;
+    background-color: rgba(227, 210, 210, 0.51);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+
+.bnt-box-success {
+    padding: 0.5em;
+    background-color:  	rgba(92,184,92,0.8);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+.bnt-box-dis {
+    padding: 0.5em;
+    background-color:  	rgb(235, 235, 228);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+
+
+.vertical-center{
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 
 /*
+.extra-col-padding-sm {
+    padding:0.5em;
+}
+
+
 body {
     background: ##5f7cb5;
     background-image: url("/bg/zenbg-1.png"), url("/bg/zenbg-2.png");
