@@ -31,6 +31,12 @@ tbody.thash-body{
 
 }
 
+.DAO-info-tx-list{
+    overflow: auto;
+    height: 630px;
+
+}
+
 /*this is to take away the arrows from the inputs*/
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -102,6 +108,22 @@ input[type=number]::-webkit-outer-spin-button {
 .bnt-box-success {
     padding: 0.5em;
     background-color:  	rgba(92,184,92,0.8);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.bnt-box-info {
+    padding: 0.5em;
+    background-color: rgba(6, 141, 204, 0.8);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.bnt-box-warning {
+    padding: 0.5em;
+    background-color:  	rgba(248,148,6,0.8);
     width: auto;
     height: auto;
     border-radius: 0.3em;

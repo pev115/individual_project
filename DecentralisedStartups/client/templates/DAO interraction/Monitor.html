@@ -1,122 +1,165 @@
 <template name="Monitor">
     <div class="container-fluid">
-
+        <div class="row row-sm-margin">
+            <div class="col-md-12" style="height:2px;">
+            </div>
+        </div>
 
 
         <div class ="row">
-            <div class = "col-md-12">
-                <h1 class="text-center"><u>Control Room:</u> </h1>
-                <h2 class="text-center"><u>{{title}}</u> </h2>
+            <div class="col-md-12 ">
+                <div class ="box">
+
+                    <div class ="row">
+                        <div class = "col-md-8 col-md-offset-2">
+                            <div class="subox">
+                                <h1 class="text-center"><b>Control Room</b> </h1>
+                                <h2 class="text-center"><u>{{title}}</u> </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class ="row row-sm-margin">
+                        <div class = "col-md-4">
+                            <div class="subox">
+                                <h4 class="text-center"> <u>Owner</u></h4>
+                                <p class="text-center"> {{owner}}</p>
+                            </div>
+                        </div>
+                        <div class = "col-md-4">
+                            <div class="subox">
+                                <h4 class="text-center"> Address</h4>
+                                <p class="text-center"> {{address}}</p>
+                            </div>
+                        </div>
+                        <div class = "col-md-4">
+                            <div class="subox">
+                                <h4 class="text-center"> Funds</h4>
+                                <p class="text-center"> {{displayBalance}} Ether</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class ="row row-sm-down-margin">
+                        <div class = "col-md-3" >
+                            {{#if investment}}
+                                <div class="bnt-box-success">
+                                    <h4 class="text-center">Investing</h4>
+                                    <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
+                                </div>
+                            {{else}}
+                                <div class="bnt-box-warning">
+                                    <h4 class="text-center">Investing</h4>
+                                    <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div class = "col-md-3" >
+                            {{#if recruiting}}
+                                <div class="bnt-box-success">
+                                    <h4 class="text-center">Recruiting</h4>
+                                    <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
+                                </div>
+                            {{else}}
+                                <div class="bnt-box-warning">
+                                    <h4 class="text-center">Recruiting</h4>
+                                    <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div class = "col-md-3" >
+                            {{#if building}}
+                                <div class ="bnt-box-success">
+                                    <h4 class="text-center">Building</h4>
+                                    <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
+                                </div>
+                            {{else}}
+                                <div class="bnt-box-warning">
+                                    <h4 class="text-center">Building</h4>
+                                    <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div class = "col-md-3" >
+                            {{#if producing}}
+                                <div class="bnt-box-success">
+                                    <h4 class="text-center">Selling</h4>
+                                    <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
+                                </div>
+                            {{else}}
+                                <div class = "bnt-box-warning">
+                                    <h4 class="text-center">Selling</h4>
+                                    <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+
+
+                </div>
             </div>
         </div>
 
 
 
-        <div class ="row">
-            <div class = "col-md-4">
-                <h4 class="text-center"> <u>Owner</u></h4>
-                <p class="text-center"> {{owner}}</p>
-            </div>
-            <div class = "col-md-4">
-                <h4 class="text-center"> Address</h4>
-                <p class="text-center"> {{address}}</p>
-            </div>
-            <div class = "col-md-4">
-                <h4 class="text-center"> Funds</h4>
-                <p class="text-center"> {{displayBalance}} Ether</p>
+
+
+
+
+        <div class="row row-sm-margin">
+            <div class="col-md-12" style="height:1px;">
             </div>
         </div>
 
-
-
-
-        <div class ="row">
-            <div class = "col-md-3" >
-                {{#if investment}}
-                    <div class="bg-success">
-                        <h4 class="text-center">Investing</h4>
-                        <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
-                    </div>
-                {{else}}
-                    <div class="bg-warning">
-                        <h4 class="text-center">Investing</h4>
-                        <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
-                    </div>
-                {{/if}}
-            </div>
-            <div class = "col-md-3" >
-                {{#if recruiting}}
-                    <div class="bg-success">
-                        <h4 class="text-center">Recruiting</h4>
-                        <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
-                    </div>
-                {{else}}
-                    <div class="bg-warning">
-                        <h4 class="text-center">Recruiting</h4>
-                        <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
-                    </div>
-                {{/if}}
-            </div>
-            <div class = "col-md-3" >
-                {{#if building}}
-                    <div class ="bg-success">
-                        <h4 class="text-center">Building</h4>
-                        <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
-                    </div>
-                {{else}}
-                    <div class="bg-warning">
-                        <h4 class="text-center">Building</h4>
-                        <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
-                    </div>
-                {{/if}}
-            </div>
-            <div class = "col-md-3" >
-                {{#if producing}}
-                    <div class="bg-success">
-                        <h4 class="text-center">Selling</h4>
-                        <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
-                    </div>
-                {{else}}
-                    <div class = "bg-warning">
-                        <h4 class="text-center">Selling</h4>
-                        <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
-                    </div>
-                {{/if}}
-            </div>
-        </div>
 
         <div class="row">
-            <ul class="nav nav-pills nav-justified monitor-template-selector" >
-                <li class="bg-info active" data-monitor-template = "infoDisplay">
-                    <a href="#">
-                        Info
-                    </a>
-                </li>
-                <li class="bg-info " data-monitor-template = "proposalDisplay">
-                    <a href="#">Job Offers</a>
-                </li>
-                <li class="bg-info " data-monitor-template = "productDisplay">
-                    <a href="#">Products</a>
-                </li>
-                <li class="bg-info " data-monitor-template = "ownerControls">
-                    <a href="#">Owner Controls</a>
-                </li>
-                <li class="bg-info " data-monitor-template = "investorControls">
-                    <a href="#">Investor Controls</a>
-                </li>
+            <div class="col-md-12">
 
-            </ul>
+
+
+                <ul class="nav nav-pills nav-justified monitor-template-selector" >
+                    <li class="bg-info active" data-monitor-template = "infoDisplay">
+                        <a href="#">
+                            Info
+                        </a>
+                    </li>
+                    <li class="bg-info " data-monitor-template = "proposalDisplay">
+                        <a href="#">Job Offers</a>
+                    </li>
+                    <li class="bg-info " data-monitor-template = "productDisplay">
+                        <a href="#">Products</a>
+                    </li>
+                    <li class="bg-info " data-monitor-template = "ownerControls">
+                        <a href="#">Owner Controls</a>
+                    </li>
+                    <li class="bg-info " data-monitor-template = "investorControls">
+                        <a href="#">Investor Controls</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                    {{> Template.dynamic template = monitorTemplate data = monitorData}}
+            </div>
         </div>
 
 
 
-        <div class="col-md-12">
-
-            {{> Template.dynamic template = monitorTemplate data = monitorData}}
-
+        <div class="row row-sm-margin">
+            <div class="col-md-12" style="height:15px;">
+            </div>
         </div>
-
-
 
 
 

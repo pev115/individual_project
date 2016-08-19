@@ -1,77 +1,125 @@
 <template name="infoDisplay">
 
     <div class="row">
-        <div class="col-md-12 bg-default" >
-            <div class="col-md-6" >
-                <div class="row">
-                    <h4 class="text-center">Financial Information</h4>
-                </div>
-                <div class="row text-center">
-                    <h6 >Percent Dividends</h6>
-                    <p>{{displayPercentDividends}}</p>
-                </div>
-                <div class="row text-center">
-                    <h6>Total Shares</h6>
-                    <p>{{displayTotalShares}}</p>
-                </div>
-                <div class="row text-center">
-                    <h6>Reward per Share per Ether</h6>
-                    <p>{{displayReward}}</p>
-                </div>
+        <div class="col-md-12">
+            <div class="box">
 
+                <div class ="row">
+
+                    <div class="col-md-6" >
+                        <div class="row row-sm-down-margin">
+                            <div class="col-md-12">
+                                <h3 class="text-center"><b>Financial Information</b></h3>
+                            </div>
+                        </div>
+                        <div class="row row-vsm-margin">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="subox">
+                                    <h4 class="text-center"><u>Percent Dividends</u></h4>
+                                    <p class="text-center">{{displayPercentDividends}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row row-vsm-margin">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="subox">
+                                    <h4 class="text-center"><u>Total Shares</u></h4>
+                                    <p class="text-center">{{displayTotalShares}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-vsm-margin">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="subox">
+                                    <h4 class="text-center">Reward per Share per Ether</h4>
+                                    <p class="text-center">{{displayReward}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-sm-margin">
+                            <div class="col-md-12">
+                                <h3 class="text-center"><b>Official Declaration</b></h3>
+                            </div>
+                        </div>
+
+
+                        <div class="row row-vsm-margin">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="subox">
+                                    <div class ="DAO-ownership-list">
+                                        <p>{{description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+
+                        <div class="row row-sm-down-margin">
+                            <div class="col-md-12">
+                                <h3 class="text-center"><b>Transaction History</b></h3>
+                            </div>
+                        </div>
+
+
+
+                        <div class = "row">
+                            <div class="col-md-12">
+                                <div class="subox">
+                                    <div class ="DAO-info-tx-list">
+                                        <ul class="list-group" >
+                                            {{#each transactions}}
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p><u>Transaction Hash :</u><br>{{transactionHash}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <p><u>Transaction Date :</u><br>{{displayDate}}</p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p><u>EtherScan Link :</u></p>
+                                                            <a class="btn btn-info" href="https://etherscan.io/tx/{{transactionHash}}">Here!</a>
+                                                        </div>
+                                                    </div>
+
+                                                </li>
+                                            {{/each}}
+                                           <button  class="btn btn-block btn-primary load-more-hashes" >Load more</button>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-
-
-
-                <h4 class="text-center">Transaction Hash table</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-condensed table-bordered thash-table">
-
-                        <thead>
-                        <tr class="thash-table-row">
-
-                            <th>Hash</th>
-                            <th>Date</th>
-                        </tr>
-                        </thead>
-
-                        <tbody class="thash-body">
-                    {{#each transactions}}
-                    <tr  class="thash-table-row">
-
-                            <td>{{transactionHash}}</td>
-                            <td>{{createdDate}}</td>
-
-                    </tr>
-
-
-                    {{/each}}
-                        <tr class="thash-table-row"><button  class="btn btn-block btn-primary load-more-hashes" >Load more</button></tr>
-                        </tbody>
-
-
-                    </table>
-                </div>
 
 
 
 
-            </div>
         </div>
-    </div>
-
-    <div class="row">
-        {{#if showDescription}}
-            <button  class="btn btn-block btn-warning toggle_description" >Hide official Declaration</button>
-            <div class="col-md-12 bg-warning " >
-                <h4   class ="text-center"> Official Declaration</h4>
-                <p>{{description}}</p>
-            </div>
-        {{else}}
-            <button  class="btn btn-block btn-warning toggle_description" >Show official Declaration</button>
-
-        {{/if}}
     </div>
 
 </template>

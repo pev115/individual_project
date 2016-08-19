@@ -20,11 +20,11 @@ Template.infoDisplay.events({
         var currentLimit =Template.instance().transactionLimit.get();
         var nextLimit = currentLimit+7;
         Template.instance().transactionLimit.set(nextLimit);
-    },
+    }/*,
     'click .thash-table-row':function(event){
         var clicked = $(event.target).closest('tr');
         console.log(clicked);
-    }
+    }*/
 });
 
 Template.infoDisplay.helpers({
@@ -61,5 +61,9 @@ Template.infoDisplay.helpers({
         console.log(this);
         Meteor.subscribe("Transactions", this._id, limit);
         return Transactions.find({});
+    },
+    displayDate:function(){
+        var date = this.createdDate.toDateString();
+        return date;
     }
 });
