@@ -10,11 +10,7 @@
             <div class="col-md-12">
                 <div class ="box">
 
-                    <!--
-                                        <div class ="row">
-                                            <div class ="col-md-10 col-md-offset-1">
-                                                <div class ="subox">
-                    -->
+
                     <div class ="row ">
                         <div class="col-md-12">
                             <h1 class="text-center"><u>User Profile: {{username}}</u> </h1>
@@ -177,30 +173,32 @@
                         <div class="col-md-6">
                             <div class="subox">
                                 <div class="row">
-                                    <div class="col-md-8">
-                                        <h2 class="text-center">Contracted Jobs</h2>
+                                    <div class="col-md-6">
+                                        <h2>Overall Rating:</h2>
                                     </div>
-                                    <div class="col-md-4 ">
-                                        {{#if onlyCurrentJobs}}
-                                            <button class="btn btn-primary profile-toggle-only-current-jobs" style="margin-top:20px;">Revert</button>
-                                        {{else}}
-                                            <button class="btn btn-primary profile-toggle-only-current-jobs"  style="margin-top:20px;">Only current</button>
-                                        {{/if}}
+                                    <div class="col-md-6 ">
+                                        <div style=" margin-top: 5px;">
+                                            {{> starsRating rating = rating size=40}}
+                                        </div>
+                                        <p>{{rating}} ({{reviews}} votes)</p>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class = "col-md-6">
                             <div class="subox">
-                                <div class="row">
+                                <div class="row" style="margin-bottom: 11px;">
                                     <div class="col-md-8">
-                                        <h2 class="text-center">DAO Ownership</h2>
+                                        <h2 class="text-center">Description:</h2>
                                     </div>
                                     <div class="col-md-4 ">
-                                        <button type="button" class="btn btn-primary"  id="create_DAO_btn"   style="margin-top:20px;">
-                                            Create DAO
-                                        </button>
+
+                                        {{#if isSelf}}
+                                            <button class = "btn  btn-success" data-toggle="modal" data-target="#EditDesc"   style="margin-top:20px; padding-left: 25px; padding-right: 25px;"> Edit </button>
+                                        {{/if}}
+
                                     </div>
                                 </div>
                             </div>
@@ -211,12 +209,137 @@
 
 
 
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class = "row">
+                                    <div class="col-md-12">
+
+                                        <div class ="DAO-ownership-list">
+                                            <ul class="list-group">
+                                                {{#each this.feedback}}
+                                                    <li class="list-group-item list-group-item-default">
+                                                        <p>Rating : {{rating}}</p>
+                                                        {{> starsRating rating = rating size='sm'}}
+                                                        <p>{{comment}}</p>
+                                                        <p>{{proposalID}}</p>
+
+                                                    </li>
+                                                {{/each}}
+
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class ="DAO-ownership-list">
+                                            {{#if this.description}}
+                                                <p>{{this.description}}</p>
+                                            {{else}}
+                                                {{#if isSelf}}
+                                                    <button class = "btn btn-lg btn-success" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
+                                                {{/if}}
+                                            {{/if}}
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
 
+            </div>
+        </div>
 
 
-                <!--
+
+
+
+
+        <div class="row row-sm-margin">
+            <div class="col-md-12" style="height:25px;">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="modal fade" id="EditDesc" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit your Description</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Desc">Enter Your Public Description below:</label>
+                        <textarea class="form-control" rows="5" id="DescInputText">{{this.description}}</textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary center-block" id="submitDesc">
+                        Save Changes
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
                     <div class="col-md-6">
 
                         <div class="row">
@@ -294,7 +417,7 @@
                         <div class="row">
 
                             {{#with ownedDaos}}
-                    {{#if this.count}}
+    {{#if this.count}}
                                     <div class ="DAO-ownership-list">
                                         <ul class="list-group">
                                             {{#each this}}
@@ -313,7 +436,7 @@
                                 {{else}}
                                     <p>Does not Own any DAOs</p>
                                 {{/if}}
-                {{/with}}
+{{/with}}
 
 
                         </div>
@@ -323,7 +446,7 @@
                 </div>
 
 
-                -->
+
 
                 <div class="row">
                     <div class="col-md-8 col-md-offset-3">
@@ -364,86 +487,27 @@
 
 
 
-                        <div class="row">
+                <div class="row">
 
-                            {{#if this.description}}
-                                <h1>Description:</h1>
+                    {{#if this.description}}
+                        <h1>Description:</h1>
 
-                                {{#if isSelf}}
-                                    <button class = "btn btn-sm btn-success" data-toggle="modal" data-target="#EditDesc">Edit</button>
-                                {{/if}}
-
-
-                                <p>{{this.description}}</p>
-
-                            {{else}}
-
-                                {{#if isSelf}}
-                                    <button class = "btn btn-lg btn-success" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
-                                {{/if}}
-                            {{/if}}
-
-                        </div>
+                        {{#if isSelf}}
+                            <button class = "btn btn-sm btn-success" data-toggle="modal" data-target="#EditDesc">Edit</button>
+                        {{/if}}
 
 
+                        <p>{{this.description}}</p>
 
-                    </div>
+                    {{else}}
+
+    {{#if isSelf}}
+                            <button class = "btn btn-lg btn-success" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
+                        {{/if}}
+{{/if}}
+
                 </div>
 
+-->
 
 
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="EditDesc" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit your Description</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="Desc">Enter Your Public Description below:</label>
-                        <textarea class="form-control" rows="5" id="DescInputText">{{this.description}}</textarea>
-                    </div>
-                    <button type="button" class="btn btn-primary center-block" id="submitDesc">
-                        Save Changes
-                    </button>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-
-
-
-
-</template>
