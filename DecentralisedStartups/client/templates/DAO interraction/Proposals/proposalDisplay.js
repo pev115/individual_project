@@ -18,7 +18,19 @@ Template.proposalDisplay.helpers({
         return total;
     },
     panelClass:function(){
-        var class_base = "panel proposal-panel panel-";
+        var class_base = " text-center bnt-box-";
+        if(this.finalised){
+            return class_base+"success";
+
+        }else if(this.completed){
+            return class_base+"warning";
+        }else if(this.appointed){
+            return class_base+"info";
+        }else{
+            return class_base+"dis";
+        }
+
+        /*var class_base = "panel proposal-panel panel-";
         if(this.finalised){
             return class_base+"success";
 
@@ -28,7 +40,7 @@ Template.proposalDisplay.helpers({
             return class_base+"info";
         }else{
             return class_base+"default";
-        }
+        }*/
     },
     phase: function(){
         if(this.finalised){

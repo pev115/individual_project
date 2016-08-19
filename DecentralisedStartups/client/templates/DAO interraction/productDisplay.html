@@ -1,111 +1,70 @@
 <template name="productDisplay">
     <div class = "row">
-        <div class ="col-md-8 col-md-offset-2">
-            <div class = "panel panel-default">
-                <div class = "panel-heading">
-                    <h2 class="text-center">Products in the Shelf</h2>
-                    {{#if selling}}
-                    {{else}}
-                        <button class = "btn btn-disabled btn-lg center-block" disabled>This DAO is not selling yet!</button>
-                    {{/if}}
-                </div>
-                <div class="panel-body">
-                <!--
-{{#if isOwner}}
--->
+        <div class="col-md-12">
+            <div class="box">
+                <div class="row">
+                    <div class ="col-md-8 col-md-offset-2">
+                        <div class = "panel panel-default">
+                            <div class = "panel-heading">
+                                <h2 class="text-center">Products in the Shelf</h2>
+                                {{#if selling}}
+                                {{else}}
+                                    <button class = "bnt-box-dis center-block" disabled>This DAO is not selling yet!</button>
+                                {{/if}}
+                            </div>
+                            <div class="panel-body">
 
 
-                    {{#each products}}
 
-                        <div class ="col-md-6">
-                            <div class = "panel panel-info">
-                                <div class = "panel-heading">
-                                    {{name}}
+                                {{#each products}}
 
-                                    {{#if isOwner}}
-                                        <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
-                                    {{/if}}
+                                    <div class ="col-md-6">
+                                        <div class = "panel panel-info">
+                                            <div class = "panel-heading">
+                                                {{name}}
 
-                                </div>
-                                <div class="panel-body">
-                                    {{#if price}}
-                                        <p><u>price:</u> {{price}} Ether</p>
-                                    {{/if}}
-                                    {{#if url}}
-                                        <p><u>More Info:</u> <a href={{url}}>here</a></p>
-                                    {{/if}}
-                                    {{#if description}}
-                                        <h5><u>Description:</u></h5>
-                                        <p>{{description}}</p>
-                                    {{/if}}
+                                                {{#if isOwner}}
+                                                    <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
+                                                {{/if}}
+
+                                            </div>
+                                            <div class="panel-body">
+                                                {{#if price}}
+                                                    <p><u>price:</u> {{price}} Ether</p>
+                                                {{/if}}
+                                                {{#if url}}
+                                                    <p><u>More Info:</u> <a href={{url}}>here</a></p>
+                                                {{/if}}
+                                                {{#if description}}
+                                                    <h5><u>Description:</u></h5>
+                                                    <p>{{description}}</p>
+                                                {{/if}}
 
 
-                                    {{#if productFinalised}}
-                                        {{#if selling}}
-                                            <button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy"> Buy</button>
-                                        {{else}}
-                                        {{/if}}
+                                                {{#if productFinalised}}
+                                                    {{#if selling}}
+                                                        <button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy"> Buy</button>
+                                                    {{else}}
+                                                    {{/if}}
 
-                                    {{else}}
-                                        <button class = "btn btn-disabled current-product-context" disabled>Work not yet Finalised.</button>
+                                                {{else}}
+                                                    <button class = "btn btn-disabled current-product-context" disabled>Work not yet Finalised.</button>
 
-                                    {{/if}}
-<!--
-{{#if selling}}
+                                                {{/if}}
 
-<button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy" >Buy</button>
-{{else}}
-<button class = "btn btn-disabled current-product-context" disabled>This DAO is not selling yet!</button>
+                                            </div>
+                                        </div>
+                                    </div>
 
-{{/if}}  -->
+                                {{/each}}
 
-                                </div>
                             </div>
                         </div>
-
-                    {{/each}}
-
-<!--
-{{else}}
-
-{{#each finalisedProducts}}
-
-<div class ="col-md-6">
-<div class = "panel panel-info">
-<div class = "panel-heading">
-{{name}}
-</div>
-<div class="panel-body">
-{{#if price}}
-<p><u>price:</u> {{price}} Ether</p>
-{{/if}}
-{{#if url}}
-<p><u>More Info:</u> <a href={{url}}>here</a></p>
-{{/if}}
-{{#if description}}
-<h5><u>Description:</u></h5>
-<p>{{description}}</p>
-{{/if}}
-
-{{#if selling}}
-
-<button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy" >Buy</button>
-{{else}}
-<button class = "btn btn-disabled current-product-context" disabled>This DAO is not selling yet!</button>
-
-{{/if}}
-
-</div>
-</div>
-</div>
-
-{{/each}}
-{{/if}}
--->
-
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 

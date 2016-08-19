@@ -22,13 +22,25 @@
                     <div class ="row row-sm-margin">
                         <div class = "col-md-4">
                             <div class="subox">
-                                <h4 class="text-center"> <u>Owner</u></h4>
-                                <p class="text-center"> {{owner}}</p>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h4 class="text-center">Owner Address</h4>
+                                    </div>
+                                    <div class ="col-md-4">
+                                        <button class="btn btn-sm center-block btn-info" id="go-to-owner">View Profile</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-center"> {{owner}}</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class = "col-md-4">
                             <div class="subox">
-                                <h4 class="text-center"> Address</h4>
+                                <h4 class="text-center">DAO Address</h4>
                                 <p class="text-center"> {{address}}</p>
                             </div>
                         </div>
@@ -51,12 +63,12 @@
                         <div class = "col-md-3" >
                             {{#if investment}}
                                 <div class="bnt-box-success">
-                                    <h4 class="text-center">Investing</h4>
+                                    <h4 class="text-center">Looking for Investment</h4>
                                     <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
                                 </div>
                             {{else}}
                                 <div class="bnt-box-warning">
-                                    <h4 class="text-center">Investing</h4>
+                                    <h4 class="text-center">Looking for Investment</h4>
                                     <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
                                 </div>
                             {{/if}}
@@ -75,19 +87,6 @@
                             {{/if}}
                         </div>
                         <div class = "col-md-3" >
-                            {{#if building}}
-                                <div class ="bnt-box-success">
-                                    <h4 class="text-center">Building</h4>
-                                    <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
-                                </div>
-                            {{else}}
-                                <div class="bnt-box-warning">
-                                    <h4 class="text-center">Building</h4>
-                                    <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
-                                </div>
-                            {{/if}}
-                        </div>
-                        <div class = "col-md-3" >
                             {{#if producing}}
                                 <div class="bnt-box-success">
                                     <h4 class="text-center">Selling</h4>
@@ -96,6 +95,20 @@
                             {{else}}
                                 <div class = "bnt-box-warning">
                                     <h4 class="text-center">Selling</h4>
+                                    <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
+                                </div>
+                            {{/if}}
+                        </div>
+
+                        <div class = "col-md-3" >
+                            {{#if building}}
+                                <div class ="bnt-box-success">
+                                    <h4 class="text-center">Building New Products</h4>
+                                    <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
+                                </div>
+                            {{else}}
+                                <div class="bnt-box-warning">
+                                    <h4 class="text-center">Building New Products</h4>
                                     <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
                                 </div>
                             {{/if}}
@@ -150,7 +163,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                    {{> Template.dynamic template = monitorTemplate data = monitorData}}
+                {{> Template.dynamic template = monitorTemplate data = monitorData}}
             </div>
         </div>
 

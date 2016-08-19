@@ -60,6 +60,19 @@ Template.Monitor.events({
         selectorTab.addClass("active");
         $(".monitor-template-selector li").not(selectorTab).removeClass("active");
         template.monitorTemplate.set('templateName',selectorTab.data("monitorTemplate"));
+    },
+    'click #go-to-owner':function(){
+        console.log("going to owner");
+        console.log(this);
+        var own = this.owner;
+        Meteor.subscribe('addressUser',this.owner,function(){
+            console.log("AAAAND THE OWNER IIISSSSS");
+            var owner= Meteor.users.findOne({address:own});
+            console.log(owner);
+            var ownerID= owner._id;
+            var path = '/profile/'+ownerID;
+            Router.go(path);
+        })
     }
 });
 
