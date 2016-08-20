@@ -100,15 +100,23 @@ input[type=number]::-webkit-outer-spin-button {
 
 .box {
     padding: 0.5em;
+    background-color: rgba(200, 198, 211, 0.60);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+/*
+.box {
+    padding: 0.5em;
     background-color: rgba(227, 210, 210, 0.51);
     width: auto;
     height: auto;
     border-radius: 0.3em;
 }
-
+*/
 .subox {
     padding: 0.5em;
-    background-color: rgba(227, 210, 210, 0.51);
+    background-color: rgba(194, 202, 212, 0.51);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -133,7 +141,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .bnt-box-success {
     padding: 0.5em;
-    background-color:  	rgba(92,184,92,0.8);
+    background-color: rgba(92, 184, 92, 0.65);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -141,7 +149,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .bnt-box-info {
     padding: 0.5em;
-    background-color: rgba(6, 141, 204, 0.8);
+    background-color: rgba(6, 141, 204, 0.65);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -149,7 +157,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .bnt-box-warning {
     padding: 0.5em;
-    background-color:  	rgba(248,148,6,0.8);
+    background-color:  	rgba(248,148,6,0.65);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -162,6 +170,17 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 0.3em;
 }
 
+.white-font-color{
+    color:white;
+}
+
+.alternative-to-white-bg{
+    ackground-color: rgba(213, 221, 231, 0.90);
+}
+
+.alternative-to-white-bg2{
+    background-color: rgba(134, 135, 168, 0.91);
+}
 
 
 .vertical-center{
@@ -185,11 +204,10 @@ input[type=number]::-webkit-outer-spin-button {
 .extra-col-padding-sm {
     padding:0.5em;
 }
-
+*/
 
 body {
     background:rgb(235, 235, 228);
-    background-image: url("/bg/zenbg-1.png");
+    background-image: url("/bg/pattern5.png");
     background-repeat: repeat-y;
 }
-*/
