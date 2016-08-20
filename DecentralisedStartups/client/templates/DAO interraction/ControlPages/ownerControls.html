@@ -14,17 +14,17 @@
                 <div class="row row-margin">
                     <div class="col-md-3">
                         {{#if this.investment}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleInvesting">Look for Investments</button>
-                        {{else}}
                             <button class="btn btn-primary btn-lg center-block" id="toggleInvesting">Stop looking for Investments</button>
+                        {{else}}
+                            <button class="btn btn-primary btn-lg center-block" id="toggleInvesting">Look for Investments</button>
                         {{/if}}
                     </div>
 
                     <div class="col-md-3">
                         {{#if this.recruiting}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Start Recruiting</button>
+                            <button class="btn btn-primary btn-lg center-block" id="toggleRecruiting">Stop Recruiting </button>
                         {{else}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Stop Recruiting </button>
+                            <button class="btn btn-primary btn-lg center-block" id="toggleRecruiting">Start Recruiting</button>
                         {{/if}}
                     </div>
 
@@ -32,16 +32,16 @@
 
                     <div class="col-md-3">
                         {{#if this.producing}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Enable Selling</button>
+                            <button class="btn btn-primary btn-lg center-block" id="toggleProduction">Disable Selling</button>
                         {{else}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Disable Selling </button>
+                            <button class="btn btn-primary btn-lg center-block" id="toggleProduction">Enable Selling</button>
                         {{/if}}
                     </div>
                     <div class="col-md-3">
                         {{#if this.building}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Announce new product building</button>
+                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Stop announcing new <br> products are being built</button>
                         {{else}}
-                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding">Stop announcing new <br> products are being built </button>
+                            <button class="btn btn-primary btn-lg center-block" id="toggleBuilding"> Announce new product building</button>
                         {{/if}}
 
                     </div>

@@ -5,6 +5,8 @@ Template.investorControls.onCreated(function(){
     this.transferSharesAmount.set('');
     this.transferReceipient = new ReactiveVar();
     this.transferReceipient.set('');
+    this.checkSharesOwned=new ReactiveVar();
+    this.checkSharesOwned.set(0);
 
 });
 
@@ -13,7 +15,7 @@ Template.investorControls.helpers({
         return  Template.instance().createdSharesAmount.get();
     },
     ownedShares:function(){
-
+        console.log("checking owned shares");
         var sender;
         if(Meteor.user()){
             sender = Meteor.user().address;
@@ -24,11 +26,14 @@ Template.investorControls.helpers({
         }
 
         var currentDAO = DAOs.findOne();
-        var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);
+       /* var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);*/
         var sh;
 
         if(typeof sender =='string') {
-            sh = contract.getShares.call({from: sender});
+            sh =Template.instance().checkSharesOwned.get();
+                /* contract.getShares.call({from: sender});*/
+            console.log(sh);
+            return sh;
         }else{
             console.log("Sender not string");
             return "An error occured";
@@ -46,6 +51,21 @@ Template.investorControls.helpers({
 });
 
 Template.investorControls.events({
+    'click #shareCheckButton':function(){
+        var sender;
+        if(Meteor.user()){
+            sender = Meteor.user().address;
+        }else if(web3.eth.defaultAccount){
+            sender = web3.eth.defaultAccount;
+        }else{
+            console.log("tell is moron to setup his default account please... I mean... please!")
+        }
+        console.log("checking shares");
+        var currentDAO = DAOs.findOne();
+        var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);
+        var sh = contract.getShares.call({from: sender});
+        Template.instance().checkSharesOwned.set(sh);
+    },
     'click #shareCreationButton':function(){
         console.log("CLICKKIIING CREATE SHARES");
         console.log($("#createSharesInput").val());
@@ -162,7 +182,7 @@ Template.investorControls.events({
         console.log(availableShares>shares && web3.isAddress(sender) && web3.isAddress(receiver));
 
         if(availableShares>shares && web3.isAddress(sender) && web3.isAddress(receiver)) {
-            contract.transfer.sendTransaction(receiver,shares, {from: sender, value: shares}, function (e, r) {
+            contract.transfer.sendTransaction(receiver,shares, {from: sender}, function (e, r) {
                 if (e) {
                     console.log("error processing the transaction");
                     console.log(e);

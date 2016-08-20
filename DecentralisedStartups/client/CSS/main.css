@@ -78,7 +78,25 @@ input[type=number]::-webkit-outer-spin-button {
 .row-sm-down-margin{
     margin-bottom: 10px;
 }
+.row-vsm-down-margin{
+    margin-bottom: 5px;
+}
 
+.row-up-sm-margin{
+    margin-top: 10px;
+}
+
+.comment-case{
+    border: rgba(88, 88, 88, 0.73);
+    border-radius: 0.3em;
+    padding: 0.2em;
+    width: auto;
+    border-width: 1px;
+    border-style: solid;
+    overflow: auto;
+    height: auto;
+    max-height: 100px;
+}
 
 .box {
     padding: 0.5em;
@@ -104,6 +122,14 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 0.3em;
 }
 
+
+.bnt-box-job-phase {
+    padding: 0.5em;
+    background-color:  rgba(227, 210, 210, 0.51);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
 
 .bnt-box-success {
     padding: 0.5em;
@@ -144,14 +170,26 @@ input[type=number]::-webkit-outer-spin-button {
     float: none;
 }
 
+.gobacktranslation:hover{
+    transform: translate(-1.5em,0em);
+    cursor: hand;
+}
+.gobackcolorchange:hover{
+ color: rgb(255, 162, 138);
+}
+.gobackcolorchange{
+    color: rgb(151, 151, 144);
+}
+
 /*
 .extra-col-padding-sm {
     padding:0.5em;
 }
-*/
+
 
 body {
     background:rgb(235, 235, 228);
-    background-image: url("/bg/newbgpattern.png");
+    background-image: url("/bg/zenbg-1.png");
     background-repeat: repeat-y;
 }
+*/

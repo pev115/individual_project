@@ -38,6 +38,26 @@ Template.proposalMonitoring.onCreated(function(){
 
 
 Template.proposalMonitoring.helpers({
+    phaseText: function(){
+        console.log("Checking the phase text");
+        console.log(this[0]);
+        if(this[0].finalised){
+            return "Finalised";
+
+        }else if(this[0].completed){
+            return "Completed";
+        }else if(this[0].appointed){
+            return "Contracted";
+        }else{
+            return "Recruiting";
+        }
+    },
+    contestantListEmpty:function(){
+      console.log("checki9ng the contestant list");
+        console.log(this[1]);
+        console.log(this[1].length);
+        return this[1].length === 0;
+    },
     jobProposalContext:function(){
         console.log("job proposal context");
         console.log(this);
@@ -55,7 +75,7 @@ Template.proposalMonitoring.helpers({
         if(this[0].appointed){
             return this[0].contractor;
         }else{
-            return "Not appointed";
+            return false;
         }
     },
     /*TODO: Not allow applying if the DAO is not recruiting*/
@@ -143,6 +163,19 @@ Template.proposalMonitoring.helpers({
 });
 
 Template.proposalMonitoring.events({
+    'click #go-to-contractor':function(){
+        console.log("going to contractor");
+        console.log(this);
+        var con = this[0].contractor;
+        Meteor.subscribe('addressUser',this[0].contractor,function(){
+            console.log("AAAAND THE OWNER IIISSSSS");
+            var contractor= Meteor.users.findOne({address:con});
+            console.log(contractor);
+            var conID= contractor._id;
+            var path = '/profile/'+conID;
+            Router.go(path);
+        })
+    },
     "click #back-to-proposalDisplay":function(event,template){
         Template.instance().get('monitorTemplate').set('templateName','proposalDisplay');
     },

@@ -131,7 +131,7 @@
                                                 <div class ="DAO-ownership-list">
                                                     <ul class="list-group">
                                                         {{#each this}}
-                                                            <li class="list-group-item list-group-item-success">
+                                                            <li class="list-group-item list-group-item-success row-vsm-margin">
                                                                 <p><u> Title: </u> <br>
                                                                     {{title}}
                                                                 </p>
@@ -222,11 +222,45 @@
                                         <div class ="DAO-ownership-list">
                                             <ul class="list-group">
                                                 {{#each this.feedback}}
-                                                    <li class="list-group-item list-group-item-default">
-                                                        <p>Rating : {{rating}}</p>
-                                                        {{> starsRating rating = rating size='sm'}}
-                                                        <p>{{comment}}</p>
-                                                        <p>{{proposalID}}</p>
+                                                    <li class="list-group-item list-group-item-default  row-vsm-margin">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="text-center"><b>Job ID:</b>
+                                                                    {{proposalID}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-2 col-md-offset-2">
+                                                                        <p class="text-center"><u>Rating: </u></p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div style=" margin-top: 1px;">
+                                                                            {{> starsRating rating = rating size=sm}}
+                                                                        </div>
+                                                                        <p>(Score: {{rating}})</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <p><u>Comment: </u></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <div class="comment-case">
+                                                                    <p style=" margin-bottom: 1px;">{{comment}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </li>
                                                 {{/each}}
@@ -248,7 +282,7 @@
                                                 <p>{{this.description}}</p>
                                             {{else}}
                                                 {{#if isSelf}}
-                                                    <button class = "btn btn-lg btn-success" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
+                                                    <button class = "btn btn-lg btn-success center-block" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
                                                 {{/if}}
                                             {{/if}}
 

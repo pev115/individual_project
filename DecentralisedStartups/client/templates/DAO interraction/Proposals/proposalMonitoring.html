@@ -1,177 +1,408 @@
 <template name="proposalMonitoring">
-    {{#with jobProposalContext}}
-        <div class="row">
-            <div class ="col-md-2" id="back-to-proposalDisplay">
-                <span class="glyphicon glyphicon-arrow-left"></span>
-            </div>
-        </div>
-
-        <div class ="row">
-            <div class ="col-md-12">
-                <h1 class="text-center"><u>Job offer # {{this.[0].ID}}</u></h1>
-            </div>
-        </div>
-
-        <div class ="row">
-            <div class = "col-md-3">
-            </div>
-            <div class = "col-md-3">
-                <h3 class="text-center">Contractor: {{contractor}}</h3>
-            </div>
-            {{#if allowedToApply}}
-                <div class = "col-md-3">
-                    <button class="btn btn-default center-block" id="apply-to-proposal">Apply</button>
-                </div>
-            {{/if}}
-        </div>
+    <div class ="row">
+        <div class="col-md-12">
+            <div class="box">
 
 
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3 class="text-center">Title: {{this.[0].title}}</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3 class="text-center">Job Description</h3>
-                <p>{{this.[0].description}}</p>
-            </div>
-        </div>
-
-        <div class = "row">
-            <div class ="col-md-12">
-                <h3 class="text-center">Contestants</h3>
-
-                <div class="row">
-
-
-                    <div class ="DAO-ownership-list">
-                        <ul class="list-group">
-                            {{#each this.[1]}}
-                                <li class="list-group-item list-group-item-default">
-                                    <p> Contestant Address: {{address}}</p>
-                                    <button type="button" class ="btn btn-primary" id ="contestant-go-to-profile">
-                                        GO!
-                                    </button>
-                                    <p>Contestant Username:{{userName}}</p>
-                                    <p>Rating: </p>
-                                    {{> starsRating rating = rating size='sm'}}
-                                    {{#if isSelf}}
-                                        <button type="button" class ="btn btn-primary" id ="contestant-remove-application">
-                                            Remove my application
-                                        </button>
-                                    {{/if}}
-                                    {{#if isOwnerANDisNotHired}}
-                                        <button type="button" class ="btn btn-primary" id ="contestant-hire-application">
-                                            Hire!
-                                        </button>
-                                    {{/if}}
-
-                                </li>
-                            {{/each}}
-
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class ="row">
-            <div class ="col-md-12">
-                <h2 class="text-center"><u>Contractor Actions:</u></h2>
-                <button class="btn btn-warning btn-lg center-block" id="proposal-complete-work">Complete Job</button>
-            </div>
-        </div>
-
-        <div class ="row">
-            <h2 class="text-center"><u>Owner Actions:</u></h2>
-            <div class="col-md-4">
-                <button class="btn btn-success btn-lg center-block" id="proposal-toggle-modal-finalise">Finalise</button>
-            </div>
-
-            <div class="col-md-4">
-                <button class="btn btn-danger btn-lg center-block" id="proposal-toggle-modal-layoff">Layoff contractor</button>
-            </div>
-
-            <div class="col-md-4">
-                <button class="btn btn-primary btn-lg center-block" id="proposal-remove">Remove proposal</button>
-            </div>
-        </div>
-
-
-
-
-
-
-        <!--download target="_blank"-->
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="leaveCommentModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add a job offering to your DAO</h4>
-                    </div>
-                    <div class="modal-body">
-
-
-                        <div class="form-group">
-                            <label for="contractorRatingFeedback">Please rate this contractor</label>
-                            {{> starsRating id='contractorRatingFeedback' size ='lg' mutable=true}}
-                        </div>
-                        <div class ="form-group">
-                            <label for="contractorCommentFeedback">Please also leave a comment on his performance</label>
-                            <textarea class="form-control"  id="contractorCommentFeedback" rows="4"></textarea>
-                        </div>
-
-                        <div class="col-md-4">
-                            {{#if finalising}}
-                                <button class="btn btn-success btn-lg center-block" id="proposal-finalise">Finalise</button>
-                            {{/if}}
-                            {{#if firing}}
-                                <button class="btn btn-danger btn-lg center-block" id="proposal-layoff-contractor">Layoff contractor</button>
-                            {{/if}}
+                {{#with jobProposalContext}}
+                    <div class="row row-sm-margin">
+                        <div class ="col-md-2 gobacktranslation" id="back-to-proposalDisplay">
+                            <h1 class="text-center gobackcolorchange"><span class="glyphicon  glyphicon-menu-left"></span></h1>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    <div class ="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class ="row">
+                                <div class ="col-md-8">
+                                    <div  style="margin-top: 35px;">
+                                        <h2 class="text-center"><b>Job offer # {{this.[0].ID}}</b></h2>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class ="bnt-box-job-phase">
+                                        <span style="vertical-align: middle;"> <h3 class="text-center"><u>Phase:</u> <br> {{phaseText}}</h3></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+
+                    <div class="row row-sm-margin">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="subox">
+                                <h3 class="text-center"><u> Title:</u> <br> {{this.[0].title}}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class ="row row-margin">
+                        <div class = "col-md-5 col-md-offset-2">
+                            <div class ="row">
+                                <div class="col-md-12">
+                                    <div class="subox">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h3 class="text-center"><u>Contractor:</u></h3>
+                                            </div>
+                                            <div class ="col-md-4">
+                                                {{#if contractor}}
+                                                    <button class="btn btn-sm center-block btn-info" style="margin-top: 20px;" id="go-to-contractor">View Profile</button>
+                                                {{else}}
+                                                    <button class="btn btn-sm center-block btn-info" style="margin-top: 20px;" id="go-to-contractor" disabled>View Profile</button>
+                                                {{/if}}
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                {{#if contractor}}
+                                                    <div style="margin-bottom: 39px;">
+                                                        <p class="text-center"> {{contractor}}</p>
+                                                    </div>
+                                                {{else}}
+                                                <div style="margin-bottom: 29px;">
+                                                    <h4 class="text-center">Not appointed</h4>
+                                                </div>
+                                                {{/if}}
+
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class = "col-md-3">
+                            <div class ="row">
+                                <div class="col-md-11 col-md-offset-1">
+                                    <div class="subox">
+                                        {{#if allowedToApply}}
+                                            <button class="btn btn-success center-block" style="padding:25px; margin-top:22px; margin-bottom:22px;" id="apply-to-proposal">Apply</button>
+                                        {{else}}
+                                            <button class="btn btn-default center-block" style="padding:25px; margin-top:22px; margin-bottom:22px;" id="apply-to-proposal" disabled>Apply</button>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h3 class="text-center"><u>Job Description</u></h3>
+
+                        </div>
+                    </div>
+
+                    <div class="row row-vsm-margin">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="subox">
+                                <div class ="DAO-ownership-list">
+                                    <p>{{this.[0].description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class = "row">
+                        <div class ="col-md-12">
+                            <h3 class="text-center"><u>Contestants</u></h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+
+                            <div class="subox">
+
+                                <div class = "row">
+                                    <div class="col-md-12">
+                                        <div class ="DAO-ownership-list">
+
+                                            {{#if contestantListEmpty}}
+                                                <div style ="padding-top: 20px;">
+                                                    <h4 class="text-center">No application has been made.</h4>
+                                                </div>
+
+
+                                            {{else}}
+                                                <ul class="list-group">
+                                                    {{#each this.[1]}}
+                                                        <li class="list-group-item list-group-item-default row-vsm-margin">
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <h4 class="text-center"><b>{{userName}}</b></h4>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <p class="text-center"><u>Address:</u><br>
+                                                                                {{address}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <div class="col-md-2 col-md-offset-3">
+                                                                            <p class="text-center"><u>Rating: </u></p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div style=" margin-top: 1px;">
+                                                                                {{> starsRating rating = rating size=sm}}
+                                                                            </div>
+                                                                            <p>(Score: {{rating}})</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div class="row row-up-sm-margin">
+                                                                <div class="col-md-10 col-md-offset-1">
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-4">
+                                                                            {{#if isSelf}}
+                                                                                <button type="button" class ="btn btn-danger center-block" id ="contestant-remove-application">
+                                                                                    Remove my application
+                                                                                </button>
+                                                                            {{/if}}
+                                                                        </div>
+                                                                        <div class ="col-md-4">
+                                                                            <button class="btn  btn-info center-block" id ="contestant-go-to-profile">View Profile</button>
+                                                                        </div>
+                                                                        <div class ="col-md-4">
+                                                                            {{#if isOwnerANDisNotHired}}
+                                                                                <button type="button" class ="btn btn-success center-block" id ="contestant-hire-application">
+                                                                                    Hire!
+                                                                                </button>
+                                                                            {{/if}}
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <p>{{address}}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="row row-up-sm-margin">
+                                                                <div class="col-md-1 col-md-offset-2">
+                                                                    <p><u>Rating:</u></p>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div style=" margin-top: 5px;">
+                                                                        {{> starsRating rating = rating size=sm}}
+                                                                    </div>
+                                                                    <p>(Score: {{rating}})</p>
+                                                                </div>
+                                                                <div class="col-md-6 col-md-offset-1">
+
+
+                                                                </div>
+                                                            </div>
+                                                            -->
+
+                                                        </li>
+                                                    {{/each}}
+
+
+                                                </ul>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class ="row row-margin">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="row">
+                                <div class ="col-md-6">
+                                    <h3 class="text-center"><u>Contractor Actions:</u></h3>
+                                </div>
+                                <div class ="col-md-6">
+                                    <h3 class="text-center"><u>Owner Actions:</u></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class ="row row-margin">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="row">
+                                <div class ="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="subox">
+                                                <button class="btn btn-warning center-block"  style="padding:15px; padding-top:30px; padding-bottom:30px;margin-top:57px; margin-bottom:57px; " id="proposal-complete-work">
+                                                    Complete Job
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class ="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="subox">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-md-offset-4">
+
+                                                        <button class="btn btn-success btn-lg center-block" style="padding:15px; padding-top:20px; padding-bottom:20px; margin-top:15px; margin-bottom:15px;" id="proposal-toggle-modal-finalise">
+                                                            Finalise
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+
+
+                                                        <button class="btn btn-danger btn-lg center-block" style="padding:10px; margin-top:15px; margin-bottom:15px;" id="proposal-toggle-modal-layoff">
+                                                            Layoff <br> contractor
+                                                        </button>
+
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <button class="btn btn-primary btn-lg center-block"  style="padding:10px; margin-top:15px; margin-bottom:15px;" id="proposal-remove">
+                                                            Remove <br> proposal
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="leaveCommentModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add a job offering to your DAO</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        <label for="contractorRatingFeedback">Please rate this contractor</label>
+                                        {{> starsRating id='contractorRatingFeedback' size ='lg' mutable=true}}
+                                    </div>
+                                    <div class ="form-group">
+                                        <label for="contractorCommentFeedback">Please also leave a comment on his performance</label>
+                                        <textarea class="form-control"  id="contractorCommentFeedback" rows="4"></textarea>
+                                    </div>
+
+                                        {{#if finalising}}
+                                            <button class="btn btn-success btn-lg center-block" id="proposal-finalise">Finalise</button>
+                                        {{/if}}
+                                        {{#if firing}}
+                                            <button class="btn btn-danger btn-lg center-block" id="proposal-layoff-contractor">Layoff contractor</button>
+                                        {{/if}}
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="uploadWork" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Upload your work</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-center"><u>Job Title:</u>{{this.[0].title}}</p>
+                                    <p class="text-center"> <u>Job ID:</u> {{this.[0].ID}} </p>
+
+                                    {{> upload_bootstrap contentType=this.[0].DAO_Id callbacks = uploadCallback}}
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {{/with}}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
         </div>
-
-
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="uploadWork" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Upload your work</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{this.[0].title}}</p>
-                        <p>  {{this.[0].ID}} </p>
-                        <p>  {{this.[0].DAO_Id}} </p>
-
-                        {{> upload_bootstrap contentType=this.[0].DAO_Id callbacks = uploadCallback}}
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    </div>
 
 
 
@@ -179,13 +410,16 @@
 
 
 
-    {{/with}}
+
+
+
+
 
 </template>
 <!--
 <template name="uploadFormTemplate">
     {{#with getFormData}}
     {{> upload_bootstrap formData=this }}
-    {{/with}}
+{{/with}}
 </template>
 -->
