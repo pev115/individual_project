@@ -46,6 +46,9 @@ Things to do to setup project:
 I haven't added but might be useful ; packages that support.md files : markdown support and markdown smth else
 
 
+# IF power cuts off when webstorm is open: On restart go find the webstorm executable from tjoun/Webstorm-145 bla bla ans launch it from there
+
+
 #Methodologies and other:
 * Command to connect the node : ```geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```
 
