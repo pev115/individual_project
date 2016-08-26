@@ -12,4 +12,5 @@ contract hasProposals{
     bool finalised;
   }
 
+
 }
