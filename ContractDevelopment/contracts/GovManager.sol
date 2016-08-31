@@ -7,6 +7,7 @@ contract GovManager {
 
   /*Governance Modifier*/
   modifier onlyOwner {
+    
     if (msg.sender != owner){
       throw;
     }

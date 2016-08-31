@@ -8,7 +8,7 @@
     abi: [{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"inputs":[],"type":"constructor"}],
     binary: "606060405260008054600160a060020a0319163317905560428060226000396000f3606060405260e060020a60003504638da5cb5b8114601a575b005b603860005473ffffffffffffffffffffffffffffffffffffffff1681565b6060908152602090f3",
     unlinked_binary: "606060405260008054600160a060020a0319163317905560428060226000396000f3606060405260e060020a60003504638da5cb5b8114601a575b005b603860005473ffffffffffffffffffffffffffffffffffffffff1681565b6060908152602090f3",
-    address: "0x92af349e51c399ca082e6bd1320763eea88203ce",
+    address: "0x578848c2cf92eb87fcfc3662ff2d9756b6a7e121",
     generated_with: "2.0.9",
     contract_name: "GovManager"
   };

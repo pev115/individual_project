@@ -11,7 +11,7 @@ module.exports = {
   },
   deploy: [
     "GovManager",
-    "SharesManager",
+    "ShareManager",
     "ProposalManager",
     "Private"
   ],

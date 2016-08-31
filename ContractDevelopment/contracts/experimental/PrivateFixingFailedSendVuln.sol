@@ -1,10 +1,10 @@
 import "../GovManager.sol";
 
-import "../SharesManager.sol";
+import "../ShareManager.sol";
 
 import "../ProposalManager.sol";
 
-contract PrivateFixingFailedSendVuln is GovManager, SharesManager, ProposalManager {
+contract PrivateFixingFailedSendVuln is GovManager, ShareManager, ProposalManager {
   bool public recruiting;
   bool public building;
   bool public production;
