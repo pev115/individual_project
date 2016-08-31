@@ -15,6 +15,7 @@ contract salaryProposalManager{
     bool finalised;
   }
 
+
   function salaryProposalManager(){}
 
 
