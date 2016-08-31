@@ -466,7 +466,7 @@ function  addFeedback(_rating,_comment,proposaluniqueID,_contractor){
         console.log(Meteor.users.find().fetch());
         var con = Meteor.users.findOne({address:_contractor});
         var newReviews =con.reviews+1;
-        var newRating= (((con.rating*con.reviews)+_rating)/(newReviews))
+        var newRating= (((con.rating*con.reviews)+_rating)/(newReviews));
         Meteor.users.update({_id:con._id},{$set:{rating:newRating,reviews:newReviews},$push:{feedback:{rating:_rating, comment:_comment,proposalID:proposaluniqueID}}});
 
     });
