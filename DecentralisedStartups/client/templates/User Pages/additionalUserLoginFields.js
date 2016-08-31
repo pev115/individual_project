@@ -8,5 +8,6 @@ Template._loginButtonsLoggedInDropdown.events({
         var user_id = Meteor.userId();
         var path = '/Create';
         Router.go(path);
+
     }
 });

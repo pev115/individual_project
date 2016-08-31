@@ -47,6 +47,8 @@ var hooksObject = {
                         console.log(Transactions.findOne({DAO_Id:_id}));
                         var path ='/Monitor/'+contract.address;
                         Router.go(path);
+                        $(".principalNavbar li").removeClass("active");
+                        $("#currentDAOliNavbar").addClass("active");
 
                     }else{
                         console.log("GOT To the weird zone");

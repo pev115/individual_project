@@ -71,8 +71,9 @@ Template.productDisplay.events({
                 console.log("payment sent");
                 window.open(currentProduct.path);
                 console.log(contract);
-                var balance = web3.eth.getBalance(currentDAO.address);
-                var _balance = balance.toNumber();
+                var balance = currentDAO.balance;
+                var dist = currentDAO.percentDividends;
+                var _balance = balance + amount - (amount*dist/100);
                 console.log(_balance);
                 Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                 DAOs.update ({_id:currentDAO._id},{$set:{balance:_balance}});

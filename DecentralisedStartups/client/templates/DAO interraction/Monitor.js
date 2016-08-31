@@ -53,12 +53,12 @@ Template.Monitor.events({
         console.log(this);
         var own = this.owner;
         Meteor.subscribe('addressUser',this.owner,function(){
-            console.log("AAAAND THE OWNER IIISSSSS");
             var owner= Meteor.users.findOne({address:own});
             console.log(owner);
             var ownerID= owner._id;
             var path = '/profile/'+ownerID;
             Router.go(path);
+            $(".principalNavbar li").removeClass("active");
         })
     }
 });

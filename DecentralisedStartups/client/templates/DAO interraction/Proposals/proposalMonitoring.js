@@ -143,6 +143,7 @@ Template.proposalMonitoring.events({
             var conID= contractor._id;
             var path = '/profile/'+conID;
             Router.go(path);
+            $(".principalNavbar li").removeClass("active");
         })
     },
     "click #back-to-proposalDisplay":function(event,template){
@@ -171,6 +172,7 @@ Template.proposalMonitoring.events({
     'click #contestant-go-to-profile':function(){
         var path= '/profile/'+this.userID;
         Router.go(path);
+        $(".principalNavbar li").removeClass("active");
     },
     'click #contestant-remove-application':function(){
         console.log(this);

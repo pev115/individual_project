@@ -175,7 +175,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .alternative-to-white-bg{
-    ackground-color: rgba(213, 221, 231, 0.90);
+    ackground-color: rgba(231, 207, 200, 0.9);
 }
 
 .alternative-to-white-bg2{
@@ -197,7 +197,7 @@ input[type=number]::-webkit-outer-spin-button {
  color: rgb(255, 162, 138);
 }
 .gobackcolorchange{
-    color: rgb(151, 151, 144);
+    color: rgb(68, 100, 222);
 }
 
 
