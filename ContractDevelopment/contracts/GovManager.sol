@@ -1,14 +1,16 @@
 contract GovManager {
-address public owner;
-function GovManager() {
-        owner = msg.sender;
-    }
+  address public owner;
+  /*Constructor*/
+  function GovManager() {
+          owner = msg.sender;
+      }
 
-    modifier onlyOwner {
-        if (msg.sender != owner){
-          throw;
-          }
-        _
+  /*Governance Modifier*/
+  modifier onlyOwner {
+    if (msg.sender != owner){
+      throw;
     }
+    _
+  }
 
 }
