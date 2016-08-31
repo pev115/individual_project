@@ -12,8 +12,10 @@ contract ProposalManager{
     bool finalised;
   }
 
+  /*Constructor*/
   function ProposalManager(){}
 
+  /*Function for completing proposal*/
   function completeWork (uint _ID){
     if(proposals[_ID].ID == 0){
       throw;
