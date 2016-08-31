@@ -9,7 +9,4 @@ function owned() {
         _
     }
 
-    function transferOwnership(address newOwner) onlyOwner {
-        owner = newOwner;
-    }
 }

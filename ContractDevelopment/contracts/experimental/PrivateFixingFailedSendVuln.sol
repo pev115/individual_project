@@ -1,18 +1,20 @@
-import "owned.sol";
+import "../owned.sol";
 
-import "SharesManager.sol";
+import "../SharesManager.sol";
 
-import "hasProposals.sol";
+import "../hasProposals.sol";
 
-contract Private is owned, SharesManager, hasProposals {
+contract PrivateFixingFailedSendVuln is owned, SharesManager, hasProposals {
   bool public recruiting;
   bool public building;
   bool public production;
   uint public percentDividends;
   string public description;
+  mapping (address=>uint) missedRewards;
 
 
-    function Private(address _owner, string _desc) {
+
+    function PrivateFixingFailedSendVuln(address _owner, string _desc) {
       if(_owner != 0){
         owner = _owner;
       }else{
@@ -96,12 +98,21 @@ contract Private is owned, SharesManager, hasProposals {
           address holder = shareholders[i];
           uint shares= balances[holder];
           if(!holder.send(((msg.value*percentDividends)/100)*(shares/totalSupply))){
-            throw;
+            missedRewards[holder] = ((msg.value*percentDividends)/100)*(shares/totalSupply);
           }
         }
     }
     }
 
+    function retrieveMissedRewards ( address _shareholder ){
+        uint sum = missedRewards[_shareholder];
+        if(sum <=  0 ){
+         throw;
+        }
+       if(! _shareholder.send(sum)){
+           throw;
+       }
+      }
 
 
     function fuel() onlyOwner{}
