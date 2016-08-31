@@ -47,7 +47,7 @@ Template.proposalMonitoring.helpers({
             return false;
         }
     },
-    /*TODO: Not allow applying if the DAO is not recruiting*/
+
     allowedToApply:function(){
         var currentUserId = Meteor.userId();
         var inContestants = $.grep(this[1], function(e){ return e.userID == currentUserId; });
@@ -107,16 +107,14 @@ Template.proposalMonitoring.helpers({
     uploadCallback: function(){
         return {
             finished:function(index,fileInfo,templateContext){
-                console.log("FINISHED HOOOOKKK");
-                console.log("THE fileInfo ISSSSSSS: ");
                 console.log(fileInfo);
-                console.log("THE index IISSSSSSSS");
+
                 console.log(index);
-                console.log("THE CONTEXT ISSSSSSSS");
+
                 console.log(templateContext);
-                console.log("THIS ISSSSSS");
+
                 console.log(this);
-                console.log("SESSION VARIABBLLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
+
                 console.log(Session.get("propForForm"));
 
 
@@ -137,7 +135,6 @@ Template.proposalMonitoring.events({
         console.log(this);
         var con = this[0].contractor;
         Meteor.subscribe('addressUser',this[0].contractor,function(){
-            console.log("AAAAND THE OWNER IIISSSSS");
             var contractor= Meteor.users.findOne({address:con});
             console.log(contractor);
             var conID= contractor._id;
@@ -151,7 +148,6 @@ Template.proposalMonitoring.events({
     },
     "click #apply-to-proposal":function(event,template){
         event.preventDefault();
-        console.log("WHAT IS THE CONTEXT");
         console.log(this);
         console.log("checking the user");
         console.log(Meteor.user());
@@ -164,7 +160,6 @@ Template.proposalMonitoring.events({
             userName:Meteor.user().username,
             rating:Meteor.user().rating
         };
-        console.log("THIS IS THE FUCKING CONTESTANT");
         console.log(Contestant);
         Contestants.insert(Contestant);
         console.log(this);
@@ -187,8 +182,7 @@ Template.proposalMonitoring.events({
         $('#leaveCommentModal').modal('toggle');
     },
 
-    /*Ethereum interactions */
-    /*TODO: Set up lal the defensive notifications if things fail*/
+
     'click #contestant-hire-application':function() {
         console.log("checking the context for hiring");
         console.log(this);
@@ -208,7 +202,7 @@ Template.proposalMonitoring.events({
         console.log(sender === currentDAO.owner);
         console.log(!proposal.appointed);
         console.log(currentDAO.balance > proposal.deposit);
-        console.log(sender === currentDAO.owner && !proposal.appointed && currentDAO.balance > proposal.deposit);/*TODO:Potential bug for being bigger but not allowing for gas -can mitigate as i know how much gas my function is going ot use and send that amount of gas with the function anyways*/
+        console.log(sender === currentDAO.owner && !proposal.appointed && currentDAO.balance > proposal.deposit);
 
         var prop= contract.proposals.call(proposaluniqueID);
         console.log(prop);
@@ -224,11 +218,11 @@ Template.proposalMonitoring.events({
                     console.log("Error processing the transaction");
                     console.log(e);
                 } else {
-                    var newBalance = currentDAO.balance - proposal.deposit; /* TODO: think about if it is better to call ethereum to set the new balance:potential concurrency bug*/
+                    var newBalance = currentDAO.balance - proposal.deposit;
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     Proposals.update({_id:proposal._id},{$set:{contractor:contestantAddress, appointed:true}});
-                    DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});/*TODO: potential concurrency bug*/
+                    DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
@@ -315,7 +309,6 @@ Template.proposalMonitoring.events({
         var mod =  $('#uploadWork');
 
 
-        console.log("COMPLETING FOOOORM");
         console.log(proposal);
         Session.set("propForForm",proposal);
         console.log(Session.get("propForForm"));
@@ -340,7 +333,7 @@ Template.proposalMonitoring.events({
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     Proposals.update({_id:proposal._id},{$set:{completed:true}});
-                    /*TODO:Need to upload something at that stage*/
+
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
@@ -352,7 +345,7 @@ Template.proposalMonitoring.events({
             console.log("one of conditions not met");
         }
     },
-    /*TODO: must implement system to give review when owner layoff or finalse*/
+
     'click #proposal-finalise':function(){
 
         console.log("finalising work");
@@ -390,8 +383,8 @@ Template.proposalMonitoring.events({
 
 
 
-                    var newBalance = currentDAO.balance - proposal.reward; /* TODO: think about if it is better to call ethereum to set the new balance:potential concurrency bug*/
-                    DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});/*TODO: potential concurrency bug*/
+                    var newBalance = currentDAO.balance - proposal.reward;
+                    DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});
 
                     console.log("checking feedback variables");
 
@@ -405,12 +398,11 @@ Template.proposalMonitoring.events({
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
                     console.log("will update products now");
-                    /*TODO: put a callback function(error,result) dong smth if there is an error*/
+
                     Meteor.call('finaliseProduct',proposal.ID,function(error,result){
                        console.log("Checking finalising");
                         console.log(error);
                         if(error){
-                            console.log("GOT A FUCKING ERROR");
                             console.log(error);
                         }
                     });
@@ -468,7 +460,6 @@ Template.proposalMonitoring.events({
 
 
 
-/*TODO:think about concurrency issues with the reviews update*/
 function  addFeedback(_rating,_comment,proposaluniqueID,_contractor){
     console.log("adding feedback");
     Meteor.subscribe('addressUser',_contractor,function(){
