@@ -1,18 +1,17 @@
-import "owned.sol";
+import "GovManager.sol";
 
-import "SharesManager.sol";
+import "ShareManager.sol";
 
-import "hasProposals.sol";
+import "ProposalManager.sol";
 
-contract Private is owned, SharesManager, hasProposals {
+contract Private is GovManager, ShareManager, ProposalManager {
   bool public recruiting;
   bool public building;
   bool public production;
-  uint public percentDividends;
+  uint public rewardRate;
   string public description;
 
-
-    /* First time setup */
+    /*Constructor*/
     function Private(address _owner, string _desc) {
       if(_owner != 0){
         owner = _owner;
@@ -26,9 +25,10 @@ contract Private is owned, SharesManager, hasProposals {
       recruiting = false;
       building = false;
       production = false;
-      percentDividends = 0;
+      rewardRate = 0;
     }
 
+    /*Activity indicator manipulation*/
     function toggleSharesIssue() onlyOwner  {
       if(investment){
         investment=false;
@@ -67,14 +67,15 @@ contract Private is owned, SharesManager, hasProposals {
       }
     }
 
-    function changeDividends(uint percent)onlyOwner{
+    /*functions for Revenue Redistribution*/
+    function changeRate(uint percent)onlyOwner{
         if(percent>100){
           throw;
         }
         if(percent<0){
           throw;
         }
-        percentDividends = percent;
+        rewardRate = percent;
     }
 
 
@@ -96,7 +97,7 @@ contract Private is owned, SharesManager, hasProposals {
         for (uint i=0; i<nbShareholders; ++i){
           address holder = shareholders[i];
           uint shares= balances[holder];
-          if(!holder.send(((msg.value*percentDividends)/100)*(shares/totalSupply))){
+          if(!holder.send(((msg.value*rewardRate)/100)*(shares/totalSupply))){
             throw;
           }
         }
@@ -108,7 +109,7 @@ contract Private is owned, SharesManager, hasProposals {
     function fuel() onlyOwner{}
 
 
-
+    /*functions for Employment Management*/
     function addProposal(uint _reward, uint _deposit, string _desc, uint _ID) onlyOwner {
       if(_ID<0){
         throw;
@@ -146,6 +147,11 @@ contract Private is owned, SharesManager, hasProposals {
 
 
     function hireContractor (address _contractor, uint _ID) onlyOwner{
+
+      if(!recruiting){
+        throw;
+      }
+
       if(proposals[_ID].ID == 0){
         throw;
       }
@@ -200,4 +206,11 @@ contract Private is owned, SharesManager, hasProposals {
       }
 
     }
+
+
+    /*fallback Function*/
+    function () {
+    throw;
+    }
+
 }

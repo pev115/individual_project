@@ -2,7 +2,6 @@
  * */
 
 Template.Browse.onCreated(function(){
-    console.log("I AM HEEEEEREEEEEYO!!!!");
     this.searchValue = new ReactiveVar();
     this.searchValue.set('');
     this.searchRecruiting = new ReactiveVar();
@@ -16,14 +15,6 @@ Template.Browse.onCreated(function(){
     this.DAOSearchLimit = new ReactiveVar();
     this.DAOSearchLimit.set(6);
 
-    /*
-     Session.set("searchValue", '');
-     Session.set("searchRecruiting", false);
-     Session.set("searchInvestment", false);
-     Session.set("searchProducing", false);
-     Session.set("searchBuilding", false);
-     Session.set('DAOSearchLimit',5);
-     */
 
     this.browseType = new ReactiveVar();
     this.browseType.set('DAO');
@@ -62,16 +53,7 @@ Template.Browse.events({
         Template.instance().searchBuilding.set(searchBuild);
 
         Template.instance().DAOSearchLimit.set(6);
-        /*Session.set("searchValue", $("#searchValue").val());
 
-
-         console.log("THE button");
-         Session.set("searchRecruiting", $("#searchRecruiting").is(':checked'));
-         Session.set("searchInvestment", $("#searchInvestment").is(':checked'));
-         Session.set("searchProducing", $("#searchProducing").is(':checked'));
-         Session.set("searchBuilding", $("#searchBuilding").is(':checked'));
-         Session.set('DAOSearchLimit',5);
-         */
     },
     "submit #searchJobs": function (event) {
         event.preventDefault();
@@ -87,10 +69,8 @@ Template.Browse.events({
     },
     "click #browse_go_button":function(event){
         event.preventDefault();
-        console.log("HHHHHEEEERRREEE");
         var _address = this.address;
         var path = '/Monitor/'+_address;
-        console.log(path);
         Router.go(path);
     },
 
@@ -118,7 +98,6 @@ Template.Browse.events({
     },
 
     'click .browse-type-selector li':function(event,template){
-        console.log("HHHHHHHHHHHHHHHHHHHHHHH");
         console.log(template);
         var selectorTab = $(event.target).closest("li");
         console.log(selectorTab);
@@ -158,7 +137,6 @@ Template.Browse.helpers({
 
     },
     counterProposalBrowse:function(){
-        console.log("here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         var counter = Template.instance().browseCounter.get();
         counter = (counter+1)%3;
         Template.instance().browseCounter.set(counter);
@@ -166,7 +144,6 @@ Template.Browse.helpers({
         return counter==0;
     },
     AssociatedDAO:function(){
-
         Meteor.subscribe('singleDAO', this.DAO_Id);
         return DAOs.findOne({_id:this.DAO_Id}).title;
     },
@@ -201,7 +178,7 @@ Template.Browse.helpers({
         if (searchVal) {
             return DAOs.find({}, { sort: [["score", "desc"]]});
         } else {
-            console.log("I will try to sort");
+            console.log("Sorting");
             return DAOs.find({});
         }
     },
@@ -250,7 +227,7 @@ Template.Browse.helpers({
         if (searchVar) {
             return Proposals.find({}, { sort: [["score", "desc"]]});
         } else {
-            console.log("I will try to sort");
+            console.log("Sorting");
             return Proposals.find({});
         }
     },
@@ -262,10 +239,5 @@ Template.Browse.helpers({
         var userName = user.username;
         return userName;
     }
-
-    /*,
-     daoLink:function(){
-     console.log("HHHHHEEEERRREEE");
-     console.log(this);
-     }*/
+    
 });

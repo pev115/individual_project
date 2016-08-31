@@ -1,12 +1,3 @@
-/*TODO: think of who is going to be the sender and implement that mechanic in*/
-
-/*TODO: Find a better way to interract with ethereum
- * find a way to get the DAO ID without using the Session
- * clean up and understand all the mess with simple schema validations
- * think about whether should include the transaction hash no matter if it works or fails
- * Think very carefully about what should be comming from ethereum directly (eg the balance)...
- * maybe no computations should be done not on ethereum*/
-
 Template.ownerControls.onCreated(function(){
    console.log("Checking the context");
     console.log(this);
@@ -58,7 +49,6 @@ Template.ownerControls.events({
         if (sender== this.owner) {
             contract.toggleSharesIssue.sendTransaction({from: sender}, function (e, r) {
                 if (e) {
-                    /*TODO: handle with an error message*/
                     console.log("Error tying to set investment to to the contract");
                     console.log(e);
                     console.log("Checking it has been changed:");
@@ -81,7 +71,7 @@ Template.ownerControls.events({
                 }
             });
         }else{
-            /*TODO: handle with an error message*/
+           console.log("an error occured");
         }
 
     },
@@ -98,7 +88,6 @@ Template.ownerControls.events({
         if (sender== this.owner) {
             contract.toggleRecruiting.sendTransaction({from: sender}, function (e, r) {
                 if (e) {
-                    /*TODO: handle with an error message*/
                     console.log("Error tying to set recruiting to to the contract");
                     console.log(e);
                     console.log("Checking it has been changed:");
@@ -121,7 +110,7 @@ Template.ownerControls.events({
                 }
             });
         }else{
-            /*TODO: handle with an error message*/
+            console.log("an error occured");
         }
 
     },
@@ -138,7 +127,7 @@ Template.ownerControls.events({
         if (sender== this.owner) {
             contract.toggleBuilding.sendTransaction({from: sender}, function (e, r) {
                 if (e) {
-                    /*TODO: handle with an error message*/
+
                     console.log("Error tying to set building to to the contract");
                     console.log(e);
                     console.log("Checking it has been changed:");
@@ -161,7 +150,7 @@ Template.ownerControls.events({
                 }
             });
         }else{
-            /*TODO: handle with an error message*/
+            console.log("an error occured");
         }
 
     },
@@ -177,7 +166,6 @@ Template.ownerControls.events({
         if (sender== this.owner) {
             contract.toggleProduction.sendTransaction({from: sender}, function (e, r) {
                 if (e) {
-                    /*TODO: handle with an error message*/
                     console.log("Error tying to set producing to to the contract");
                     console.log(e);
                     console.log("Checking it has been changed:");
@@ -200,7 +188,7 @@ Template.ownerControls.events({
                 }
             });
         }else{
-            /*TODO: handle with an error message*/
+            console.log("an error occured");
         }
 
     }
@@ -210,10 +198,6 @@ Template.ownerControls.events({
 });
 
 
-
-
-
-/*TODO: Change from taking the coinbase to actually taking the owners registered account*/
 
 var hooksProposalForm = {
     onSuccess: function(insert,result) {
@@ -256,7 +240,7 @@ var hooksProposalForm = {
                 });
 
         }else{
-
+            console.log("an error occured");
         }
     },
 
@@ -275,8 +259,6 @@ var hooksProposalForm = {
 
 AutoForm.addHooks('ProposalForm',hooksProposalForm);
 
-/*TODO: right now if transaction does not get mined I am screwed
-* do some kind of notifications system*/
 var hooksChangeDividendsForm = {
 
     onSubmit: function (insertDoc, updateDoc, currentDoc) {
@@ -298,7 +280,7 @@ var hooksChangeDividendsForm = {
 
             console.log("Owner verified to be sender." );
 
-            contract.changeDividends.sendTransaction(div, {from: sender}, function (e, r) {
+            contract.changeRate.sendTransaction(div, {from: sender}, function (e, r) {
                     if (e) {
                         console.log("Error processing the tranaction");
                         console.log(e);
@@ -340,15 +322,12 @@ AutoForm.addHooks('changeDividendsForm',hooksChangeDividendsForm);
 
 
 
-/*TODO: verify units that are sent and if we can send non integer amounts
-* check what happens if try to send more amount than currently owned
-* Think what happens if user is not logged in*/
 
 var hooksFuelForm = {
 
     onSubmit: function (insertDoc, updateDoc, currentDoc) {
 
-        console.log("SUbmiting.... b/n these are the three objects..");
+        console.log("Submiting.... b/n these are the three objects..");
         console.log(insertDoc);
         console.log(updateDoc);
         console.log(currentDoc);
@@ -397,55 +376,5 @@ var hooksFuelForm = {
 };
 
 
-
 AutoForm.addHooks('fuelForm',hooksFuelForm);
 
-/*TODO: need to make sure that Im using the applicant collection
-* See what happens when I insert wrong and inexisting inputs for contractor and proposalID
-* test the thing (did not test the thing)
-* need to finish it...
-* 
-*
-
-var hooksHireContractorForm ={
-
-    onSubmit: function (insertDoc, updateDoc, currentDoc) {
-
-        console.log("Submitiing the HIRE contractor form.....");
-        console.log(insertDoc);
-        console.log(updateDoc);
-        console.log(currentDoc);
-        console.log(this);
-
-        //TODO:Think of using the custom schema to first verify that the subscriptions are returning something
-        Meteor.subscribe('ProposalUsingID',insertDoc.ID);
-        Meteor.subscribe('contestantByAddress',insertDoc.contractor);
-
-
-        var proposal = Proposals.findOne();
-        var currentDAO = DAOs.findOne();
-        var contestantAddress = insertDoc.contractor;
-        var proposaluniqueID = proposal.ID;
-        var sender = Meteor.user().address;
-
-
-        var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
-
-
-
-            this.done();
-
-
-        return false;
-    },
-
-    onError: function(insert,error){
-        console.log("I got an error");
-        console.log(error);
-        console.log(insert);
-        return error;
-    }
-};
-
-AutoForm.addHooks('hireContractorForm',hooksHireContractorForm);
- */

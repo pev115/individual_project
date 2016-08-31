@@ -1,35 +1,4 @@
-/*TODO: Make the apply button do a popup for confirmation
- * Implement proper security for not allowing people to apply twice*/
-/*TODO:
- IMPORTANT: FINISH implementing the modal for comment and rating leaving. There is the bug that the button
- does not appear now -> need to have just one reactive var and switch the value every time i change
- BUG: When adding new contestant it appears at the buttom unless refresh
- * put the username in the contractor part of the job offer
- * FOR EVERYTHING: Need to think of what happens when the sender has no gas to do the transactions
- * remove person who was just contracted from contestants and make sure he still cannot apply
- * think about how I upgrade the balances
- * BUG: if the contestants rating changes, it does not change in the contestant list
- * could do as described here https://dweldon.silvrback.com/common-mistakes  */
 
-/*
-Template.uploadFormTemplate.helpers({
-    getFormData :function(){
-        console.log("FUUUUUUUUUUUUUCKYOUUUUUUUUUUUUUUUUUUUUUUUUU");
-        console.log("Checking the form data");
-       var prop = Session.get("propForForm");
-        console.log(prop);
-        return prop;
-    }
-});
-
-Template.uploadFormTemplate.onDestroyed(function(){
-   Session.set("propForForm",'');
-});
-
-
- n8YSgPkcDN9zerSbv
- sjP2tPrcCuhhyog6q
- */
 
 Template.proposalMonitoring.onCreated(function(){
     this.modalUse = new ReactiveVar();

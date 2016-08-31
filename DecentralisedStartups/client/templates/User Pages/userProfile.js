@@ -1,16 +1,4 @@
-/* TODO: Implement special view for the currently logged in user
-Clean up the table class names and unite with the infor display table class names
-implement what happens when you click on the table rows
- make it more secure by not passing options in the proposals subscription but the two elements separately
- make suer that there is no bug in the table display of the stages and that the stage is always consistent with the existence of a contractor
- * Think about If I need to subscribe to the logged in user everywhere
 
- * See how can I have a proper description field (also if description field is too long does not break jproperly
- *restrict user rating to a max of 5
- *Unify dao ownership list css aswell
- * Implement a way of notifications when getting contracted
- *or seeing balance that changes  
- * */
 Template.userProfile.onCreated(function(){
     this.ownedDAOLimit=new ReactiveVar();
     this.ownedDAOLimit.set(2);
@@ -68,7 +56,7 @@ Template.userProfile.helpers({
     onlyCurrentJobs:function(){
         return Template.instance().onlyAppointed.get();
     },
-    employerFeedback:function(){  /*TODO: I think this is useless:verify*/
+    employerFeedback:function(){
         console.log("Checking employer feedback..");
         console.log(this.feedback);
         return this.feedback;
@@ -105,7 +93,7 @@ Template.userProfile.events({
         console.log(proposalId);
         console.log("Here is clicked");
         console.log(clicked);
-        //console.log(Proposals.findOne({_id:proposalId}));
+
         var proposalToDisplay =Proposals.findOne({_id:proposalId});
         Session.set('proposalToDisplayDirectly',proposalId);
         var path = '/Monitor/'+proposalToDisplay.DAO_Id;

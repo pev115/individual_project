@@ -19,9 +19,6 @@ Template.Connect.events({
         console.log(event);
         var path = '/Monitor/'+address;
         console.log(path);
-        //if(DAOs.findOne({address:address})) {
-        //    Session.set('current_DAO', address);
-      //  }
         Router.go(path);
 
     }

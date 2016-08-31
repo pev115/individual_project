@@ -22,16 +22,14 @@ Template.investorControls.helpers({
         }else if(web3.eth.defaultAccount){
             sender = web3.eth.defaultAccount;
         }else{
-            console.log("tell is moron to setup his default account please... I mean... please!")
+            console.log("No unlocked account found");
         }
 
         var currentDAO = DAOs.findOne();
-       /* var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);*/
         var sh;
 
         if(typeof sender =='string') {
             sh =Template.instance().checkSharesOwned.get();
-                /* contract.getShares.call({from: sender});*/
             console.log(sh);
             return sh;
         }else{
@@ -58,7 +56,7 @@ Template.investorControls.events({
         }else if(web3.eth.defaultAccount){
             sender = web3.eth.defaultAccount;
         }else{
-            console.log("tell is moron to setup his default account please... I mean... please!")
+            console.log("No unlocked account found!");
         }
         console.log("checking shares");
         var currentDAO = DAOs.findOne();
@@ -67,14 +65,11 @@ Template.investorControls.events({
         Template.instance().checkSharesOwned.set(sh);
     },
     'click #shareCreationButton':function(){
-        console.log("CLICKKIIING CREATE SHARES");
         console.log($("#createSharesInput").val());
         var val = $("#createSharesInput").val();
         Template.instance().createdSharesAmount.set(val);
     },
     'click #shareTransferButton':function(){
-        console.log("CLICKKIIING TRANSFER SHARES");
-
         var valAmnt = $("#transferSharesInput").val();
         var valDest = $("#transferSharesDestination").val();
         Template.instance().transferSharesAmount.set(valAmnt);
@@ -84,7 +79,6 @@ Template.investorControls.events({
     'submit #createSharesForm':function(event,template) {
         Template.instance().createdSharesAmount.set('');
         event.preventDefault();
-        console.log("I SUBMITT!!");
         console.log(event);
         console.log(template);
         var sharestr= $("#createSharesInput").val();
@@ -100,7 +94,7 @@ Template.investorControls.events({
         }else if(web3.eth.defaultAccount){
             sender = web3.eth.defaultAccount;
         }else{
-            console.log("tell is moron to setup his default account please... I mean... please!")
+            console.log("No unlocked account found");
         }
 
         var currentDAO = DAOs.findOne();
@@ -126,13 +120,11 @@ Template.investorControls.events({
                     console.log(contract);
                     console.log(r);
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
-                    /*TODO:concurrency issues here*/
                     DAOs.update({_id: currentDAO._id}, {$set: {totalShares: _totalShares, balance :_balance}});
                 }
             });
         }else{
-            /*TODO: Need some error message*/
-            console.log("Invertment not ON");
+            console.log("Investment not ON");
         }
 
         $('#areYouSureInvest').modal('toggle');
@@ -142,7 +134,6 @@ Template.investorControls.events({
         Template.instance().transferSharesAmount.set('');
         Template.instance().transferReceipient.set('');
         event.preventDefault();
-        console.log("I SUBMITT for TRANSFER!!");
 
         var sharestr= $("#transferSharesInput").val();
         var receiver = $("#transferSharesDestination").val();
@@ -161,7 +152,7 @@ Template.investorControls.events({
         }else if(web3.eth.defaultAccount){
             sender = web3.eth.defaultAccount;
         }else{
-            console.log("tell is moron to setup his default account please... I mean... please!")
+            console.log("No unlocked account");
         }
 
         var currentDAO = DAOs.findOne();
@@ -196,8 +187,7 @@ Template.investorControls.events({
                 }
             });
         }else{
-            /*TODO: Need some error message*/
-            console.log("One of conditiosn wrong");
+            console.log("One of conditions wrong");
         }
 
         $('#areYouSureTransfer').modal('toggle');

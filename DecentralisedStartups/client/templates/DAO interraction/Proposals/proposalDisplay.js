@@ -1,5 +1,3 @@
-/*TODO:investigate: proposals seem to be ordered by last accessed see what is happening*/
-
 
 
 Template.proposalDisplay.helpers({
@@ -30,17 +28,7 @@ Template.proposalDisplay.helpers({
             return class_base+"dis";
         }
 
-        /*var class_base = "panel proposal-panel panel-";
-        if(this.finalised){
-            return class_base+"success";
 
-        }else if(this.completed){
-            return class_base+"warning";
-        }else if(this.appointed){
-            return class_base+"info";
-        }else{
-            return class_base+"default";
-        }*/
     },
     phase: function(){
         if(this.finalised){
@@ -76,7 +64,7 @@ Template.proposalDisplay.helpers({
 Template.proposalDisplay.events({
     "click .goToProposalButton":function(event,template){
         console.log(event);
-        console.log("YOLLOOooooooooooooooo0000000000000000000000000ooooooooooooooO");
+
         console.log(this);
         console.log("Now fid one");
         var proposalCursor = Proposals.find(this._id);

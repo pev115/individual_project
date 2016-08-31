@@ -1,9 +1,6 @@
-/*TODO: must provide the mechanism for the feedback to go there as well as rating and reviews. Must also
-provide a way to edit user profile
- */
+
 Accounts.onCreateUser(function(options,user){
-   // console.log("Theses are the onCreateUser arguments:");
-   // console.log(options);
+
     user.address =options.address;
     user.description="";
     user.rating=0;
@@ -19,8 +16,7 @@ Accounts.validateNewUser(function(user){
         wrongFormat = true;
     }
     var exists = Meteor.users.findOne({address:user.address});
-   // console.log("searching for this address..");
-   // console.log(exists);
+
     if(exists){
         throw new Meteor.Error(401,"An account with this address already exists.");
     }else if(wrongFormat){

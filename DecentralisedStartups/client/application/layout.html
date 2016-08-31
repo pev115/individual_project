@@ -16,16 +16,7 @@
 
                     <li><a href="{{pathFor 'Browse'}}">Browse</a></li>
                     <li><a href="{{pathFor 'Connect'}}">Connect</a></li>
-                   <!-- {{#if currentDAOpath}}
-                        <li><a href="{{currentDAOpath}}">Current DAO</a></li>
-                    {{else}}
-                        <li  disabled><a href="#">Disconnected</a></li>
-                    {{/if}} -->
-
-
                     <li><a href="{{currentDAOpath}}">Current DAO</a></li>
-
-
 
                     {{#if currentUser}}
                     <li><a href="{{pathFor 'Create'}}">Create</a></li>
@@ -34,7 +25,7 @@
                 <ul class="nav navbar-nav navbar-right">
                 {{> loginButtons }}
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
 
 
         </div>

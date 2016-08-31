@@ -1,10 +1,4 @@
-/*subscription does not seem to work with finalised need to check again*/
 
-
-/*
- Template.productDisplay.onCreated(function(){
- Meteor.subscribe('AllProducts');
- });/**/
 Template.productDisplay.onCreated(function(){
     this.currentProduct= new ReactiveVar();
     this.currentProduct.set({});
@@ -46,22 +40,10 @@ Template.productDisplay.helpers({
         var finalised = this.finalised;
         console.log(finalised);
         return this.finalised;
-    }/*,
-    proposalFinalised:function(){
-        var handle=  Meteor.subscribe('ProposalUsingID',this.proposalID);
-        if (handle.ready()) {
-            var proposal = Proposals.findOne();
-            if (proposal.finalised){
-                return true;
-            }else{
-                return false;
-            }
-        }
-    }*/
+    }
 });
 
 
-/*TODO: Think about what happens for random users, what account do I use,what happens when it fails ect*/
 
 Template.productDisplay.events({
     'click #buyProduct':function(){
@@ -71,7 +53,7 @@ Template.productDisplay.events({
         }else if(web3.eth.defaultAccount){
             sender = web3.eth.defaultAccount;
         }else{
-            console.log("tell is moron to setup his default account please... I mean... please!")
+            console.log("No unlocked account")
         }
 
         var currentDAO = DAOs.findOne();
@@ -87,8 +69,7 @@ Template.productDisplay.events({
                 console.log(e);
             }else{
                 console.log("payment sent");
-                window.open(currentProduct.path); /*TODO: here in the real network it will look like nothing happened because modal gonna close and download gonna start 17 sec later*/
-                /*Update funds*//*TODO: this will not work with real network*/
+                window.open(currentProduct.path);
                 console.log(contract);
                 var balance = web3.eth.getBalance(currentDAO.address);
                 var _balance = balance.toNumber();
@@ -101,7 +82,6 @@ Template.productDisplay.events({
         $('#areYouSureBuy').modal('toggle');
     },
     'click #press':function(){
-        console.log("PREEEEEESSSSS");
         console.log(Template.instance());
         console.log(this);
     },

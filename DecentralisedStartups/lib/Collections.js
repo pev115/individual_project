@@ -1,14 +1,3 @@
-/*TODO:
- * put all the necessary fields to the DAOs collection.
- * do another shcema for the transaction hashes so that I have the created date too
- * this would need to be updated using a meteor method
- * see if I can put schema for user accounts
- */
-
-
-/*TODO:Think about splitting the collections to one file per collection
- * Make the proposal IDs unique and think of what happens if a the random function happens to create twice the same
- * ID*/
 
 
 SimpleSchema.messages({
@@ -84,8 +73,7 @@ Schemas.Contestant = new SimpleSchema({
     },
     userID:{
         type:String,
-        label:"UserID"/*,
-         unique:true*/
+        label:"UserID"
     },
     userName:{
         type:String,
@@ -108,16 +96,12 @@ Schemas.Contestant = new SimpleSchema({
     }
 });
 
-/*TODO: change the autoform to normal and change the optionals that are not really*/
+
 Schemas.Proposal =  new SimpleSchema({
     ID: {
         type:Number,
         label: "ID",
-        optional:true,
-        /*unique:true,
-         autoform:{
-         omit: true
-         }*/
+        optional:true
     },
     createdDate:{
         type:Date,
@@ -161,10 +145,7 @@ Schemas.Proposal =  new SimpleSchema({
     contractor:{
         type:String,
         label:"Contractor",
-        defaultValue:"0x000"  /*TODO:think if default is better than optional here*/
-        /*, autoform:{
-         omit:true
-         }*/
+        defaultValue:"0x000"
     },
     appointed:{
         type:Boolean,
@@ -216,11 +197,11 @@ Schemas.DAO = new SimpleSchema({
         max:42,
         min:42,
         custom: function(){
-            console.log("CHECKING THE CUSTOM OWNER VALIDATION");
+            console.log("Checking the custom validation");
             console.log(this);
             console.log(this.isSet);
             if(Meteor.isClient && this.isSet){
-                console.log("executing the client side............");
+                console.log("executing the client side...");
                 console.log("checking the owner custom validation");
                 console.log("subscribing...");
                 Meteor.subscribe('addressUser',this.value);
@@ -234,7 +215,7 @@ Schemas.DAO = new SimpleSchema({
                 }
             }
             if(Meteor.isServer){
-                console.log("Executing the server side.........................");
+                console.log("Executing the server side...");
                 console.log(this);
                 var found = Meteor.users.findOne({address:this.value});
                 if(!found){
@@ -321,16 +302,6 @@ Contestants.attachSchema(Schemas.Contestant);
 Products.attachSchema(Schemas.Product);
 
 
-/*
-investSchema = new SimpleSchema({
-    amount :{
-        type:Number,
-        label:Amount,
-        decimal:true
-    }
-});
-
-*/
 
 DAOs.allow({
     insert:function(userId,doc){

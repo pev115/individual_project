@@ -52,39 +52,4 @@ I haven't added but might be useful ; packages that support.md files : markdown 
 #Methodologies and other:
 * Command to connect the node : ```geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```
 
-##TODO :
-/////IMPORTANT
-* CHANGE FROM using coinbases to using the correct user accounts when interracting with ethereum
-
-
-
-    * Check why allowing for the personal api is not secure
-    * Define the DAO framework to work with-> an interface common to all the DAOs that will allow interraction.
-    * Find out if there is another way of doing this that does not require to have the personal api on and check if there is a way that it would work just by having the ethereum wallet on.
-    * Find out if having two web3 apis one server side to open accounts and one client side is secure.
-    * Find a good wesite and source for the following:
-      - The general ethereum working (homestead)
-      - The solidity language
-      - The javascript api
-      - The other apis (eg personal admin ect)
-      - The geth commands and geth in general
-      - Gather up all the forums ect i have
-      - The web3 through meteor
-      - solidity and npm
-
-    * revisit the READM file : get the info necessary from group project as well.
-    * Get initiated with truffle and testrpc
-    * make a design plan
-    * refind how I ignored node modules and place it here.
-    * Donwload the new version of the ethereum wallet.
-    * Get the geth command for running the node down
-    * import the packages in version file as libraries
-
-##Questions:
-
-* How to connect to node other than typing ``` geth --testnet --verbosity "2" --rpc --rpcapi "eth,net,web3,personal" --rpccorsdomain "http://localhost:3000" console```  ?
-* Can I connect to node just via having the wallet up?
-* Is the above command ok? is it secure? Can I find a way to securely submit the password and have it unlock the account via RPC on the server side?
-
-
 
