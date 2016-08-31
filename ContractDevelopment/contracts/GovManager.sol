@@ -5,7 +5,9 @@ function GovManager() {
     }
 
     modifier onlyOwner {
-        if (msg.sender != owner) throw;
+        if (msg.sender != owner){
+          throw;
+          }
         _
     }
 

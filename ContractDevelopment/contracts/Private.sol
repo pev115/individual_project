@@ -11,7 +11,7 @@ contract Private is GovManager, SharesManager, ProposalManager {
   uint public rewardRate;
   string public description;
 
-
+    /*Constructor*/
     function Private(address _owner, string _desc) {
       if(_owner != 0){
         owner = _owner;
@@ -28,6 +28,7 @@ contract Private is GovManager, SharesManager, ProposalManager {
       rewardRate = 0;
     }
 
+    /*Activity indicator manipulation*/
     function toggleSharesIssue() onlyOwner  {
       if(investment){
         investment=false;
@@ -66,6 +67,7 @@ contract Private is GovManager, SharesManager, ProposalManager {
       }
     }
 
+    /*functions for Revenue Redistribution*/
     function changeRate(uint percent)onlyOwner{
         if(percent>100){
           throw;
@@ -107,7 +109,7 @@ contract Private is GovManager, SharesManager, ProposalManager {
     function fuel() onlyOwner{}
 
 
-
+    /*functions for Employment Management*/
     function addProposal(uint _reward, uint _deposit, string _desc, uint _ID) onlyOwner {
       if(_ID<0){
         throw;
@@ -206,7 +208,7 @@ contract Private is GovManager, SharesManager, ProposalManager {
     }
 
 
-
+    /*fallback Function*/
     function () {
     throw;
     }
