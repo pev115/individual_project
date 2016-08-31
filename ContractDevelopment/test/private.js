@@ -448,9 +448,9 @@ contract('Private', function(accounts){
           amount+= parseInt(web3.toWei(10, 'Ether'));
         }
       }).then(function(){
-        return priv.changeDividends.sendTransaction(50,{from:account_zero})
+        return priv.changeRate.sendTransaction(50,{from:account_zero})
               .then(function(){
-                return priv.percentDividends.call();
+                return priv.rewardRate.call();
               });
       }).then(function(div){
         assert.equal(50,div.toNumber(),"dividends percent not set properly");

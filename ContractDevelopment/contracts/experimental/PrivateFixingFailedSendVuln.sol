@@ -8,7 +8,7 @@ contract PrivateFixingFailedSendVuln is GovManager, SharesManager, ProposalManag
   bool public recruiting;
   bool public building;
   bool public production;
-  uint public percentDividends;
+  uint public rewardRate;
   string public description;
   mapping (address=>uint) missedRewards;
 
@@ -27,7 +27,7 @@ contract PrivateFixingFailedSendVuln is GovManager, SharesManager, ProposalManag
       recruiting = false;
       building = false;
       production = false;
-      percentDividends = 0;
+      rewardRate = 0;
     }
 
     function toggleSharesIssue() onlyOwner  {
@@ -75,7 +75,7 @@ contract PrivateFixingFailedSendVuln is GovManager, SharesManager, ProposalManag
         if(percent<0){
           throw;
         }
-        percentDividends = percent;
+        rewardRate = percent;
     }
 
 
@@ -97,8 +97,8 @@ contract PrivateFixingFailedSendVuln is GovManager, SharesManager, ProposalManag
         for (uint i=0; i<nbShareholders; ++i){
           address holder = shareholders[i];
           uint shares= balances[holder];
-          if(!holder.send(((msg.value*percentDividends)/100)*(shares/totalSupply))){
-            missedRewards[holder] = ((msg.value*percentDividends)/100)*(shares/totalSupply);
+          if(!holder.send(((msg.value*rewardRate)/100)*(shares/totalSupply))){
+            missedRewards[holder] = ((msg.value*rewardRate)/100)*(shares/totalSupply);
           }
         }
     }
