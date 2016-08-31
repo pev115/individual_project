@@ -1,10 +1,10 @@
-import "owned.sol";
+import "GovManager.sol";
 
 import "SharesManager.sol";
 
-import "hasProposals.sol";
+import "ProposalManager.sol";
 
-contract Private is owned, SharesManager, hasProposals {
+contract Private is GovManager, SharesManager, ProposalManager {
   bool public recruiting;
   bool public building;
   bool public production;

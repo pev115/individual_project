@@ -1,6 +1,6 @@
-contract owned {
+contract GovManager {
 address public owner;
-function owned() {
+function GovManager() {
         owner = msg.sender;
     }
 

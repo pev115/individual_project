@@ -8,14 +8,14 @@
     abi: [{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"type":"function"},{"inputs":[],"type":"constructor"}],
     binary: "606060405260008054600160a060020a0319163317905560428060226000396000f3606060405260e060020a60003504638da5cb5b8114601a575b005b603860005473ffffffffffffffffffffffffffffffffffffffff1681565b6060908152602090f3",
     unlinked_binary: "606060405260008054600160a060020a0319163317905560428060226000396000f3606060405260e060020a60003504638da5cb5b8114601a575b005b603860005473ffffffffffffffffffffffffffffffffffffffff1681565b6060908152602090f3",
-    address: "0x888a034d88e6f8b8f085e354e85e9c919f8f7283",
+    address: "0x717d171242e6a9fde4a84e2b212a011c016aebca",
     generated_with: "2.0.9",
-    contract_name: "owned"
+    contract_name: "GovManager"
   };
 
   function Contract() {
     if (Contract.Pudding == null) {
-      throw new Error("owned error: Please call load() first before creating new instance of this contract.");
+      throw new Error("GovManager error: Please call load() first before creating new instance of this contract.");
     }
 
     Contract.Pudding.apply(this, arguments);
@@ -32,7 +32,7 @@
 
   Contract.new = function() {
     if (Contract.Pudding == null) {
-      throw new Error("owned error: Please call load() first before calling new().");
+      throw new Error("GovManager error: Please call load() first before calling new().");
     }
 
     return Contract.Pudding.new.apply(Contract, arguments);
@@ -40,7 +40,7 @@
 
   Contract.at = function() {
     if (Contract.Pudding == null) {
-      throw new Error("owned error: Please call load() first before calling at().");
+      throw new Error("GovManager error: Please call load() first before calling at().");
     }
 
     return Contract.Pudding.at.apply(Contract, arguments);
@@ -48,7 +48,7 @@
 
   Contract.deployed = function() {
     if (Contract.Pudding == null) {
-      throw new Error("owned error: Please call load() first before calling deployed().");
+      throw new Error("GovManager error: Please call load() first before calling deployed().");
     }
 
     return Contract.Pudding.deployed.apply(Contract, arguments);
@@ -59,7 +59,7 @@
   } else {
     // There will only be one version of Pudding in the browser,
     // and we can use that.
-    window.owned = Contract;
+    window.GovManager = Contract;
   }
 
 })();

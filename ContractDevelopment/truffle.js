@@ -10,9 +10,9 @@ module.exports = {
     "images/": "images/"
   },
   deploy: [
-    "owned",
+    "GovManager",
     "SharesManager",
-    "hasProposals",
+    "ProposalManager",
     "Private"
   ],
 /*  after_deploy: [

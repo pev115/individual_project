@@ -1,4 +1,4 @@
-contract hasProposals{
+contract ProposalManager{
   mapping (uint => proposal)  public proposals;
 
   struct proposal{
@@ -12,7 +12,7 @@ contract hasProposals{
     bool finalised;
   }
 
-  function hasProposals(){}
+  function ProposalManager(){}
 
   function completeWork (uint _ID){
     if(proposals[_ID].ID == 0){
