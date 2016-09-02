@@ -1,0 +1,17 @@
+<template name="notification">
+    <div class="notification bnt-box-success-not" >
+        <button type="button" class="close throw-not" >&times;</button>
+        <p class="text-center"><b>Your Transaction was successfully sent to Ethereum!</b></p>
+        <p><u>Transaction hash :</u><br>{{txhash}}</p>
+        <div class="col-md-6">
+            <button class="btn btn-success btn-sm center-block throw-not">Close</button>
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <a class="btn btn-info btn-sm  throw-not"  href="https://etherscan.io/tx/{{txHash}}">Go to link</a>
+
+            </div>
+        </div>
+
+    </div>
+</template>

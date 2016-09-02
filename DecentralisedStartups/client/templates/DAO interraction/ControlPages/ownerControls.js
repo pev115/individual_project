@@ -68,6 +68,22 @@ Template.ownerControls.events({
                     }
                     console.log("Checking database changed, database value:");
                     console.log(DAOs.findOne().investment);
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
                 }
             });
         }else{
@@ -107,6 +123,23 @@ Template.ownerControls.events({
                     }
                     console.log("Checking database changed, database value:");
                     console.log(DAOs.findOne().recruiting);
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
                 }
             });
         }else{
@@ -147,6 +180,24 @@ Template.ownerControls.events({
                     }
                     console.log("Checking database changed, database value:");
                     console.log(DAOs.findOne().building);
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
+
                 }
             });
         }else{
@@ -185,6 +236,25 @@ Template.ownerControls.events({
                     }
                     console.log("Checking database changed, database value:");
                     console.log(DAOs.findOne().producing);
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
+
+
                 }
             });
         }else{
@@ -234,7 +304,24 @@ var hooksProposalForm = {
                     } else {
                         console.log("proposal send to ethereum successfully.");
                         Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
-                        Proposals.update({_id:proposalMongoID},{$set:{ID:uniqueID,DAO_Id:currentDAO._id}})
+                        Proposals.update({_id:proposalMongoID},{$set:{ID:uniqueID,DAO_Id:currentDAO._id}});
+
+
+                        var notes = Session.get('notifications');
+
+                        if (typeof notes=="undefined"){
+                            notes =[];
+                        }
+
+                        if(notes.length > 2){
+                            notes.splice(0,1);
+                        }
+                        notes.push({txhash:r,success:true});
+                        Session.set('notifications', notes);
+
+
+
+
 
                     }
                 });
@@ -288,6 +375,26 @@ var hooksChangeDividendsForm = {
                         console.log("proposal send to ethereum successfully.");
                         Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                         DAOs.update({_id:currentDAO._id},{$set:{percentDividends:insertDoc.percentDividends}});
+
+
+
+
+
+                        var notes = Session.get('notifications');
+
+                        if (typeof notes=="undefined"){
+                            notes =[];
+                        }
+
+                        if(notes.length > 2){
+                            notes.splice(0,1);
+                        }
+                        notes.push({txhash:r,success:true});
+                        Session.set('notifications', notes);
+
+
+
+
                     }
                 });
 
@@ -354,6 +461,25 @@ var hooksFuelForm = {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});
+
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
+
                 }
             });
 

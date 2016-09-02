@@ -77,6 +77,24 @@ Template.productDisplay.events({
                 console.log(_balance);
                 Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                 DAOs.update ({_id:currentDAO._id},{$set:{balance:_balance}});
+
+
+
+                var notes = Session.get('notifications');
+
+                if (typeof notes=="undefined"){
+                    notes =[];
+                }
+
+                if(notes.length > 2){
+                    notes.splice(0,1);
+                }
+                notes.push({txhash:r,success:true});
+                Session.set('notifications', notes);
+
+
+
+
             }
         });
 

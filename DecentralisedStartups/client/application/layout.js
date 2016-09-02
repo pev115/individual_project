@@ -8,6 +8,10 @@ Template.layout.helpers({
             path = '/Monitor/error';
         }
         return path;
+    },
+    notes: function(){
+        var notes = Session.get('notifications');
+        return notes;
     }
 });
 

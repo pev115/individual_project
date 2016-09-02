@@ -109,6 +109,24 @@ Template.proposalDisplay.events({
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     Proposals.remove({_id:proposal._id});
+
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+                    
+                    
+                    
                 }
             });
 

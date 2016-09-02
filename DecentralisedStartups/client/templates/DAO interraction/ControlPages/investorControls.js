@@ -121,6 +121,18 @@ Template.investorControls.events({
                     console.log(r);
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
                     DAOs.update({_id: currentDAO._id}, {$set: {totalShares: _totalShares, balance :_balance}});
+                    
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
                 }
             });
         }else{
@@ -184,6 +196,20 @@ Template.investorControls.events({
                     console.log(r);
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
 
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+                    
+                    
+                    
                 }
             });
         }else{

@@ -226,6 +226,21 @@ Template.proposalMonitoring.events({
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
                 }
             });
 
@@ -288,6 +303,22 @@ Template.proposalMonitoring.events({
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
                 }
             });
             Template.instance().modalUse.set("none");
@@ -338,6 +369,26 @@ Template.proposalMonitoring.events({
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
                     mod.modal({backdrop:'static', keyboard:false});
+
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
+
+
                 }
             });
 
@@ -408,6 +459,26 @@ Template.proposalMonitoring.events({
                     });
 
 
+
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
+
+
                 }
             });
             Template.instance().modalUse.set("none");
@@ -443,6 +514,26 @@ Template.proposalMonitoring.events({
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
                     console.log(prop);
+
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({txhash:r,success:true});
+                    Session.set('notifications', notes);
+
+
+
+
+
                 }
             });
             Template.instance().get('monitorTemplate').set('templateName','proposalDisplay');
