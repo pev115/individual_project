@@ -105,6 +105,14 @@ input[type=number]::-webkit-outer-spin-button {
     height: auto;
     border-radius: 0.3em;
 }
+
+.subox {
+    padding: 0.5em;
+    background-color: rgba(250, 255, 255, 0.71);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
 /*
 .box {
     padding: 0.5em;
@@ -113,7 +121,7 @@ input[type=number]::-webkit-outer-spin-button {
     height: auto;
     border-radius: 0.3em;
 }
-*/
+
 .subox {
     padding: 0.5em;
     background-color: rgba(194, 202, 212, 0.51);
@@ -121,7 +129,7 @@ input[type=number]::-webkit-outer-spin-button {
     height: auto;
     border-radius: 0.3em;
 }
-
+*/
 .box-red {
     padding: 0.5em;
     background-color:  	rgba(248,148,6,0.6);
@@ -133,7 +141,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .bnt-box-job-phase {
     padding: 0.5em;
-    background-color:  rgba(227, 210, 210, 0.51);
+    background-color: rgba(250, 255, 255, 0.71);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -165,6 +173,37 @@ input[type=number]::-webkit-outer-spin-button {
 .bnt-box-dis {
     padding: 0.5em;
     background-color:  	rgb(235, 235, 228);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.bnt-box-success-new {
+    padding: 0.5em;
+    background-color: rgba(101, 196, 101, 0.4);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.bnt-box-info-new {
+    padding: 0.5em;
+    background-color: rgba(6, 141, 204, 0.4);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+
+.bnt-box-warning-new {
+    padding: 0.5em;
+    background-color: rgba(255, 152, 6, 0.4);
+    width: auto;
+    height: auto;
+    border-radius: 0.3em;
+}
+.bnt-box-dis-new {
+    padding: 0.5em;
+    background-color:  	rgba(235, 235, 228, 0.4);
     width: auto;
     height: auto;
     border-radius: 0.3em;

@@ -131,13 +131,19 @@
                                                 <div class ="DAO-ownership-list">
                                                     <ul class="list-group">
                                                         {{#each this}}
-                                                            <li class="list-group-item list-group-item-success row-vsm-margin">
-                                                                <p><u> Title: </u> <br>
-                                                                    {{title}}
-                                                                </p>
-                                                                <p><u> Address: </u> <br>
-                                                                    {{address}}
-                                                                </p>
+                                                            <li class="list-group-item row-vsm-margin">
+                                                                <div class="col-md-5">
+                                                                    <p><u> Title: </u> <br>
+                                                                        {{title}}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <p><u> Address: </u> <br>
+                                                                        {{address}}
+                                                                    </p>
+                                                                </div>
+
+
                                                                 <button type="button" class ="btn btn-primary center-block" id ="profile-go-button">GO!</button>
                                                             </li>
                                                         {{/each}}
