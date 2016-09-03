@@ -22,9 +22,9 @@ contract ShareManager {
       uint shareholderID = shareholders.length++;
       shareholders[shareholderID]=msg.sender;
     }
-
-    balances[msg.sender]+=msg.value;
-    totalSupply += msg.value;
+    uint shares = msg.value / 1 ether;
+    balances[msg.sender] = balances[msg.sender] + shares;
+    totalSupply  = totalSupply+ shares;
     return true;
   }
 

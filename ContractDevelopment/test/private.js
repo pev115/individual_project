@@ -77,18 +77,18 @@ contract('Private', function(accounts){
             console.log("Error in creating shares");
             console.log(e);
         });
-          total += amount;
+          total += amount / 1000000000000000000;
           amount+= parseInt(web3.toWei(10, 'Ether'));
         }
         return priv.totalSupply.call() ;
       }).then(function(supply){
         assert.equal(supply.toNumber(), total, "total does not match")
       }).then(function(){
-        return priv.transfer.sendTransaction(accounts[0], parseInt(web3.toWei(5,'Ether')),{from:accounts[2]}).then(function(){
+        return priv.transfer.sendTransaction(accounts[0], 5,{from:accounts[2]}).then(function(){
             return priv.getShares.call();
         });
       }).then(function(sh){
-        var expected = parseInt(web3.toWei(5,'Ether'));
+        var expected = 5;
         assert.equal(sh.toNumber(),expected, "Did not transfer correctly");
       }).then(done).catch(done);
     }).catch(done);
@@ -153,12 +153,12 @@ contract('Private', function(accounts){
     priv.toggleRecruiting.sendTransaction({from:accounts[0]})
     .then(function(){
 
-      return priv.fuel.sendTransaction({from:accounts[0],value:20}).then(function(){
+      return priv.fuel.sendTransaction({from:accounts[0],value:200000000000000000000}).then(function(){
         return web3.eth.getBalance(priv.address);
       });
     }).then(function(blance){
       contractBalance = blance;
-      assert.equal(contractBalance,20,"The contract balance is not set properly");
+      assert.equal(contractBalance.toNumber(),200000000000000000000,"The contract balance is not set properly");
     }).then(function(){
       priv.addProposal.sendTransaction(_reward,_deposit,_desc,_ID,{from:accounts[0]});
       return priv.proposals.call(_ID);
@@ -181,7 +181,7 @@ contract('Private', function(accounts){
       assert.equal(prop[5],true, "the appointed did not toggle");
       return web3.eth.getBalance(priv.address);
     }).then(function(blance){
-      var expected = contractBalance - _deposit;
+      var expected = contractBalance - _deposit *1000000000000000000;
       assert.equal(expected,blance, "The money was not sent from the contract");
     }).then(function(){
       var err = false;
@@ -226,7 +226,7 @@ contract('Private', function(accounts){
     }).then(function(){
       return web3.eth.getBalance(priv.address);
     }).then(function(blance){
-      var expected = contractBalance - _deposit - _reward;
+      var expected = contractBalance - _deposit*1000000000000000000 - _reward*1000000000000000000;
       assert.equal(expected,blance, "The reward was not sent from the contract");
     }).then(done).catch(done);
     }).catch(done);
@@ -276,11 +276,11 @@ contract('Private', function(accounts){
 
     }).then(function(prop){
       assert.equal(prop[5],false, "Toggled appoint even if no contractor");
-      return priv.fuel.sendTransaction({from:accounts[0],value:20}).then(function(){
+      return priv.fuel.sendTransaction({from:accounts[0],value:200000000000000000000}).then(function(){
         return web3.eth.getBalance(priv.address);
       });
     }).then(function(blance){
-      assert.equal(blance,20,"fueling failed");
+      assert.equal(blance,200000000000000000000,"fueling failed");
       return priv.hireContractor.sendTransaction(_contractor,_ID,{form:accounts[0]})
               .then(function(){
                 return priv.proposals.call(_ID);
@@ -332,11 +332,11 @@ contract('Private', function(accounts){
           }).then(function(prop){
               assert.equal(prop[0],_ID, "The id of the proposal does not match the input");
           }).then(function(){
-            return priv.fuel.sendTransaction({from:accounts[0],value:20}).then(function(){
+            return priv.fuel.sendTransaction({from:accounts[0],value:200000000000000000000}).then(function(){
               return web3.eth.getBalance(priv.address);
             });
           }).then(function(blance){
-            assert.equal(blance,20,"fueling failed");
+            assert.equal(blance,200000000000000000000,"fueling failed");
             return priv.hireContractor.sendTransaction(_contractor,_ID,{form:accounts[0]})
                     .then(function(){
                       return priv.proposals.call(_ID);

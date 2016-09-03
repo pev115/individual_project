@@ -162,7 +162,7 @@ contract Private is GovManager, ShareManager, ProposalManager {
       }
       p.appointed = true;
       p.contractor = _contractor;
-      if(!_contractor.send(p.deposit)){
+      if(!_contractor.send(p.deposit * 1 ether)){
         throw;
       }
 
@@ -201,7 +201,7 @@ contract Private is GovManager, ShareManager, ProposalManager {
       uint payment = p.reward;
       p.finalised = true;
 
-      if(!p.contractor.send(payment)){
+      if(!p.contractor.send(payment * 1 ether)){
         throw;
       }
 
