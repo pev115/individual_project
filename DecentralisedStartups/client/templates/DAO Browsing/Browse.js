@@ -72,8 +72,8 @@ Template.Browse.events({
         var _address = this.address;
         var path = '/Monitor/'+_address;
         Router.go(path);
-        $(".principalNavbar li").removeClass("active");
-        $("#currentDAOliNavbar").addClass("active");
+        //$(".principalNavbar li").removeClass("active");
+       // $("#currentDAOliNavbar").addClass("active");
     },
 
     'click #add_more_DAO': function(event){
@@ -118,8 +118,8 @@ Template.Browse.events({
         Session.set('proposalToDisplayDirectly',proposalId);
         var path = '/Monitor/'+this.DAO_Id;
         Router.go(path);
-        $(".principalNavbar li").removeClass("active");
-        $("#currentDAOliNavbar").addClass("active");
+        //$(".principalNavbar li").removeClass("active");
+        //$("#currentDAOliNavbar").addClass("active");
 
     }
 });

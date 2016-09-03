@@ -75,7 +75,7 @@ Template.Monitor.events({
             var ownerID= owner._id;
             var path = '/profile/'+ownerID;
             Router.go(path);
-            $(".principalNavbar li").removeClass("active");
+           // $(".principalNavbar li").removeClass("active");
         })
     }
 });

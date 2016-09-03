@@ -18,7 +18,7 @@ Template.layout.helpers({
 Template.layout.events({
     'click .principalNavbar li' :function(event,template){
         var selectorTab = $(event.target).closest("li");
-        selectorTab.addClass("active");
-        $(".principalNavbar li").not(selectorTab).removeClass("active");
+       // selectorTab.addClass("active");
+       // $(".principalNavbar li").not(selectorTab).removeClass("active");
     }
 });

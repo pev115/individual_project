@@ -74,8 +74,8 @@ Template.userProfile.helpers({
 Template.userProfile.events({
     'click #create_DAO_btn':function(){
         Router.go('/Create');
-        $(".principalNavbar li").removeClass("active");
-        $("#createliNavbar").addClass("active");
+        //$(".principalNavbar li").removeClass("active");
+       // $("#createliNavbar").addClass("active");
     },
     'click #profile_add_more_DAO': function(event){
         event.preventDefault();
@@ -100,8 +100,8 @@ Template.userProfile.events({
         Session.set('proposalToDisplayDirectly',proposalId);
         var path = '/Monitor/'+proposalToDisplay.DAO_Id;
         Router.go(path);
-        $(".principalNavbar li").removeClass("active");
-        $("#currentDAOliNavbar").addClass("active");
+        //$(".principalNavbar li").removeClass("active");
+        //$("#currentDAOliNavbar").addClass("active");
     },
     'click .profile-toggle-only-current-jobs':function(){
         if(Template.instance().onlyAppointed.get()){
@@ -115,8 +115,8 @@ Template.userProfile.events({
         console.log(this);
         var path = '/Monitor/'+this.address;
         Router.go(path);
-        $(".principalNavbar li").removeClass("active");
-        $("#currentDAOliNavbar").addClass("active");
+        //$(".principalNavbar li").removeClass("active");
+       // $("#currentDAOliNavbar").addClass("active");
     },
     'click #submitDesc':function(){
         console.log("getting here");

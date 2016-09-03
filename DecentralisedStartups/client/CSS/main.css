@@ -124,7 +124,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .box-red {
     padding: 0.5em;
-    background-color: rgba(227, 210, 210, 0.51);
+    background-color:  	rgba(248,148,6,0.6);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -282,4 +282,16 @@ body {
 .modal-success {
     background-color: rgba(92, 184, 92, 0.65);
     color:white;
+}
+
+.hoverStyleNavbar:hover{
+    opacity:0.9;
+}
+
+.hoverStyleNavbar{
+    opacity:0.6;
+}
+
+.StyleNavbar{
+    opacity:0.7;
 }

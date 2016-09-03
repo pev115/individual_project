@@ -48,8 +48,8 @@ var hooksObject = {
                         var path ='/Monitor/'+contract.address;
                         Session.set(contract.address ,true );
                         Router.go(path);
-                        $(".principalNavbar li").removeClass("active");
-                        $("#currentDAOliNavbar").addClass("active");
+                        //$(".principalNavbar li").removeClass("active");
+                        //$("#currentDAOliNavbar").addClass("active");
 
                     }else{
                         console.log("GOT To the weird zone");

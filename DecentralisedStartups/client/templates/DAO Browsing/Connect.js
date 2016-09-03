@@ -20,7 +20,7 @@ Template.Connect.events({
         var path = '/Monitor/'+address;
         console.log(path);
         Router.go(path);
-        $(".principalNavbar li").removeClass("active");
-        $("#currentDAOliNavbar").addClass("active");
+        //$(".principalNavbar li").removeClass("active");
+        //$("#currentDAOliNavbar").addClass("active");
     }
 });
