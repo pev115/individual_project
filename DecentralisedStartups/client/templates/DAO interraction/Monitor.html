@@ -12,10 +12,10 @@
 
                     <div class ="row row-margin">
                         <div class = "col-md-6 col-md-offset-3">
-                            <div class="subox">
-                                <h1 class="text-center"><b>Control Room</b> </h1>
-                                <h2 class="text-center"><u>{{title}}</u> </h2>
-                            </div>
+
+                                <h1 class="text-center"><b>Control Room</b> - {{title}}</h1>
+                                <!--<h2 class="text-center"><u>{{title}}</u> </h2>
+                            </div> -->
                         </div>
                     </div>
 
@@ -23,42 +23,44 @@
                     </div>
 
                     <div class ="row row-margin">
-                        <div class = "col-md-4">
-                            <div class="subox">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <h4 class="text-center">Owner Address</h4>
-                                    </div>
-                                    <div class ="col-md-4">
-                                        <button class="btn btn-sm center-block btn-info" id="go-to-owner">View Profile</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="text-center"> {{owner}}</p>
-                                    </div>
-                                </div>
+                        <div class = "col-md-6">
+                            <div class = "col-md-8 col-md-offset-2">
 
+
+
+                                <div class="subox">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h4 class="text-center">Owner Address</h4>
+                                        </div>
+                                        <div class ="col-md-4">
+                                            <button class="btn btn-sm center-block btn-info" id="go-to-owner">View Profile</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="text-center"> {{owner}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                        <div class = "col-md-4">
-                            <div class="subox">
-                                <h4 class="text-center">DAO Address</h4>
-                                <p class="text-center"> {{address}}</p>
+                        <div class = "col-md-6">
+                            <div class = "col-md-8 col-md-offset-2">
+                                <div class="subox">
+                                    <h4 class="text-center">DAO Address</h4>
+                                    <p class="text-center"> {{address}}</p>
+                                </div>
                             </div>
                         </div>
-                      <div class = "col-md-4">
-                            <div class="subox">
-                                <h4 class="text-center"> Funds</h4>
-                                <p class="text-center"> {{displayBalance}} Ether</p>
-                            </div>
-                        </div>
+
 
                     </div>
 
 
 
-                    <div class="row row-vsm-margin">
+                    <div class="row row-sm-margin">
                     </div>
 
 
@@ -219,7 +221,7 @@
                         <h4>
                             <u>Address:</u>
                         </h4>
-                        <h5>{{createHashValue}}</h5>
+                        <h5>{{address}}</h5>
                     </div>
                     <div class="modal-body">
 

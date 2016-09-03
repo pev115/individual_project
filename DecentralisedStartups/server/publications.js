@@ -82,9 +82,9 @@ Meteor.publish('Transactions',function(DAO_id,_limit){
     return Transactions.find({DAO_Id:DAO_id},{limit:_limit,sort:{createdDate:-1}});
 });
 
-Meteor.publish('OneTransaction',function(DAO_id){
-    return Transactions.find({DAO_Id:DAO_id});
-});
+//Meteor.publish('OneTransaction',function(DAO_id){
+ //   return Transactions.find({DAO_Id:DAO_id});
+//});
 
 
 Meteor.publish('Proposals',function(DAO_id){

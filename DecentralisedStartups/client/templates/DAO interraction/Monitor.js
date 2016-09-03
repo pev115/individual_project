@@ -33,7 +33,6 @@ Template.Monitor.helpers({
         var txt = this.balance + '';
         console.log(txt);
         return txt;
-
     },
     monitorTemplate: function(){
         return Template.instance().monitorTemplate.get('templateName');

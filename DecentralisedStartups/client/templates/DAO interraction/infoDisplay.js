@@ -27,6 +27,11 @@ Template.infoDisplay.helpers({
         var txt = this.percentDividends +'';
         return txt;
     },
+    displayBalance: function(){
+        var txt = this.balance + '';
+        console.log(txt);
+        return txt;
+    },
     displayTotalShares:function(){
         var txt = this.totalShares+'';
         return txt;
