@@ -334,3 +334,36 @@ body {
 .StyleNavbar{
     opacity:0.7;
 }
+
+
+.myCarouSize{
+   /* height :700px;
+    max-height: 700px;
+    overflow: hidden;*/
+
+}
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+.mycarou img {
+    width: 100%;
+    height: auto;
+}
+
+.carouText{
+    position: absolute;
+    top: 30px;
+    width:100%;
+    color: white;
+    z-index: 20;
+    text-shadow: 0 4px 8px rgba(0,0,0,1);
+}
+
+.carouButton{
+    position: absolute;
+    bottom: 18%;
+    width:100%;
+    z-index: 20;
+
+}
