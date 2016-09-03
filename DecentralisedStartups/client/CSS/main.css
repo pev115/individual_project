@@ -256,3 +256,13 @@ body {
     border-radius: 0.3em;
     color: white;
 }
+
+
+.bnt-box-warning-not {
+    padding: 0.5em;
+    background-color:  	rgba(248,148,6,0.65);
+    width: 530px;
+    height: auto;
+    border-radius: 0.3em;
+    color: white;
+}

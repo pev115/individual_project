@@ -105,6 +105,21 @@ Template.proposalDisplay.events({
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
                 } else {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -132,6 +147,20 @@ Template.proposalDisplay.events({
 
         }else{
         console.log("Some condition not met");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
         }
 
     }

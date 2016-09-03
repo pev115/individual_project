@@ -53,6 +53,24 @@ Template.ownerControls.events({
                     console.log(e);
                     console.log("Checking it has been changed:");
                     console.log(DAOs.findOne());
+
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
+
                 }else{
                     console.log("checking the result");
                     console.log(r);
@@ -88,6 +106,18 @@ Template.ownerControls.events({
             });
         }else{
            console.log("an error occured");
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
         }
 
     },
@@ -108,6 +138,20 @@ Template.ownerControls.events({
                     console.log(e);
                     console.log("Checking it has been changed:");
                     console.log(DAOs.findOne());
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
                 }else{
                     console.log("checking the result");
                     console.log(r);
@@ -144,6 +188,19 @@ Template.ownerControls.events({
             });
         }else{
             console.log("an error occured");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
         }
 
     },
@@ -165,6 +222,22 @@ Template.ownerControls.events({
                     console.log(e);
                     console.log("Checking it has been changed:");
                     console.log(DAOs.findOne());
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
                 }else{
                     console.log("checking the result");
                     console.log(r);
@@ -202,6 +275,24 @@ Template.ownerControls.events({
             });
         }else{
             console.log("an error occured");
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
+
+
         }
 
     },
@@ -221,6 +312,22 @@ Template.ownerControls.events({
                     console.log(e);
                     console.log("Checking it has been changed:");
                     console.log(DAOs.findOne());
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
+
                 }else{
                     console.log("checking the result");
                     console.log(r);
@@ -259,6 +366,22 @@ Template.ownerControls.events({
             });
         }else{
             console.log("an error occured");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
+
         }
 
     }
@@ -301,6 +424,22 @@ var hooksProposalForm = {
                         console.log("Verifying proposal is removed correctly:");
                         console.log(Proposals.findOne({_id: proposalMongoID}));
 
+                        var notes = Session.get('notifications');
+
+                        if (typeof notes=="undefined"){
+                            notes =[];
+                        }
+
+                        if(notes.length > 2){
+                            notes.splice(0,1);
+                        }
+                        notes.push({success:false});
+                        Session.set('notifications', notes);
+
+
+
+
+
                     } else {
                         console.log("proposal send to ethereum successfully.");
                         Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -328,6 +467,22 @@ var hooksProposalForm = {
 
         }else{
             console.log("an error occured");
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
         }
     },
 
@@ -371,6 +526,21 @@ var hooksChangeDividendsForm = {
                     if (e) {
                         console.log("Error processing the tranaction");
                         console.log(e);
+
+                        var notes = Session.get('notifications');
+
+                        if (typeof notes=="undefined"){
+                            notes =[];
+                        }
+
+                        if(notes.length > 2){
+                            notes.splice(0,1);
+                        }
+                        notes.push({success:false});
+                        Session.set('notifications', notes);
+
+
+
                     } else {
                         console.log("proposal send to ethereum successfully.");
                         Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -402,6 +572,22 @@ var hooksChangeDividendsForm = {
 
         }else{
             this.done(new Error('logged in user not the owner' ));
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
         }
 
 
@@ -457,6 +643,23 @@ var hooksFuelForm = {
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
+
+
                 } else {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -487,6 +690,22 @@ var hooksFuelForm = {
 
         }else{
             this.done(new Error('logged in user not the owner' ));
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
         }
         return false;
     } ,

@@ -114,6 +114,22 @@ Template.investorControls.events({
                 if (e) {
                     console.log("error processing the transaction");
                     console.log(e);
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+                    
+                    
+                    
                 } else {
                     console.log("share creation sent");
 
@@ -137,6 +153,22 @@ Template.investorControls.events({
             });
         }else{
             console.log("Investment not ON");
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+            
+            
+            
         }
 
         $('#areYouSureInvest').modal('toggle');
@@ -189,6 +221,22 @@ Template.investorControls.events({
                 if (e) {
                     console.log("error processing the transaction");
                     console.log(e);
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+                    
+                    
+                    
                 } else {
                     console.log("share transfer sent");
 
@@ -214,6 +262,22 @@ Template.investorControls.events({
             });
         }else{
             console.log("One of conditions wrong");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+            
+            
+            
+            
         }
 
         $('#areYouSureTransfer').modal('toggle');

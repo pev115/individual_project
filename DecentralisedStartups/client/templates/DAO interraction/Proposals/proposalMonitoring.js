@@ -217,6 +217,22 @@ Template.proposalMonitoring.events({
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
+
                 } else {
                     var newBalance = currentDAO.balance - proposal.deposit;
                     console.log("proposal send to ethereum successfully.");
@@ -247,6 +263,21 @@ Template.proposalMonitoring.events({
 
         }else{
             console.log("either not owner or appointed already");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
         }
 
 
@@ -285,6 +316,23 @@ Template.proposalMonitoring.events({
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
+
                 } else {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -325,6 +373,22 @@ Template.proposalMonitoring.events({
             $('#leaveCommentModal').modal('toggle');
         }else{
             console.log("either not owner or not appointed  or finalised already");
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
         }
 
     },
@@ -360,6 +424,21 @@ Template.proposalMonitoring.events({
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
+
                 } else {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -394,6 +473,21 @@ Template.proposalMonitoring.events({
 
         }else{
             console.log("one of conditions not met");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
         }
     },
 
@@ -427,6 +521,19 @@ Template.proposalMonitoring.events({
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
                 } else {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -485,6 +592,23 @@ Template.proposalMonitoring.events({
             $('#leaveCommentModal').modal('toggle');
         }else{
             console.log("one of conditions not met");
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
+
+
+
         }
     },
 
@@ -507,6 +631,22 @@ Template.proposalMonitoring.events({
                 if (e) {
                     console.log("Error processing the transaction");
                     console.log(e);
+
+
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
+
+
+
                 } else {
                     console.log("proposal send to ethereum successfully.");
                     Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
@@ -539,6 +679,21 @@ Template.proposalMonitoring.events({
             Template.instance().get('monitorTemplate').set('templateName','proposalDisplay');
         }else{
             console.log("one of conditions not met");
+
+
+            var notes = Session.get('notifications');
+
+            if (typeof notes=="undefined"){
+                notes =[];
+            }
+
+            if(notes.length > 2){
+                notes.splice(0,1);
+            }
+            notes.push({success:false});
+            Session.set('notifications', notes);
+
+
         }
 
     }

@@ -67,6 +67,22 @@ Template.productDisplay.events({
             if(e){
                 console.log("error processing the transaction");
                 console.log(e);
+
+
+                var notes = Session.get('notifications');
+
+                if (typeof notes=="undefined"){
+                    notes =[];
+                }
+
+                if(notes.length > 2){
+                    notes.splice(0,1);
+                }
+                notes.push({success:false});
+                Session.set('notifications', notes);
+                
+                
+                
             }else{
                 console.log("payment sent");
                 window.open(currentProduct.path);
