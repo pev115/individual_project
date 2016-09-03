@@ -266,3 +266,18 @@ body {
     border-radius: 0.3em;
     color: white;
 }
+
+
+.translateCreateUp{
+    transform: translate(0em,-50em);
+    -ms-transform: translate(0em, -50em);
+    -webkit-transform: translate(0em, -50em);
+    transition-duration: 1.5s;
+}
+
+
+
+.modal-success {
+    background-color: rgba(92, 184, 92, 0.65);
+    color:white;
+}

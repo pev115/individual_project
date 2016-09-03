@@ -1,7 +1,6 @@
 
 
 Template.Monitor.onCreated(function(){
-    console.log("I AM HEEEEEREEEEE!!!!");
     console.log(this);
     Session.set('current_DAO', this.data.address);
     this.monitorTemplate = new ReactiveDict();
@@ -14,6 +13,19 @@ Template.Monitor.onCreated(function(){
         delete Session.keys['proposalToDisplayDirectly'];
     }
 
+});
+
+
+Template.Monitor.onRendered(function(){
+    var thisaddress= this.data.address;
+    console.log("this address is", thisaddress);
+    var justCreated = Session.get(thisaddress);
+    console.log(justCreated);
+    if (justCreated){
+        $('#justCreatedDAO').modal('show');
+        Session.set(thisaddress,false);
+        delete Session.keys[this.data.address];
+    }
 });
 
 Template.Monitor.helpers({
@@ -34,6 +46,11 @@ Template.Monitor.helpers({
         }else{
             return this;
         }
+    },
+    createHashValue: function(){
+        Meteor.subscribe("OneTransaction", this._id);
+        var tx=Transactions.findOne();
+        return tx.transactionHash;
     }
 });
 

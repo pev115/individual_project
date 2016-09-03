@@ -46,6 +46,7 @@ var hooksObject = {
                         console.log("checking it got inserted correctly");
                         console.log(Transactions.findOne({DAO_Id:_id}));
                         var path ='/Monitor/'+contract.address;
+                        Session.set(contract.address ,true );
                         Router.go(path);
                         $(".principalNavbar li").removeClass("active");
                         $("#currentDAOliNavbar").addClass("active");
@@ -60,6 +61,18 @@ var hooksObject = {
                     DAOs.remove(_id);
                     console.log("Checking it has been removed...");
                     console.log(DAOs.findOne({_id: _id}));
+                    $("#translateUpCreateForm").removeClass("translateCreateUp");
+                    var notes = Session.get('notifications');
+
+                    if (typeof notes=="undefined"){
+                        notes =[];
+                    }
+
+                    if(notes.length > 2){
+                        notes.splice(0,1);
+                    }
+                    notes.push({success:false});
+                    Session.set('notifications', notes);
                 }
             }
         );
@@ -67,6 +80,15 @@ var hooksObject = {
 
     onError: function(insert,error){
         console.log("I got an error");
+        $("#translateUpCreateForm").removeClass("translateCreateUp");
+    },
+
+    beginSubmit: function(){
+        $('#SubmitCreateDAOForm').attr("disabled",true);
+        $("#translateUpCreateForm").addClass("translateCreateUp");
+    },
+    endSubmit: function() {
+        $('#SubmitCreateDAOForm').removeAttr("disabled");
     }
 
 };

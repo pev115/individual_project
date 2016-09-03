@@ -9,40 +9,42 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="box">
+                    <div id = "translateUpCreateForm">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="box">
 
-                            {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
-                                <fieldset>
-                                    <legend class="text-center"><h3>Create your own DAO</h3></legend>
-                                    <div class ="col-md-6 col-md-offset-3">
-                                        {{> afQuickField name='owner' id='owner-text-field-create'}}
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="set-owner-checkbox-for-create"> Set myself as the Onwer
-                                            </label>
+                                {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
+                                    <fieldset>
+                                        <legend class="text-center"><h3>Create your own DAO</h3></legend>
+                                        <div class ="col-md-6 col-md-offset-3">
+                                            {{> afQuickField name='owner' id='owner-text-field-create' placeholder='0xa14fd...' label ='Owner Address'}}
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="set-owner-checkbox-for-create"> Set myself as the Onwer
+                                                </label>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class ="col-md-6 col-md-offset-3">
+                                            {{> afQuickField name='title' label ='Title' placeholder="Name your DAO"}}
+                                        </div>
+
+                                        <div class ="col-md-8 col-md-offset-2">
+                                            {{> afQuickField name='description' label = "Official Declaration" placeholder="The Official Declaration is permanently recorded on the Blockchain and visible by all potential stakeholders." rows=6}}
+                                        </div>
+
+                                    </fieldset>
+
+                                    <div class="row row-sm-margin">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary btn-lg center-block" id="SubmitCreateDAOForm">Create!</button>
                                         </div>
                                     </div>
 
-
-
-                                    <div class ="col-md-6 col-md-offset-3">
-                                        {{> afQuickField name='title'}}
-                                    </div>
-
-                                    <div class ="col-md-8 col-md-offset-2">
-                                        {{> afQuickField name='description' label = "Project Description" rows=6}}
-                                    </div>
-
-                                </fieldset>
-
-                                <div class="row row-sm-margin">
-                                    <div class="col-md-12">
-                                     <button type="submit" class="btn btn-primary btn-lg center-block">Create!</button>
-                                    </div>
-                                </div>
-
-                            {{/autoForm}}
+                                {{/autoForm}}
+                            </div>
                         </div>
                     </div>
                 </div>
