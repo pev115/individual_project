@@ -100,7 +100,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .box {
     padding: 0.5em;
-    background-color: rgba(200, 198, 211, 0.60);
+    background-color: rgba(253, 253, 255, 0.53);
     width: auto;
     height: auto;
     border-radius: 0.3em;
@@ -175,7 +175,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .alternative-to-white-bg{
-    ackground-color: rgba(231, 207, 200, 0.9);
+    background-color: rgba(231, 207, 200, 0.9);
 }
 
 .alternative-to-white-bg2{
@@ -202,9 +202,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 body {
-    background:rgb(235, 235, 228);
-    background-image: url("/bg/pattern5.png");
-    background-repeat: repeat-y;
+    background: url("/bg/lightp.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 
