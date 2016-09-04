@@ -53,7 +53,9 @@ Template.proposalMonitoring.helpers({
         var inContestants = $.grep(this[1], function(e){ return e.userID == currentUserId; });
         console.log("the matched contestants are:");
         console.log(inContestants);
-        if(currentUserId && inContestants.length ==0){
+
+
+        if(currentUserId && inContestants.length ==0 && this[0].finalised===false){
             return true;
         }else{
             return false;

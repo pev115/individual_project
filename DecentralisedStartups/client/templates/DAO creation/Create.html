@@ -1,5 +1,5 @@
 <template name="Create">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row row-margin">
             <div class="col-md-12" style="height:20px;">
             </div>
@@ -10,13 +10,13 @@
             <div class="col-md-12">
                 <div class="row">
                     <div id = "translateUpCreateForm">
-                        <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-10 col-md-offset-1">
                             <div class="box">
 
                                 {{#autoForm collection="DAOs" id="DAOform" type="insert" }}
                                     <fieldset>
-                                        <legend class="text-center"><h3>Create your own DAO</h3></legend>
-                                        <div class ="col-md-6 col-md-offset-3">
+                                        <legend class="text-center"><h2><b>Create your own DAO</b></h2></legend>
+                                        <div class ="col-md-8 col-md-offset-2">
                                             {{> afQuickField name='owner' id='owner-text-field-create' placeholder='0xa14fd...' label ='Owner Address'}}
                                             <div class="checkbox">
                                                 <label>
@@ -27,7 +27,7 @@
 
 
 
-                                        <div class ="col-md-6 col-md-offset-3">
+                                        <div class ="col-md-8 col-md-offset-2">
                                             {{> afQuickField name='title' label ='Title' placeholder="Name your DAO"}}
                                         </div>
 

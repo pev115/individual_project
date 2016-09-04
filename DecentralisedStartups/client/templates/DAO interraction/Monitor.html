@@ -1,5 +1,5 @@
 <template name="Monitor">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row row-sm-margin">
             <div class="col-md-12" style="height:2px;">
             </div>
@@ -8,23 +8,26 @@
 
         <div class ="row">
             <div class="col-md-12 ">
+                <h1 class="text-center"><b>Control Room</b> - {{title}}</h1>
+            </div>
+        </div>
+                <div class ="row">
+            <div class="col-md-12 ">
                 <div class ="box">
 
-                    <div class ="row row-margin">
-                        <div class = "col-md-6 col-md-offset-3">
+                    <!--<div class ="row row-margin">
+                        <div class = "col-md-8 col-md-offset-2">
 
                                 <h1 class="text-center"><b>Control Room</b> - {{title}}</h1>
-                                <!--<h2 class="text-center"><u>{{title}}</u> </h2>
-                            </div> -->
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="row row-sm-margin">
                     </div>
 
                     <div class ="row row-margin">
                         <div class = "col-md-6">
-                            <div class = "col-md-8 col-md-offset-2">
+                            <div class = "col-md-10 col-md-offset-1">
 
 
 
@@ -47,7 +50,7 @@
                             </div>
                         </div>
                         <div class = "col-md-6">
-                            <div class = "col-md-8 col-md-offset-2">
+                            <div class = "col-md-10 col-md-offset-1">
                                 <div class="subox">
                                     <h4 class="text-center">DAO Address</h4>
                                     <p class="text-center"> {{address}}</p>
@@ -84,12 +87,12 @@
                         <div class = "col-md-3" >
                             <div class="col-md-10 col-md-offset-1">
                                 {{#if recruiting}}
-                                    <div class="bnt-box-success-new">
+                                    <div class="bnt-box-success-new  added-padding-md-v">
                                         <h4 class="text-center">Recruiting</h4>
                                         <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
                                     </div>
                                 {{else}}
-                                    <div class="bnt-box-warning-new">
+                                    <div class="bnt-box-warning-new added-padding-md-v">
                                         <h4 class="text-center">Recruiting</h4>
                                         <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
                                     </div>
@@ -99,12 +102,12 @@
                         <div class = "col-md-3" >
                             <div class="col-md-10 col-md-offset-1">
                                 {{#if producing}}
-                                    <div class="bnt-box-success-new">
+                                    <div class="bnt-box-success-new  added-padding-md-v">
                                         <h4 class="text-center">Selling</h4>
                                         <p class="text-center"> <span class="glyphicon glyphicon-ok"></span></p>
                                     </div>
                                 {{else}}
-                                    <div class = "bnt-box-warning-new">
+                                    <div class = "bnt-box-warning-new  added-padding-md-v">
                                         <h4 class="text-center">Selling</h4>
                                         <p class="text-center"><span class="glyphicon glyphicon-remove"></span> </p>
                                     </div>
@@ -216,16 +219,17 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h2 class="text-center">
                             <b>Congratulations! </b><br>
-                            You created a new DAO.
+                            <span style="font-size:90%;">You created a new DAO.</span>
                         </h2>
-                        <h4>
-                            <u>Address:</u>
-                        </h4>
-                        <h5>{{address}}</h5>
+                        <p style="margin-bottom: 0px;">
+                            <b style="font-size:120%">Address:</b> {{address}}
+                        </p>
+                        <!--<h5>{{address}}</h5>-->
                     </div>
                     <div class="modal-body">
 
-                        <h3 class ="text-center">Are you ready to access the Control Room the Organisation you deployed?</h3>
+                        <!--<h3 class ="text-center">Are you ready to access the Control Room the Organisation you deployed?</h3>-->
+                        <h3 class ="text-center">Are you ready to access the Control Room?!</h3>
                         <button type="button" class="btn btn-info btn-lg center-block" data-dismiss="modal">I am Ready!</button>
 
 

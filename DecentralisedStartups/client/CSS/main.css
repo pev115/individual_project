@@ -31,10 +31,20 @@ tbody.thash-body{
 
 }
 
+.official-Declaration{
+    overflow: auto;
+    height: 320px;
+
+}
+
 .DAO-info-tx-list{
     overflow: auto;
     height: 700px;
+}
 
+.txmargins{
+    margin-right: 45px;
+    margin-left: 45px;
 }
 
 /*this is to take away the arrows from the inputs*/
@@ -308,6 +318,14 @@ body {
     color: white;
 }
 
+.bnt-box-warning-not-txt {
+    padding: 0.5em;
+    background-color:  	rgba(248,148,6,0.69);
+    border-radius: 0.3em;
+    color: white;
+    text-align: center;
+}
+
 
 .translateCreateUp{
     transform: translate(0em,-50em);
@@ -319,7 +337,7 @@ body {
 
 
 .modal-success {
-    background-color: rgba(92, 184, 92, 0.65);
+    background-color: rgba(92, 184, 92, 0.65);/*rgba(61, 179, 61, 0.69);*/
     color:white;
 }
 
@@ -332,7 +350,7 @@ body {
 }
 
 .StyleNavbar{
-    opacity:0.7;
+    opacity:0.9;
 }
 
 
@@ -367,3 +385,83 @@ body {
     z-index: 20;
 
 }
+
+.shadow-bold{
+    font-weight:bold ;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 5px 10px rgb(0, 0, 0);
+}
+
+.shadow-btn{
+   box-shadow: 0 4px 9px rgb(0, 0, 0);
+}
+
+
+
+.shadow-blue{
+    color: rgb(255, 255, 255);
+    text-shadow: 0 4px 9px rgb(28, 46, 141);
+}
+
+.added-padding-md-v{
+    padding-top: 17px;
+    padding-bottom: 17px;
+}
+.boldText{
+    font-weight:bold ;
+}
+
+.horBrake{
+    color: #000000;
+    text-align: center;
+    width: 100px;
+}
+
+.borderRight{
+    border-right: solid 1px lightgrey;
+}
+.borderLeft{
+    border-left: solid 1px lightgrey;
+}
+
+
+
+.ToInfinityFast{
+
+    transform:  translate(-18em,-4em) scale(0,0) ;
+    -ms-transform:translate(-18em,-4em)  scale(0,0);
+    -webkit-transform: translate(-18em,-4em)   scale(0,0) ;
+
+    transition-duration: 1s;
+    -webkit-animation-timing-function: cubic-bezier(.4,.15,.91,.12);
+    animation-timing-function: cubic-bezier(.4,.15,.91,.12);
+}
+
+.vertical-bar{
+    border-right: 1px solid lightgrey;
+}
+.bar-left{
+    border-left: 1px solid lightgrey;
+}
+
+/*
+.ToInfinityFast{
+
+    transform:   scale(0,0) ;
+    -ms-transform:  scale(0,0);
+    -webkit-transform:    scale(0,0) ;
+
+    -webkit-animation-timing-function: cubic-bezier(.4,.15,.91,.12);
+    animation-timing-function: cubic-bezier(.4,.15,.91,.12);
+
+}
+
+.ToInfinity{
+
+    transform:  translate(-18em,-4em) ;
+    -ms-transform:translate(-18em,-4em) ;
+    -webkit-transform: translate(-18em,-4em) ;
+
+    -webkit-animation-timing-function: cubic-bezier(.4,.15,.91,.12);
+    animation-timing-function: cubic-bezier(.4,.15,.91,.12);
+}*/

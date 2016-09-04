@@ -4,62 +4,75 @@
             <div class="box">
                 <div class="row">
                     <div class ="col-md-8 col-md-offset-2">
-                        <div class = "panel panel-default">
-                            <div class = "panel-heading">
-                                <h2 class="text-center">Products in the Shelf</h2>
+
+                        <div class="row row-margin">
+                            <div class="col-md-12">
+                                <h2 class="text-center"><b><i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                    Products in Display</b></h2>
                                 {{#if selling}}
                                 {{else}}
-                                    <button class = "bnt-box-dis center-block" disabled>This DAO is not selling yet!</button>
-                                {{/if}}
-                            </div>
-                            <div class="panel-body">
-
-
-
-                                {{#each products}}
-
-                                    <div class ="col-md-6">
-                                        <div class = "panel panel-info">
-                                            <div class = "panel-heading">
-                                                {{name}}
-
-                                                {{#if isOwner}}
-                                                    <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
-                                                {{/if}}
-
-                                            </div>
-                                            <div class="panel-body">
-                                                {{#if price}}
-                                                    <p><u>price:</u> {{price}} Ether</p>
-                                                {{/if}}
-                                                {{#if url}}
-                                                    <p><u>More Info:</u> <a href={{url}}>here</a></p>
-                                                {{/if}}
-                                                {{#if description}}
-                                                    <h5><u>Description:</u></h5>
-                                                    <p>{{description}}</p>
-                                                {{/if}}
-
-
-                                                {{#if productFinalised}}
-                                                    {{#if selling}}
-                                                        <button class ="btn btn-info current-product-context" data-toggle="modal" data-target="#areYouSureBuy"> Buy</button>
-                                                    {{else}}
-                                                    {{/if}}
-
-                                                {{else}}
-                                                    <button class = "btn btn-disabled current-product-context" disabled>Work not yet Finalised.</button>
-
-                                                {{/if}}
-
-                                            </div>
-                                        </div>
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <p class = " text-center bnt-box-warning-not-txt ">This DAO is not selling yet!</p>
                                     </div>
 
-                                {{/each}}
-
+                                {{/if}}
                             </div>
                         </div>
+
+                        <div class="row row-margin">
+                            <div class="col-md-12">
+
+
+
+                                    {{#each products}}
+
+                                        <div class ="col-md-6">
+                                            <div class = "panel panel-info">
+                                                <div class = "panel-heading">
+                                                    {{name}}
+
+                                                    {{#if isOwner}}
+                                                        <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
+                                                    {{/if}}
+
+                                                </div>
+                                                <div class="panel-body">
+                                                    {{#if price}}
+                                                        <p><u>price:</u> {{price}} Ether</p>
+                                                    {{/if}}
+                                                    {{#if url}}
+                                                        <p><u>More Info:</u> <a href={{url}}>here</a></p>
+                                                    {{/if}}
+                                                    {{#if description}}
+                                                        <h5><u>Description:</u></h5>
+                                                        <p>{{description}}</p>
+                                                    {{/if}}
+
+
+                                                    {{#if productFinalised}}
+                                                        {{#if selling}}
+                                                            <button class ="btn btn-info current-product-context center-block" data-toggle="modal" data-target="#areYouSureBuy"> Buy</button>
+                                                        {{else}}
+                                                        {{/if}}
+
+                                                    {{else}}
+                                                        <button class = "btn btn-info  current-product-context center-block" disabled>Work not yet Finalised.</button>
+
+                                                    {{/if}}
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {{/each}}
+
+                                </div>
+
+                            </div>
+
+
+
+
                     </div>
                 </div>
             </div>

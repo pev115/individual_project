@@ -3,14 +3,143 @@
     <div class="row">
         <div class ="col-md-12">
             <div class="box">
+                <!--
+                                <div class="row row-margin">
+                                    <div class="col-md-12" style="height:1px;">
+                                    </div>
+                                    <div class="col-md-12">
+                                         <h2 class ="text-center"><b>Owner controls</b></h2>
+                    </div>
+                </div>-->
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class ="text-center"><b>Owner controls</b></h2>
+
+                <div class="row row-margin">
+                    <div class="col-md-6">
+                        <div class="row ">
+                            <div class="col-md-8 col-md-offset-3 ">
+                                <h3 class="text-center boldText"> <i class="fa fa-flag" aria-hidden="true"></i>
+                                    Activity Flags</h3>
+                            </div>
+                        </div>
+
+
+                        <div class="row row-margin">
+                            <div class="col-md-8 col-md-offset-3">
+
+                                <div class = "subox">
+                                    <div class="row row-margin">
+                                        <div class="col-md-7 col-md-offset-1">
+                                            <h4 class="text-center">Look for Investments </h4>
+                                        </div>
+                                        <div class="col-md-4 borderLeft">
+                                            {{#if this.investment}}
+                                                <button class="btn btn-warning " id="toggleInvesting">Stop</button>
+                                            {{else}}
+                                                <button class="btn btn-success " id="toggleInvesting">Start</button>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+
+                                    <div class="row row-margin">
+                                        <div class="col-md-7 col-md-offset-1">
+                                            <h4 class="text-center">Recruit Contractors </h4>
+                                        </div>
+                                        <div class="col-md-4 borderLeft">
+                                            {{#if this.recruiting}}
+                                                <button class="btn btn-warning  " id="toggleRecruiting">Stop</button>
+                                            {{else}}
+                                                <button class="btn btn-success   " id="toggleRecruiting">Start</button>
+                                            {{/if}}
+
+                                        </div>
+                                    </div>
+                                    <div class="row row-margin">
+                                        <div class="col-md-8 ">
+                                            <h4 class="text-center">Announce New Products </h4>
+                                        </div>
+                                        <div class="col-md-4 borderLeft">
+                                            {{#if this.building}}
+                                                <button class="btn btn-warning  " id="toggleBuilding">Stop</button>
+                                            {{else}}
+                                                <button class="btn btn-success " id="toggleBuilding">Start</button>
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                    <div class="row row-margin">
+                                        <div class="col-md-7 col-md-offset-1">
+                                            <h4 class="text-center">Sell Products  </h4>
+                                        </div>
+                                        <div class="col-md-4 borderLeft">
+                                            {{#if this.producing}}
+                                                <button class="btn btn-warning" id="toggleProduction">Stop</button>
+                                            {{else}}
+                                                <button class="btn btn-success" id="toggleProduction">Start</button>
+                                            {{/if}}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="row ">
+                            <div class="col-md-8 col-md-offset-1 ">
+                                <h3 class="text-center boldText"> <i class="fa fa-university" aria-hidden="true"></i>
+                                    Executive Commands</h3>
+                            </div>
+                        </div>
+                        <div class="row row-margin">
+                            <div class="col-md-8 col-md-offset-1">
+                                <div class="subox">
+                                    {{#autoForm collection="DAOs" id="changeDividendsForm" type="normal" doc=this schema=changeDivSchema }}
+                                        <fieldset>
+                                            {{> afQuickField name='percentDividends' label='Percent of Revenue entitled to Shareholders'}}
+                                        </fieldset>
+                                        <button type="submit" class="btn btn-primary center-block" id="submitChangeDividendsButton">
+                                            Modify
+                                        </button>
+                                    {{/autoForm}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-margin">
+                            <div class="col-md-8 col-md-offset-1">
+                                <div class="subox">
+                                    {{#autoForm collection="DAOs" id="fuelForm" type="normal" doc=this schema=fuelSchema }}
+                                        <fieldset>
+                                            {{> afQuickField name='balance' type='number' label='Supply Ether to your DAO' placeholder="Amount in Ether" value=0}}
+                                        </fieldset>
+                                        <button type="submit" class="btn btn-primary center-block" id="submitFuelButton">
+                                            Supply
+                                        </button>
+                                    {{/autoForm}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row row-margin">
+                            <div class="col-md-8 col-md-offset-1">
+                                <button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#proposalCreationModal" >
+                                    Add An Employment Offer
+                                </button>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
 
 
+
+
+
+                <!--
                 <div class="row row-margin">
                     <div class="col-md-3">
                         {{#if this.investment}}
@@ -100,7 +229,7 @@
                         </button>
                     </div>
                 </div>
-
+-->
             </div>
 
 
