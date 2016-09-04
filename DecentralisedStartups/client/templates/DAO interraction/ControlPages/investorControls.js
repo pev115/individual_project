@@ -108,9 +108,9 @@ Template.investorControls.events({
         var _balance = currentDAO.balance +shares;
 
         var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);
-
+        var __shares =parseInt(web3.toWei(shares,'ether'));
         if(currentDAO.investment && typeof sender =='string') {
-            contract.createShares.sendTransaction(this.proposalID, {from: sender, value: shares}, function (e, r) {
+            contract.createShares.sendTransaction(this.proposalID, {from: sender, value: __shares}, function (e, r) {
                 if (e) {
                     console.log("error processing the transaction");
                     console.log(e);

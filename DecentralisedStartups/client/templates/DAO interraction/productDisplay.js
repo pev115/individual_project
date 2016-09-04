@@ -59,11 +59,11 @@ Template.productDisplay.events({
         var currentDAO = DAOs.findOne();
         var currentProduct = this;
         var amount = this.price;
-
+        var _amount = parseInt(web3.toWei(amount,'ether'));
 
         var contract =web3.eth.contract(privateContract.abi).at(currentDAO.address);
 
-        contract.receivePayment.sendTransaction(this.proposalID,{from:sender,value:amount},function(e,r){
+        contract.receivePayment.sendTransaction(this.proposalID,{from:sender,value:_amount},function(e,r){
             if(e){
                 console.log("error processing the transaction");
                 console.log(e);

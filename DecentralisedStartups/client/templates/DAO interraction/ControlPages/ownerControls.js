@@ -26,11 +26,11 @@ Template.ownerControls.helpers({
         return new SimpleSchema({
             ID: {
                 type:Number,
-                label: "ID",
+                label: "ID"
             },
             contractor:{
                 type:String,
-                label:"Contractor",
+                label:"Contractor"
             }
         });
     }
@@ -629,8 +629,12 @@ var hooksFuelForm = {
         var currentDAO = DAOs.findOne();
         var sender = Meteor.user().address;
         var currentBalance = currentDAO.balance;
-        var amount = insertDoc.balance;
-        var newBalance = currentBalance+amount;/* TODO: think about if it is better to call ethereum to set the new balance*/
+        var _amount = insertDoc.balance;
+        var amount = parseInt(web3.toWei(_amount,'ether'));
+        console.log("The type of the amount is");
+        console.log(typeof amount);
+        console.log(amount);
+        var newBalance = currentBalance+_amount;
 
 
         var contract = web3.eth.contract(privateContract.abi).at(currentDAO.address);
