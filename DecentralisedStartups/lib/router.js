@@ -10,6 +10,8 @@ Router.configure({
 
 Router.route('/',{name:'home'});
 
+Router.route('/About',{name:'About'});
+
 Router.route('/profile/:_userID',{
     name:'userProfile',
     notFoundTemplate:'userNotFound',
