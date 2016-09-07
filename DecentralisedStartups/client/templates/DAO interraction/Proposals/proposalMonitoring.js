@@ -209,7 +209,7 @@ Template.proposalMonitoring.events({
         var prop= contract.proposals.call(proposaluniqueID);
         console.log(prop);
 
-        if (sender === currentDAO.owner && !proposal.appointed && currentDAO.balance > proposal.deposit) {
+        if (sender === currentDAO.owner && !proposal.appointed && currentDAO.balance > proposal.deposit && currentDAO.recruiting) {
 
             console.log("Owner verified to be sender." );
             console.log(contestantAddress);
@@ -452,8 +452,9 @@ Template.proposalMonitoring.events({
                     mod.modal({backdrop:'static', keyboard:false});
 
 
-
-
+                    Session.set('workComplete',true);
+                    Session.set('workCompletetxHash',r);
+/*
                     var notes = Session.get('notifications');
 
                     if (typeof notes=="undefined"){
@@ -466,7 +467,7 @@ Template.proposalMonitoring.events({
                     notes.push({txhash:r,txType:"Work Completion",success:true});
                     Session.set('notifications', notes);
 
-
+*/
 
 
 

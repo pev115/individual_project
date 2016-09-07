@@ -13,6 +13,30 @@ Template.Monitor.onCreated(function(){
         delete Session.keys['proposalToDisplayDirectly'];
     }
 
+    var completedWork=Session.get('workComplete');
+    var hash = Session.get('workCompletetxHash');
+    console.log("Complete work");
+    console.log(completedWork);
+    if(completedWork){
+        var notes = Session.get('notifications');
+
+        if (typeof notes=="undefined"){
+            notes =[];
+        }
+
+        if(notes.length > 2){
+            notes.splice(0,1);
+        }
+        notes.push({txhash:hash,txType:"Work Completion", success:true});
+        Session.set('notifications', notes);
+        Session.set('workComplete',false);
+        Session.set('workCompletetxHash','');
+        delete Session.keys['workComplete'];
+        delete Session.keys['workCompletetxHash'];
+
+    }
+
+
 });
 
 
