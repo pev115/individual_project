@@ -91,7 +91,7 @@ Template.productDisplay.events({
                 var dist = currentDAO.percentDividends;
                 var _balance = balance + amount - (amount*dist/100);
                 console.log(_balance);
-                Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r, txType:"Purchase"});
                 DAOs.update ({_id:currentDAO._id},{$set:{balance:_balance}});
 
 
@@ -105,7 +105,7 @@ Template.productDisplay.events({
                 if(notes.length > 2){
                     notes.splice(0,1);
                 }
-                notes.push({txhash:r,success:true});
+                notes.push({txhash:r,txType:"Purchase",success:true});
                 Session.set('notifications', notes);
 
 

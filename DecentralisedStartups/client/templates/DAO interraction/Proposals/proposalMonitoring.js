@@ -238,7 +238,7 @@ Template.proposalMonitoring.events({
                 } else {
                     var newBalance = currentDAO.balance - proposal.deposit;
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r, txType:"Contractor Appointment"});
                     Proposals.update({_id:proposal._id},{$set:{contractor:contestantAddress, appointed:true}});
                     DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});
                     console.log("verifying ethereum state");
@@ -255,7 +255,7 @@ Template.proposalMonitoring.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Contractor Appointment",success:true});
                     Session.set('notifications', notes);
 
 
@@ -337,7 +337,7 @@ Template.proposalMonitoring.events({
 
                 } else {
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r, txType:"Contractor Layoff"});
                     Proposals.update({_id:proposal._id},{$set:{contractor:"0x000", appointed:false, completed:false}});
 
 
@@ -364,7 +364,7 @@ Template.proposalMonitoring.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Contractor Layoff",success:true});
                     Session.set('notifications', notes);
 
 
@@ -443,7 +443,7 @@ Template.proposalMonitoring.events({
 
                 } else {
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r, txType:"Work Completion"});
                     Proposals.update({_id:proposal._id},{$set:{completed:true}});
 
                     console.log("verifying ethereum state");
@@ -463,7 +463,7 @@ Template.proposalMonitoring.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Work Completion",success:true});
                     Session.set('notifications', notes);
 
 
@@ -538,7 +538,7 @@ Template.proposalMonitoring.events({
 
                 } else {
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r,txType:"Contract Finalisation"});
                     Proposals.update({_id:proposal._id},{$set:{finalised:true}});
 
 
@@ -651,7 +651,7 @@ Template.proposalMonitoring.events({
 
                 } else {
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r,txType:"Employment Offer Removal"});
                     Proposals.remove({_id:proposal._id});
                     console.log("verifying ethereum state");
                     var prop= contract.proposals.call(proposaluniqueID);
@@ -669,7 +669,7 @@ Template.proposalMonitoring.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Employment Offer Removal",success:true});
                     Session.set('notifications', notes);
 
 

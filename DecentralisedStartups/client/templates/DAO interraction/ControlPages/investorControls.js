@@ -135,7 +135,7 @@ Template.investorControls.events({
 
                     console.log(contract);
                     console.log(r);
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r, txType:"Shares issue"});
                     DAOs.update({_id: currentDAO._id}, {$set: {totalShares: _totalShares, balance :_balance}});
                     
                     var notes = Session.get('notifications');
@@ -147,7 +147,7 @@ Template.investorControls.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Shares issue",success:true});
                     Session.set('notifications', notes);
                 }
             });
@@ -242,7 +242,7 @@ Template.investorControls.events({
 
                     console.log(contract);
                     console.log(r);
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r,txType:"Shares Transfer"});
 
                     var notes = Session.get('notifications');
 
@@ -253,7 +253,7 @@ Template.investorControls.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Shares Transfer",success:true});
                     Session.set('notifications', notes);
                     
                     

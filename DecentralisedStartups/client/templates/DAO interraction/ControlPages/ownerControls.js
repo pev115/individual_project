@@ -78,7 +78,7 @@ Template.ownerControls.events({
                     console.log(this);
                     console.log("checking the value in ethereum");
                     console.log(contract.investment.call());
-                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r});
+                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r, txType:"Investment Flag Switch"});
                     if(investing){
                         DAOs.update(DAO_id,{$set:{investment:false}});
                     }else{
@@ -98,7 +98,7 @@ Template.ownerControls.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r, txType:"Investment Flag Switch", success:true});
                     Session.set('notifications', notes);
 
 
@@ -159,7 +159,7 @@ Template.ownerControls.events({
                     console.log(this);
                     console.log("checking the value in ethereum");
                     console.log(contract.recruiting.call());
-                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r});
+                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r, txType:"Recruiting Flag Switch"});
                     if(recruiting){
                         DAOs.update(DAO_id,{$set:{recruiting:false}});
                     }else{
@@ -179,7 +179,7 @@ Template.ownerControls.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Recruiting Flag Switch",success:true});
                     Session.set('notifications', notes);
 
 
@@ -245,7 +245,7 @@ Template.ownerControls.events({
                     console.log(this);
                     console.log("checking the value in ethereum");
                     console.log(contract.building.call());
-                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r});
+                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r, txType:"Building Flag Switch"});
                     if(building){
                         DAOs.update(DAO_id,{$set:{building:false}});
                     }else{
@@ -265,7 +265,7 @@ Template.ownerControls.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r, txType:"Building Flag Switch",success:true});
                     Session.set('notifications', notes);
 
 
@@ -335,7 +335,7 @@ Template.ownerControls.events({
                     console.log(this);
                     console.log("checking the value in ethereum");
                     console.log(contract.production.call());
-                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r});
+                    Transactions.insert({DAO_Id:DAO_id,transactionHash:r ,txType:"Selling Flag Switch"});
                     if(producing){
                         DAOs.update(DAO_id,{$set:{producing:false}});
                     }else{
@@ -355,7 +355,7 @@ Template.ownerControls.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Selling Flag Switch",success:true});
                     Session.set('notifications', notes);
 
 
@@ -442,7 +442,7 @@ var hooksProposalForm = {
 
                     } else {
                         console.log("proposal send to ethereum successfully.");
-                        Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                        Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r,txType:"Employment Offer Addition"});
                         Proposals.update({_id:proposalMongoID},{$set:{ID:uniqueID,DAO_Id:currentDAO._id}});
 
 
@@ -455,7 +455,7 @@ var hooksProposalForm = {
                         if(notes.length > 2){
                             notes.splice(0,1);
                         }
-                        notes.push({txhash:r,success:true});
+                        notes.push({txhash:r,txType:"Employment Offer Addition",success:true});
                         Session.set('notifications', notes);
 
 
@@ -543,7 +543,7 @@ var hooksChangeDividendsForm = {
 
                     } else {
                         console.log("proposal send to ethereum successfully.");
-                        Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                        Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r, txType:"Change in the Reward Rate"});
                         DAOs.update({_id:currentDAO._id},{$set:{percentDividends:insertDoc.percentDividends}});
 
 
@@ -559,7 +559,7 @@ var hooksChangeDividendsForm = {
                         if(notes.length > 2){
                             notes.splice(0,1);
                         }
-                        notes.push({txhash:r,success:true});
+                        notes.push({txhash:r,txType:"Change in the Reward Rate",success:true});
                         Session.set('notifications', notes);
 
 
@@ -666,7 +666,7 @@ var hooksFuelForm = {
 
                 } else {
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r,txType:"Ether Supply"});
                     DAOs.update({_id:currentDAO._id},{$set:{balance:newBalance}});
 
 
@@ -681,7 +681,7 @@ var hooksFuelForm = {
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Ether Supply",success:true});
                     Session.set('notifications', notes);
 
 

@@ -290,6 +290,11 @@ Schemas.Transaction = new SimpleSchema({
         type: Date,
         label:"CreatedDate",
         defaultValue:new Date()
+    },
+    txType:{
+        type:String,
+        label:"Transaction Type",
+        optional: true
     }
 });
 

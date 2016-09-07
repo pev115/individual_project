@@ -122,7 +122,7 @@ Template.proposalDisplay.events({
 
                 } else {
                     console.log("proposal send to ethereum successfully.");
-                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r});
+                    Transactions.insert({DAO_Id:currentDAO._id,transactionHash:r,txType:"Employment Offer Removal"});
                     Proposals.remove({_id:proposal._id});
 
 
@@ -137,7 +137,7 @@ Template.proposalDisplay.events({
                     if(notes.length > 2){
                         notes.splice(0,1);
                     }
-                    notes.push({txhash:r,success:true});
+                    notes.push({txhash:r,txType:"Employment Offer Removal",success:true});
                     Session.set('notifications', notes);
                     
                     

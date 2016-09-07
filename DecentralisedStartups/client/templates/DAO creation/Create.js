@@ -42,7 +42,7 @@ var hooksObject = {
                         console.log("Checking it has been changed:");
                         console.log(DAOs.findOne(_id));
                         console.log("Settign the transactionhash...");
-                        Transactions.insert({DAO_Id:_id,transactionHash:contract.transactionHash});
+                        Transactions.insert({DAO_Id:_id,transactionHash:contract.transactionHash, txType:"DAO Genesis"});
                         console.log("checking it got inserted correctly");
                         console.log(Transactions.findOne({DAO_Id:_id}));
                         var path ='/Monitor/'+contract.address;
