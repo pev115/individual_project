@@ -110,9 +110,9 @@
                             <div class="col-md-8 col-md-offset-1">
                                 <div class="subox">
                                     {{#autoForm collection="DAOs" id="fuelForm" type="normal" doc=this schema=fuelSchema }}
-                                        <fieldset>
-                                            {{> afQuickField name='balance' type='number' label='Supply Ether to your DAO' placeholder="Amount in Ether" value=0}}
-                                        </fieldset>
+                                                <fieldset>
+                                                    {{> afQuickField name='balance' type='number' label='Supply Ether to your DAO' placeholder="Amount in Ether" value=''}}
+                                                </fieldset>
                                         <button type="submit" class="btn btn-primary center-block" id="submitFuelButton">
                                             Supply
                                         </button>
@@ -125,7 +125,7 @@
                         <div class="row row-margin">
                             <div class="col-md-8 col-md-offset-1">
                                 <button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#proposalCreationModal" >
-                                    Add An Employment Offer
+                                    Add an Employment Offer
                                 </button>
                             </div>
                         </div>
@@ -251,18 +251,18 @@
                     {{#autoForm collection="Proposals" id="ProposalForm" type="insert" }}
                         <fieldset>
                             <div class ="col-md-8 col-md-offset-2">
-                                {{> afQuickField name='title'}}
+                                {{> afQuickField name='title' placeholder="Please enter the title of the Job"}}
                             </div>
 
                             <div class ="col-md-4 col-md-offset-2">
-                                {{> afQuickField name='deposit'}}
+                                {{> afQuickField name='deposit' placeholder="Amount in Ether"}}
                             </div>
                             <div class ="col-md-4 ">
-                                {{> afQuickField name='reward'}}
+                                {{> afQuickField name='reward'  placeholder="Amount in Ether"}}
                             </div>
 
                             <div class ="col-md-10 col-md-offset-1">
-                                {{> afQuickField name='description' label = "Job Description" rows=6}}
+                                {{> afQuickField name='description' label = "Job Description"  placeholder="Please enter the Description of the Vacancy" rows=6}}
                             </div>
 
 

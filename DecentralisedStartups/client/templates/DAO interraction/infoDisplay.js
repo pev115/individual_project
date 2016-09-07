@@ -1,7 +1,7 @@
 
 Template.infoDisplay.onCreated(function(){
     this.transactionLimit = new ReactiveVar();
-    this.transactionLimit.set(7);
+    this.transactionLimit.set(5);
 });
 
 
