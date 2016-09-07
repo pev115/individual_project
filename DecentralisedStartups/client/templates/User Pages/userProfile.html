@@ -139,7 +139,7 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                     <p><u> Address: </u> <br>
-                                                                       <span style="font-size:83%;">{{address}}</span>
+                                                                        <span style="font-size:83%;">{{address}}</span>
                                                                     </p>
                                                                 </div>
 
@@ -202,7 +202,9 @@
                                     <div class="col-md-4 ">
 
                                         {{#if isSelf}}
-                                            <button class = "btn  btn-success" data-toggle="modal" data-target="#EditDesc"   style="margin-top:20px; padding-left: 25px; padding-right: 25px;"> Edit </button>
+                                            {{#if this.description}}
+                                                <button class = "btn  btn-success" data-toggle="modal" data-target="#EditDesc"   style="margin-top:20px; padding-left: 25px; padding-right: 25px;"> Edit </button>
+                                            {{/if}}
                                         {{/if}}
 
                                     </div>
