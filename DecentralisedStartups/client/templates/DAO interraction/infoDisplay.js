@@ -40,13 +40,13 @@ Template.infoDisplay.helpers({
         var div =this.percentDividends;
         var shares = this.totalShares;
         if(div=== 0){
-            return '0';
+            return '0 Ether';
         }else if(shares===0){
             return 'No shares are issued';
         }else if(typeof  shares=== "number" && typeof div ==="number"){
             var _reward = div/(shares*100);
             var reward = _reward.toFixed(6);
-            return reward +'';
+            return reward +' Ether';
         }else{
             return 'undefined';
         }
