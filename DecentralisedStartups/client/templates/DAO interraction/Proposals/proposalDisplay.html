@@ -1,0 +1,81 @@
+<template name="proposalDisplay">
+    <div class="row">
+        <div class ="col-md-12">
+            <div class="box">
+
+                <div class="row row-margin">
+                    <div class ="col-md-12">
+                        <!--<h2 class="text-center"><b>Job Listings</b></h2>-->
+                    </div>
+                </div>
+
+                <div class="row row-margin">
+                    <div class="col-md-10 col-md-offset-1">
+                        {{#each proposal}}
+
+                            <div class ="col-md-4">
+                                <div class = "panel proposal-panel panel-default">
+                                    <div class = "panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div style="padding-top: 5px;" >
+                                                    <p ><b>{{title}}</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{#if canRemove}}
+                                                    <button class = "btn btn-sm btn-warning center-block " id="removeProposalButton">Remove</button>
+                                                {{/if}}
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5><u>Proposal ID:</u> {{ID}}</h5>
+                                            </div>
+                                        </div>
+                                      <div class="row row-vsm-margin">
+                                          <div class="col-md-6">
+                                              <div style="padding-top: 10px;">
+                                                  <p><u>Total Reward:</u> &nbsp; {{totalReward}}</p>
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class ={{panelClass}}>
+                                                  <span style="vertical-align: middle;">  {{phase}}</span>
+                                              </div>
+
+                                          </div>
+                                      </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button class = "btn btn-sm btn-info btn-block goToProposalButton">View Full Description</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{/each}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</template>

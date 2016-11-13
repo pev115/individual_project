@@ -1,0 +1,153 @@
+<template name="productDisplay">
+    <div class = "row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="row">
+                    <div class ="col-md-8 col-md-offset-2">
+
+                        <div class="row row-margin">
+                            <div class="col-md-12">
+                                <h2 class="text-center"><b><i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                    Products in Display</b></h2>
+                                {{#if selling}}
+                                {{else}}
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <p class = " text-center bnt-box-warning-not-txt ">This DAO is not selling yet!</p>
+                                    </div>
+
+                                {{/if}}
+                            </div>
+                        </div>
+
+                        <div class="row row-margin">
+                            <div class="col-md-12">
+
+
+
+                                    {{#each products}}
+
+                                        <div class ="col-md-6">
+                                            <div class = "panel panel-info">
+                                                <div class = "panel-heading">
+                                                    {{name}}
+
+                                                    {{#if isOwner}}
+                                                        <button class = "btn btn-sm btn-success current-product-context" data-toggle="modal" data-target="#EditProduct">Edit</button>
+                                                    {{/if}}
+
+                                                </div>
+                                                <div class="panel-body">
+                                                    {{#if price}}
+                                                        <p><u>price:</u> {{price}} Ether</p>
+                                                    {{/if}}
+                                                    {{#if url}}
+                                                        <p><u>More Info:</u> <a href={{url}}>here</a></p>
+                                                    {{/if}}
+                                                    {{#if description}}
+                                                        <h5><u>Description:</u></h5>
+                                                        <p>{{description}}</p>
+                                                    {{/if}}
+
+
+                                                    {{#if productFinalised}}
+                                                        {{#if selling}}
+                                                            <button class ="btn btn-info current-product-context center-block" data-toggle="modal" data-target="#areYouSureBuy"> Buy</button>
+                                                        {{else}}
+                                                        {{/if}}
+
+                                                    {{else}}
+                                                        <button class = "btn btn-info  current-product-context center-block" disabled>Work not yet Finalised.</button>
+
+                                                    {{/if}}
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {{/each}}
+
+                                </div>
+
+                            </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="EditProduct" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit the Product</h4>
+                </div>
+                <div class="modal-body">
+                    {{#with currentProduct}}
+                        {{#autoForm collection="Products" id="editProductsForm" type="update" doc=this}}
+                            <fieldset>
+                                {{> afQuickField name='name'}}
+                                {{> afQuickField name='url'}}
+                                {{> afQuickField name='description' rows=3}}
+                                {{> afQuickField name='price'}}
+                            </fieldset>
+
+                            <button type="submit" class="btn btn-primary center-block">
+                                Save Changes
+                            </button>
+                        {{/autoForm}}
+
+                    {{/with}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="areYouSureBuy" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                {{#with currentProduct}}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2>You are about to pay {{price}} Ether, are you sure you want to proceed?</h2>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <button class="btn btn-success btn-lg center-block" id="buyProduct">
+                            I am Sure, Proceed!
+                        </button>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                {{/with}}
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+</template>

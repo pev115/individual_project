@@ -1,0 +1,353 @@
+<template name="userProfile">
+    <div class="container">
+
+        <div class="row row-sm-margin">
+            <div class="col-md-12" style="height:2px;">
+            </div>
+        </div>
+
+        <div class="row row-sm-down-margin">
+            <div class="col-md-12">
+                <div class ="box">
+
+
+                    <div class ="row ">
+                        <div class="col-md-12">
+                            <h1 class="text-center"><u>User Profile: {{username}}</u> </h1>
+                        </div>
+                    </div>
+
+                    <div class ="row row-sm-down-margin">
+                        <div class="col-md-12">
+                            <h2 class="text-center"><u>Address: {{address}}</u> </h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class ="box">
+
+
+
+
+                    <div class="row row-skewed-margin">
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h2 class="text-center">Contracted Jobs</h2>
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        {{#if onlyCurrentJobs}}
+                                            <button class="btn btn-primary profile-toggle-only-current-jobs" style="margin-top:20px;">Revert</button>
+                                        {{else}}
+                                            <button class="btn btn-primary profile-toggle-only-current-jobs"  style="margin-top:20px;">Only current</button>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class = "col-md-6">
+                            <div class="subox">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h2 class="text-center">DAO Ownership</h2>
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        <button type="button" class="btn btn-primary"  id="create_DAO_btn"   style="margin-top:20px;">
+                                            Create DAO
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="subox">
+
+                                <div class = "row">
+                                    <div class="col-md-12">
+                                        <table class="table  table-hover table-condensed " style="margin-bottom: 0px;">
+                                            <thead>
+                                            <tr>
+                                                <th>Job Id</th>
+                                                <th>Title</th>
+                                                <th style="text-align: center;">Stage</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-div">
+                                            <table class="table  table-hover table-condensed table-bordered "  style="margin-bottom: 0px;">
+                                                <tbody>
+                                                {{#each jobs}}
+                                                    <tr class="table-jobs-for-profile" data-proposalID="{{this._id}}" >
+                                                        <td>{{ID}}</td>
+                                                        <td>{{title}}</td>
+                                                        <td>{{stage}}</td>
+
+                                                    </tr>
+                                                {{/each}}
+                                                <td></td><button  class="btn btn-block center-block btn-primary load-more-hashes">Load more</button><td></td>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{#with ownedDaos}}
+                                            {{#if this.count}}
+                                                <div class ="DAO-ownership-list">
+                                                    <ul class="list-group">
+                                                        {{#each this}}
+                                                            <li class="list-group-item row-vsm-margin">
+                                                                <div class="col-md-5">
+                                                                    <p><u> Title: </u> <br>
+                                                                        {{title}}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <p><u> Address: </u> <br>
+                                                                        <span style="font-size:83%;">{{address}}</span>
+                                                                    </p>
+                                                                </div>
+
+
+                                                                <button type="button" class ="btn btn-primary btn-sm center-block" id ="profile-go-button">GO!</button>
+                                                            </li>
+                                                        {{/each}}
+
+                                                        <button  class="btn btn-block btn-primary" id ="profile_add_more_DAO">Load more</button>
+
+                                                    </ul>
+                                                </div>
+
+                                            {{else}}
+                                                <p>Does not Own any DAOs</p>
+                                            {{/if}}
+                                        {{/with}}
+
+
+
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="row row-skewed-margin">
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2>Overall Rating</h2>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div style=" margin-top: 5px;">
+                                            {{> starsRating rating = rating size=40}}
+                                        </div>
+                                        <p>{{rating}} ({{reviews}} votes)</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class = "col-md-6">
+                            <div class="subox">
+                                <div class="row" style="margin-bottom: 11px;">
+                                    <div class="col-md-8">
+                                        <h2 class="text-center">Description</h2>
+                                    </div>
+                                    <div class="col-md-4 ">
+
+                                        {{#if isSelf}}
+                                            {{#if this.description}}
+                                                <button class = "btn  btn-success" data-toggle="modal" data-target="#EditDesc"   style="margin-top:20px; padding-left: 25px; padding-right: 25px;"> Edit </button>
+                                            {{/if}}
+                                        {{/if}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class = "row">
+                                    <div class="col-md-12">
+
+                                        <div class ="DAO-ownership-list">
+                                            <ul class="list-group">
+                                                {{#each this.feedback}}
+                                                    <li class="list-group-item list-group-item-default  row-vsm-margin">
+
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="text-center"><b>Job ID:</b>
+                                                                    {{proposalID}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-3 col-md-offset-2">
+                                                                        <p class="text-center"><u>Rating:</u></p>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div style=" margin-top: -2px;">
+                                                                            {{> starsRating rating = rating size=sm}}
+                                                                        </div>
+                                                                        <p>(Score: {{rating}})</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <p><u>Comment: </u></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <div class="comment-case">
+                                                                    <p style=" margin-bottom: 1px;">{{comment}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </li>
+                                                {{/each}}
+
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="subox">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class ="DAO-ownership-list">
+                                            {{#if this.description}}
+                                                <p>{{this.description}}</p>
+                                            {{else}}
+                                                {{#if isSelf}}
+                                                    <button class = "btn btn-lg btn-success center-block" data-toggle="modal" data-target="#EditDesc">Put a Description of yourself!</button>
+                                                {{/if}}
+                                            {{/if}}
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="row row-sm-margin">
+            <div class="col-md-12" style="height:25px;">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="modal fade" id="EditDesc" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit your Description</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="Desc">Enter Your Public Description below:</label>
+                        <textarea class="form-control" rows="5" id="DescInputText">{{this.description}}</textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary center-block" id="submitDesc">
+                        Save Changes
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</template>
+

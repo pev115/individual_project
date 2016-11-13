@@ -1,0 +1,161 @@
+<template name="infoDisplay">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class ="row row-margin">
+
+                    <div class="col-md-6" >
+                        <div class="row row-sm-down-margin">
+                            <div class="col-md-12 ">
+                                <h3 class="text-center boldText"> <i class="fa fa-money" aria-hidden="true"></i>
+                                    Financial Information</h3>
+                            </div>
+                        </div>
+
+
+                        <!-- <span class="glyphicon glyphicon-piggy-bank"></span>
+
+
+                         <div class = "col-md-4">
+                            <div class="subox">
+                                <h4 class="text-center"> Funds</h4>
+                                <p class="text-center"> {{displayBalance}} Ether</p>
+                            </div>
+                        </div> -->
+
+                        <div class="row row-margin">
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="subox">
+                                    <h4 class="text-center"><u>Funds</u></h4>
+                                    <p class="text-center">{{displayBalance}} Ether</p>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="subox">
+                                    <h4 class="text-center"><u>Reward Rate</u></h4>
+                                    <p class="text-center">{{displayPercentDividends}} %</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row row-margin">
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="subox">
+                                    <h4 class="text-center"><u>Total Shares</u></h4>
+                                    <p class="text-center">{{displayTotalShares}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="subox">
+                                    <h4 class="text-center"><u>Revenue Return</u></h4>
+                                    <p class="text-center">{{displayReward}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+
+                        <div class="row row-sm-margin">
+                            <div class="col-md-12">
+                                <h3 class="text-center boldText"><i class="fa fa-gavel" aria-hidden="true"></i>
+                                    Official Declaration</h3>
+                            </div>
+                        </div>
+
+
+                        <div class="row row-vsm-margin">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="subox">
+                                    <div class ="official-Declaration">
+                                        <p>{{description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="row row-up-margin">
+                    <div class="col-md-12">
+                        <h3 class="text-center boldText"> <i class="fa fa-barcode" aria-hidden="true"></i>
+                            Transaction History</h3>
+                    </div>
+                </div>
+
+
+
+                <div class = "row row-sm-margin">
+                    <div class="col-md-12">
+                        <div class="subox txmargins">
+                            <div class ="DAO-info-tx-list">
+                                <ul class="list-group" >
+                                    {{#each transactions}}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-md-10 col-md-offset-1 ">
+                                                    <p><u>Transaction Hash :</u><br>{{transactionHash}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-md-offset-1 vertical-bar">
+                                                    <p><u>Transaction Date :</u><br>{{displayDate}}</p>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1 vertical-bar">
+                                                    <p><u>Transaction Type :</u><br>{{txType}}</p>
+                                                </div>
+                                                <div class="col-md-3 col-md-offset-1">
+                                                    <p><u>EtherScan Link :</u></p>
+                                                    <a class="btn btn-info" href="https://etherscan.io/tx/{{transactionHash}}">Here!</a>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                    {{/each}}
+                                    <button  class="btn btn-block btn-primary load-more-hashes" >Load more</button>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</template>
